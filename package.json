@@ -1,0 +1,43 @@
+{
+  "name": "forge-king",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://gitee.com/varzhonglei/forge-king.git",
+  "author": "Zhong Lei <lei.zhong@target-energysolutions.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["dune"],
+  "scripts": {
+    "dev": "cd dune && yarn dev",
+    "start": "node src/main.js",
+    "compile": "npx tsc",
+    "js-start": "NODE_ENV=production node dist/main.ts",
+    "lint": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/fs-extra": "^9.0.13",
+    "@types/lodash": "^4.14.182",
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^17.0.32",
+    "eslint": "^8.38.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^5.0.2"
+  },
+  "engines": {
+    "node": ">=16.7"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "fs-extra": "^10.1.0",
+    "inquirer": "^9.1.4",
+    "lodash": "^4.17.21",
+    "mongodb": "^4.8.0",
+    "socket.io": "^4.6.1",
+    "zlib": "^1.0.5"
+  }
+}

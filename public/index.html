@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>WebRTC Example</title>
+    <script src="/socket.io.min.js"></script>
+  </head>
+  <body>
+    <form>
+      <label for="message">Message:</label>
+      <input type="text" id="message" name="message">
+      <button type="submit">Send</button>
+    </form>
+    <ul id="messages"></ul>
+    <script>
+      const config = {
+        iceServers: [
+          { urls: 'stun:stun.l.google.com:19302' }
+        ]
+      };
+      const peerConnection = new RTCPeerConnection(config);
+      const dataChannel = peerConnection.createDataChannel('chat');
+
+      dataChannel.onopen = () => {
+        console.log('Data channel opened');
+      };
+
+      dataChannel.onmessage = (event) => {
+        console.log('Received message:', event.data);
+        const messages = document.getElementById('messages');
+        const li = document.createElement('li');
+        li.textContent = event.data;
+        messages.appendChild(li);
+      };
+
+      const socket = io('http://123.60.135.146:3000');
+
+      socket.on('connect', () => {
+        console.log('Connected to server');
+      });
+
+      socket.on('offer', (offer) => {
+        console.log('Received offer:', offer);
+        peerConnection.setRemoteDescription(new RTCSessionDescription(offer))
+          .then(() => peerConnection.createAnswer())
+          .then(answer => peerConnection.setLocalDescription(answer))
+          .then(() => {
+            socket.emit('answer', peerConnection.localDescription);
+          });
+      });
+
+      socket.on('answer', (answer) => {
+        console.log('Received answer:', answer);
+        peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+      });
+
+      socket.on('iceCandidate', (candidate) => {
+        console.log('Received ICE candidate:', candidate);
+        peerConnection.addIceCandidate(new RTCIceCandidate(candidate))
+          .catch(error => console.error(error));
+      });
+
+      peerConnection.createOffer().then(offer => {
+        console.log('Created offer:', offer);
+        return peerConnection.setLocalDescription(offer);
+      }).then(() => {
+        socket.emit('offer', peerConnection.localDescription);
+      });
+
+      peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+          console.log('Adding ICE candidate:', event.candidate);
+          socket.emit('iceCandidate', event.candidate);
+        }
+      };
+
+      peerConnection.addEventListener('connectionstatechange', event => {
+        if (peerConnection.connectionState === 'connected') {
+            console.log('Peers connected!')
+        }
+      });
+
+      const form = document.querySelector('form');
+      const input = document.getElementById('message');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const message = input.value;
+        input.value = '';
+        dataChannel.send(message);
+      });
+    </script>
+  </body>
+</html>
