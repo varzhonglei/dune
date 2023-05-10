@@ -4,16 +4,16 @@ import Dexie, { Table } from 'dexie';
 export interface ModFile {
   id?: number;
   name: string;
-  // file: File
+  file: File
 }
 
 export class MySubClassedDexie extends Dexie {
   files!: Table<ModFile>; 
 
   constructor() {
-    super('myDatabase');
+    super('myDatabase1');
     this.version(1).stores({
-      files: '++id, name' // Primary key and indexed props
+      files: '++id, name, file' // Primary key and indexed props
     });
   }
 }

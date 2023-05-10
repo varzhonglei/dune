@@ -1,0 +1,10 @@
+{
+  "require": ["ts-node/register", "test/fixtures.ts"],
+  "extensions": ["ts", "tsx"],
+  "spec": [
+    "test/**/**.test.**"
+  ],
+  "watch-files": [
+    "src"
+  ]
+}

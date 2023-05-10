@@ -9,7 +9,7 @@ export function AddFileForm() {
       if (file) {
         const id = await db.files.add({
           name: file.name,
-          // file: file,
+          file: file,
         });
         console.log(`File successfully added: ${file.name}. Got id ${id}`)
       }
