@@ -1,21 +1,11 @@
 import { roles } from "../store/roles"
-import { genRandomArray } from "../tools/random"
-import { Game, Table } from "../round-table/tables"
+import { Game, Table, tableListStore } from "../round-table/tables"
 import { DataStore } from "../store/momento"
 import { Role, initDashBoard } from "../typing"
+import { random } from "lodash"
 
 
- 
-// const roleSet = () => {
-//   const random1_4 = genRandomArray(4) 
-//   roles.slice(0, 4).forEach((r, ind) => {
-//     store.roles.push({
-//       ...r,
-//       user: store.users[random1_4[ind]]
-//     })
-//   })
-//   store.firstPlayer = roles[random1_4[0]]
-// }
+
 const setRole = ( {
   store,
   token,
@@ -25,17 +15,43 @@ const setRole = ( {
   token: string
   role: Role
 }) => {
+  const w = { water: 1 }
+  if (role === Role.queen) {
+    w.water = 0
+  }
   store.setState({
     dashboards: {
       [token]: {
         ...initDashBoard,
+        ...w,
         role,
       }
     }
   })
 }
+const setRoles = (table: Table) => {
+  const users = table.users
+  const rs = Object.values(roles)
+  rs.sort((a,b) => random(-1.1, 1.1))
+  rs.slice(0, 4).forEach((role, ind) => {
+    setRole({
+      store: table.store,
+      token: users[ind].token,
+      role: role.key,
+    })
+  })
+}
+const setFirstPlayer = (table: Table) => {
+  const users = table.users
+  table.store.setState({
+    firstPlayer: users[random(0,3)]
+  })
+}
 
-export const setUp = (table: Table) => {
-  const store = table.store
-
+export const setup = (tableId: number) => {
+  const table = tableListStore.find(t => t.id === tableId)
+  if (!table) return
+  if (table.users.length < 4) return 
+  setRoles(table)
+  setFirstPlayer(table)
 }

@@ -28,9 +28,9 @@ describe('create user', function() {
     user4.token = createUser(user4.name)
     assert.equal(userList.length, 4)
     const u1 =  userList.find(u => u.token === user1.token)
-    assert.equal(u1?.user?.name, 'jiang')
+    assert.equal(u1?.name, 'jiang')
     const u4 =  userList.find(u => u.token === user4.token)
-    assert.equal(u4?.user?.name, 'yang')
+    assert.equal(u4?.name, 'yang')
   })
   it('duplicate name test', function() {
     const res = createUser(user4.name)

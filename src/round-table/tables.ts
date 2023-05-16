@@ -3,7 +3,7 @@ import { Dashboard } from "../typing"
 import { User } from "../typing/user"
 
 export interface Game {
-  firstPlayer?: string
+  firstPlayer?: User
   dashboards?: {
     [key in string] : Dashboard
   }

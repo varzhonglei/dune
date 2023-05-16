@@ -1,11 +1,7 @@
 import { User } from "../typing/user"
 import jwt from "jsonwebtoken";
 
-export const userList: {
-  token: string,
-  user: User,
-  // expired: Date,
-}[] = []
+export const userList: User[] = []
 
 export const DuplicateName = 'username already exist'
 
@@ -13,19 +9,21 @@ export const createUser = (name: string): string => {
   const user = {
     name
   }
-  const allNames = userList.map(u => u.user.name)
+  const allNames = userList.map(u => u.name)
   if (allNames.includes(name)) {
     return DuplicateName
   }
   const token = generateJwtToken(user)
   userList.push({
-    user,
+    name,
     token
   })
   return token
 }
 
-type Payload = User
+type Payload = {
+  name: string
+}
 
 function generateJwtToken(payload: Payload): string {
   const secret = "mysecretkey-ben";
