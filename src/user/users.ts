@@ -7,9 +7,15 @@ export const userList: {
   // expired: Date,
 }[] = []
 
+export const DuplicateName = 'username already exist'
+
 export const createUser = (name: string): string => {
   const user = {
     name
+  }
+  const allNames = userList.map(u => u.user.name)
+  if (allNames.includes(name)) {
+    return DuplicateName
   }
   const token = generateJwtToken(user)
   userList.push({

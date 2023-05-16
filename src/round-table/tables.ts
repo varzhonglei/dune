@@ -1,21 +1,32 @@
+import { DataStore } from "../store/momento"
+import { Dashboard } from "../typing"
 import { User } from "../typing/user"
 
-interface TableListStore {
+export interface Game {
+  firstPlayer?: string
+  dashboards?: {
+    [key in string] : Dashboard
+  }
+}
+const initialGame = {
+
+}
+
+
+export interface Table {
   id: number,
   users: User[];
-  store: Game;
+  store: DataStore<Game>;
 }
 
-interface Game {
-
-}
 
 const createTable = (id: number) => {
+  const store = new DataStore<Game>(initialGame);
   return {
     id,
     users: [],
-    store: {},
+    store: store,
   }
 }
 
-export const tableListStore: TableListStore[] = [1,2,3,4,5].map(i => createTable(i))
+export const tableListStore: Table[] = [1,2,3,4,5].map(i => createTable(i))

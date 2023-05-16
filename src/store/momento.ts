@@ -1,3 +1,5 @@
+import { merge, cloneDeep } from 'lodash'
+
 interface Memento<T> {
   state: T;
   index: number;
@@ -32,9 +34,13 @@ export class DataStore<T> {
     };
   }
 
-  setState(newState: T): void {
+  setState(data: T): void {
+    const newState = merge(this.getState(), data)
+    this._setState(cloneDeep(newState))
+  }
+
+  _setState(newState: T): void {
     this.state = newState;
-    this.saveState();
   }
 
   getState(): T {

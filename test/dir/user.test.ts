@@ -1,5 +1,5 @@
 import assert from 'assert'
-import { createUser, userList } from '../../src/user/users'
+import { DuplicateName, createUser, userList } from '../../src/user/users'
 
 const user1 = {
   name: 'jiang',
@@ -18,6 +18,8 @@ const user4 = {
   token: '',
 }
 
+export const users = [user1,user2, user3, user4]
+
 describe('create user', function() {
   it('create 4 user', function() {
     user1.token = createUser(user1.name)
@@ -29,6 +31,10 @@ describe('create user', function() {
     assert.equal(u1?.user?.name, 'jiang')
     const u4 =  userList.find(u => u.token === user4.token)
     assert.equal(u4?.user?.name, 'yang')
+  })
+  it('duplicate name test', function() {
+    const res = createUser(user4.name)
+    assert.equal(res, DuplicateName)
   })
 })
 

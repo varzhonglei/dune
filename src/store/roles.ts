@@ -1,12 +1,6 @@
 import { deepFreeze } from '../tools/deep-freeze'
+import { Role } from '../typing'
 
-export enum Role {
-  'polo' = 'polo',
-  'hailena' = 'hailena',
-  'queen' = 'queen',
-  'miemie' = 'miemie',
-  'paochuan' = 'paochuan'
-}
 const polo = { 
   name: 'Polo', 
   key: Role.polo,
