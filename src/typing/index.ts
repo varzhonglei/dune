@@ -3,7 +3,14 @@ export enum Role {
   'hailena' = 'hailena',
   'queen' = 'queen',
   'miemie' = 'miemie',
-  'paochuan' = 'paochuan'
+  'paochuan' = 'paochuan',
+  'fanshu2' = 'fanshu2',
+  'qiange' = 'qiange',
+  'yilaisha' = 'yilaisha',
+  'wanguijie' = 'wanguijie',
+  'longbo' = 'longbo',
+  'shui' = 'shui',
+  'yeye' = 'yeye'
 }
 
 export type Dashboard = {

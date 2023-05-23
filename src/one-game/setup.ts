@@ -15,20 +15,25 @@ const setRole = ( {
   token: string
   role: Role
 }) => {
-  const w = { water: 1 }
+  const ex = { ...initDashBoard }
   if (role === Role.queen) {
-    w.water = 0
+    ex.water = 0
   }
+  if (role === Role.fanshu2) {
+    ex.money = 1
+    ex.spice = 1
+  }
+  
   store.setState({
     dashboards: {
       [token]: {
-        ...initDashBoard,
-        ...w,
+        ...ex,
         role,
       }
     }
   })
 }
+
 const setRoles = (table: Table) => {
   const users = table.users
   const rs = Object.values(roles)
