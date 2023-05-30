@@ -1,13 +1,5 @@
-enum StationIcon {
-  triangle = 'triangle',
-  pentagon = 'pentagon',
-  circular = 'circular',
-
-  fremen = 'fremen',
-  sister = 'sister',
-  union = 'union',
-  empire = 'empire',
-}
+import { EConstraint, EEffect } from "./effect"
+import { StationIcon } from "./station"
 
 type card = {
   name: string
@@ -21,11 +13,11 @@ const c1: card = {
   name: '香料控制',
   icons: [StationIcon.triangle],
   playEffect: {
-    con: ['give-spice-1'],
-    conBonus: ['trash-card-1', 'get-troops-1']
+    con: [{ key: EConstraint.paySpice }],
+    conBonus: [{ key: EEffect.trashCard },{ key: EEffect.getTroops }]
   },
   revealEffect: {
-    get: ['get-cardBuy-1']
+    get: [{ key: EEffect.cardBuy }]
   }
 }
 
@@ -34,34 +26,34 @@ const c2 = {
   icons: [StationIcon.fremen, StationIcon.sister, StationIcon.union, StationIcon.empire],
   playEffect: {},
   revealEffect: {
-    get: ['get-cardBuy-1']
+    get: [{ key: EEffect.cardBuy }]
   }
 }
 
 const c3 = {
   name: '寻求盟友',
   icons: [StationIcon.fremen, StationIcon.sister, StationIcon.union, StationIcon.empire],
-  playEffect: { get: ['trash-card-self'] },
+  playEffect: { get: [{ key: EEffect.trashCardSelf }] },
   revealEffect: {
-    get: ['get-cardBuy-1']
+    get: [{ key: EEffect.cardBuy }]
   }
 }
 
 const c4 = {
   name: 'todo 三角',
   icons: [StationIcon.triangle],
-  playEffect: { get: ['research'] },
+  playEffect: { get: [{ key: EEffect.research }] },
   revealEffect: {
-    get: ['get-cardBuy-1', 'get-TLLBuy-1']
+    get: [{ key: EEffect.cardBuy }, { key: EEffect.TLLBuy }]
   }
 }
 
 const c5 = {
   name: '土地测量',
-  icons: [StationIcon.circular],
+  icons: [StationIcon.circle],
   playEffect: {},
   revealEffect: {
-    get: ['get-cardBuy-1']
+    get: [{ key: EEffect.cardBuy }]
   }
 }
 
@@ -70,7 +62,7 @@ const c6 = {
   icons: [],
   playEffect: {},
   revealEffect: {
-    get: ['get-cardBuy-2']
+    get: [{ key: EEffect.cardBuy, number: 2 }]
   }
 }
 
@@ -79,16 +71,16 @@ const c7 = {
   icons: [StationIcon.pentagon],
   playEffect: {},
   revealEffect: {
-    get: ['combat-power-1']
+    get: [{ key: EEffect.dao }]
   }
 }
 
 const c8 = {
   name: '印章戒指',
-  icons: [StationIcon.pentagon, StationIcon.triangle, StationIcon.circular],
-  playEffect: { get: ['role-effect'] },
+  icons: [StationIcon.pentagon, StationIcon.triangle, StationIcon.circle],
+  playEffect: { get: [{ key: EEffect.roleSkill }] },
   revealEffect: {
-    get: ['combat-power-1']
+    get: [{ key: EEffect.cardBuy }]
   }
 }
 
