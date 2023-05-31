@@ -2,12 +2,20 @@
 
 export enum EConstraint {
   'paySpice' = 'paySpice',
-  'union2' = 'union2',
-  'fremen2' = 'fremen2',
   'payWater' = 'payWater',
   'trashCard' = 'trashCard',
   'payMoney' = 'payMoney',
   'loseInf' = 'loseInf',
+  'fremenBound' = 'fremenBound',
+  'fremen2' = 'fremen2',
+  'fremenAlliance' = 'fremenAlliance',
+  'sister2' = 'sister2',
+  'sisterInPlay' = 'sisterInPlay',
+  'sisterAlliance' = 'sisterAlliance',
+  'union2' = 'union2',
+  'unionAlliance' = 'unionAlliance',
+  'empire2' = 'empire2',
+  'empireAlliance' = 'empireAlliance',
 }
 
 export enum EEffect {
@@ -38,6 +46,9 @@ export enum EEffect {
   'byTechLess1' = 'byTechLess1',
   'byTech' = 'byTech',
   'getJian' = 'getJian',
-  'getInf' = 'getInf',
-  'getInf2' = 'getInf2',
+  'inf' = 'inf',
+  'inf2' = 'inf2',
+  'infFremen' = 'infFremen',
+  'infSister' = 'infSister',
+  'infUnion' = 'infUnion',
 }
