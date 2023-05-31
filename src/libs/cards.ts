@@ -1,7 +1,7 @@
 import { EConstraint, EEffect } from "./effect"
 import { StationIcon } from "./station"
 
-type card = {
+export type TCard = {
   name: string
   playEffect: any
   revealEffect: any
@@ -9,12 +9,15 @@ type card = {
   img?: any
 }
 
-const c1: card = {
+const c1: TCard = {
   name: '香料控制',
   icons: [StationIcon.triangle],
   playEffect: {
-    con: [{ key: EConstraint.paySpice }],
-    conBonus: [{ key: EEffect.trashCard },{ key: EEffect.getTroops }]
+    get: [{
+      key: EEffect.constraint,
+      con: [{ key: EConstraint.paySpice }],
+      conBonus: [{ key: EEffect.trashCard },{ key: EEffect.getTroops }]
+    }]
   },
   revealEffect: {
     get: [{ key: EEffect.cardBuy }]
@@ -86,3 +89,37 @@ const c8 = {
 
 
 export const basicCards = [c1,c2,c3,c4,c4, c5,c6,c6,c7,c7, c8]
+
+const spiceMustFlow = {
+  name: '香料永流传',
+  price: 9,
+  icons: [],
+  playEffect: {},
+  revealEffect: {
+    get: [{ key: EEffect.getSpice }]
+  }
+}
+export const spiceMustFlowCards = Array.from({length: 10}).map(_ => spiceMustFlow)
+
+const fremen = {
+  name: 'fremen bro',
+  price: 2,
+  icons: [StationIcon.pentagon, StationIcon.circle],
+  playEffect: {},
+  revealEffect: {
+    get: [{ key: EEffect.getSpice }]
+  }
+}
+
+export const fremenCards = Array.from({length: 9}).map(_ => fremen)
+
+const spacingGuid = {
+  name: 'Spacing Guid',
+  icons: Object.values(StationIcon),
+  playEffect: {
+    get: [{ key: EEffect.drawCard }]
+  },
+  revealEffect: {}
+}
+
+export const spacingGuidCards = Array.from({length: 6}).map(_ => spacingGuid)

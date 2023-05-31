@@ -1,4 +1,4 @@
-import { roles } from "../store/roles"
+import { roles } from "../libs/roles"
 import { Game, Table, tableListStore } from "../round-table/tables"
 import { DataStore } from "../store/momento"
 import { Role, initDashBoard } from "../typing"
