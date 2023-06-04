@@ -133,3 +133,85 @@ const c6 = {
 add(c6, c6)
 
 
+const c7 = {
+  name: '权利之网',
+  camp: [ECardCamp.sister],
+  qianRu: true,
+  icons: [StationIcon.sister],
+  playEffect: {
+    get: [
+      {
+        key: EEffect.constraint,
+        con: [{ key: EConstraint.fremen2 }],
+        conBonus: [{ key: EEffect.getWater }]
+      },
+      {
+        key: EEffect.constraint,
+        con: [{ key: EConstraint.union2 }],
+        conBonus: [{ key: EEffect.drawCard }]
+      },
+      {
+        key: EEffect.constraint,
+        con: [{ key: EConstraint.empire2 }],
+        conBonus: [{ key: EEffect.getMoney, number: 2 }]
+      },
+    ]
+  },
+  revealEffect: {
+    get: [{key: EEffect.cardBuy,}, {key: EEffect.inf,}]
+  },
+}
+add(c7)
+
+const c8 = {
+  name: '其他记忆',
+  camp: [ECardCamp.sister],
+  icons: [StationIcon.circle, StationIcon.triangle],
+  playEffect: {
+    get: [
+      {
+        key: EEffect.or,
+        options: [{ key: EEffect.drawCard }, 
+          { key: EEffect.findSister }] 
+      },
+    ]
+  },
+  revealEffect: {
+    get: [{key: EEffect.cardBuy, number: 2}]
+  },
+}
+add(c8)
+
+const c9 = {
+  name: '3费的抽一卡',
+  camp: [ECardCamp.sister],
+  icons: [StationIcon.circle, StationIcon.triangle, StationIcon.pentagon],
+  playEffect: {
+    get: [
+      { key: EEffect.drawCard }
+    ]
+  },
+  revealEffect: {
+    get: [{key: EEffect.cardBuy }]
+  },
+}
+add(c9)
+
+const c10 = {
+  name: '姐妹会大哥',
+  camp: [ECardCamp.sister],
+  qianRu: true,
+  icons: [StationIcon.pentagon],
+  playEffect: {
+    get: [
+      { key: EEffect.constraint,
+        con: [{ key: EConstraint.sisterInPlay }],
+        conBonus: [{ key: EEffect.paoC, number: 2 }]
+      }
+    ]
+  },
+  revealEffect: {
+    get: [{key: EEffect.cardBuy }, {key: EEffect.drawYin }]
+  },
+}
+add(c10)

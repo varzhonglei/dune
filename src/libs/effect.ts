@@ -16,7 +16,7 @@ export enum EConstraint {
   'unionAlliance' = 'unionAlliance',
   'empire2' = 'empire2',
   'empireAlliance' = 'empireAlliance',
-  'dropCard' = 'dropCard'
+  'dropCard' = 'dropCard',
 }
 
 export enum EEffect {
@@ -54,5 +54,6 @@ export enum EEffect {
   'infUnion' = 'infUnion',
   'infEmpire' = 'infEmpire',
   'liete' = 'liete',
-  'infExSister' = 'infExSister'
+  'infExSister' = 'infExSister',
+  'findSister' = 'findSister',
 }
