@@ -1,4 +1,5 @@
 import { merge, cloneDeep } from 'lodash'
+import { produce } from 'immer';
 
 interface Memento<T> {
   state: T;
@@ -34,9 +35,14 @@ export class DataStore<T> {
     };
   }
 
-  setState(data: T): void {
-    const newState = merge(this.getState(), data)
-    this._setState(cloneDeep(newState))
+  setState(p: T | ((prevState: T) => any)): void {
+    if (typeof p === 'function') {
+      const newState = produce(this.getState(), p as any) as any
+      newState && this._setState(newState)
+    } else {
+      const newState = merge(this.getState(), p)
+      this._setState(cloneDeep(newState))
+    }
   }
 
   _setState(newState: T): void {

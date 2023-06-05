@@ -56,4 +56,7 @@ export enum EEffect {
   'liete' = 'liete',
   'infExSister' = 'infExSister',
   'findSister' = 'findSister',
+  'killTroopCamp' = 'killTroopCamp',
+  'deployTroop' = 'deployTroop',
+  'powerPlay' = 'powerPlay',
 }

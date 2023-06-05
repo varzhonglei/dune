@@ -9,8 +9,8 @@ describe('join table', function() {
     joinTable(1, users[1])
     joinTable(1, users[2])
     joinTable(1, users[3])
-    assert.equal(tableListStore[0].users[1].name, 'jeff')
-    assert.equal(tableListStore[0].users[2].name, 'ben')
+    assert.equal(tableListStore[0].store.getState().users[1].name, 'jeff')
+    assert.equal(tableListStore[0].store.getState().users[2].name, 'ben')
   })
 })
 

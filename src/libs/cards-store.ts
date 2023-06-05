@@ -215,3 +215,46 @@ const c10 = {
   },
 }
 add(c10)
+
+const c11 = {
+  name: '普翼机 抽牌',
+  icons: [StationIcon.triangle],
+  playEffect: {
+    get: [
+      { key: EEffect.constraint,
+        con: [{ key: EConstraint.union2 }],
+        conBonus: [{ key: EEffect.drawCard, number: 2 }]
+      }
+    ]
+  },
+  revealEffect: {
+    get: [{key: EEffect.cardBuy }, {key: EEffect.getSpice }]
+  },
+}
+add(c11, c11)
+
+const c12 = {
+  name: '普翼机 上兵',
+  icons: [StationIcon.triangle, StationIcon.circle],
+  playEffect: {
+    get: [
+      { key: EEffect.killTroopCamp}
+    ]
+  },
+  revealEffect: {
+    get: [{key: EEffect.dao, number: 3 }, {key: EEffect.deployTroop }]
+  },
+}
+add(c12, c12)
+
+const c13 = {
+  name: 'power play',
+  icons: [StationIcon.fremen, StationIcon.sister, StationIcon.union, StationIcon.empire],
+  playEffect: {
+    get: [
+      { key: EEffect.powerPlay}
+    ]
+  },
+  revealEffect: {},
+}
+add(c13, c13)

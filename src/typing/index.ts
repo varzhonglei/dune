@@ -1,3 +1,5 @@
+import { User } from "./user"
+
 export enum Role {
   'polo' = 'polo',
   'hailena' = 'hailena',
@@ -13,7 +15,16 @@ export enum Role {
   'yeye' = 'yeye'
 }
 
+enum MiBaoColor {
+  'yellow' = 'yellow',
+  'blue' = 'blue',
+  'red' = 'red',
+  'green' = 'green',
+}
+
 export type Dashboard = {
+  user?: User
+  miBaoColor?: MiBaoColor
   point: number
   //source
   money: number
@@ -24,6 +35,10 @@ export type Dashboard = {
   sister: number
   union: number
   empire: number
+  //
+  troopsCamp: number
+  troopsBattle: number
+  troopsSupply: number
 
   role: Role
 }
@@ -37,6 +52,9 @@ export const initDashBoard: Dashboard = {
   sister: 0,
   union: 0,
   empire: 0,
-  role: Role.polo
+  role: Role.polo,
+  troopsCamp: 5,
+  troopsBattle: 0,
+  troopsSupply: 7,
 }
 

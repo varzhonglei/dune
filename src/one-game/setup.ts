@@ -24,18 +24,14 @@ const setRole = ( {
     ex.spice = 1
   }
   
-  store.setState({
-    dashboards: {
-      [token]: {
-        ...ex,
-        role,
-      }
-    }
+  store.setState(draft => {
+    const d  = draft.dashboards.find(d => d.user?.token === token)
+    d && (d.role = role)
   })
 }
 
 const setRoles = (table: Table) => {
-  const users = table.users
+  const users = table.store.getState().users
   const rs = Object.values(roles)
   rs.sort((a,b) => random(-1.1, 1.1))
   rs.slice(0, 4).forEach((role, ind) => {
@@ -47,16 +43,16 @@ const setRoles = (table: Table) => {
   })
 }
 const setFirstPlayer = (table: Table) => {
-  const users = table.users
+  const users = table.store.getState().users
   table.store.setState({
     firstPlayer: users[random(0,3)]
-  })
+  } as any)
 }
 
 export const setup = (tableId: number) => {
   const table = tableListStore.find(t => t.id === tableId)
   if (!table) return
-  if (table.users.length < 4) return 
+  
   setRoles(table)
   setFirstPlayer(table)
 }
