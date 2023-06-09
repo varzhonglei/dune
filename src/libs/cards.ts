@@ -9,7 +9,7 @@ export type TCard = {
   img?: any
 }
 
-const c1: TCard = {
+export const c1_spice_control:TCard = {
   name: '香料控制',
   icons: [StationIcon.triangle],
   playEffect: {
@@ -88,7 +88,7 @@ const c8 = {
 }
 
 
-export const basicCards = [c1,c2,c3,c4,c4, c5,c6,c6,c7,c7, c8]
+export const basicCards = [c2,c3,c4,c4, c5,c6,c6,c7,c7, c8]
 
 const spiceMustFlow = {
   name: '香料永流传',

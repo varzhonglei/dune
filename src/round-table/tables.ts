@@ -1,5 +1,5 @@
 import { DataStore } from "../store/momento"
-import { Dashboard, initDashBoard } from "../typing"
+import { Dashboard, MiBaoColor, initDashBoard } from "../typing"
 import { User } from "../typing/user"
 
 export interface Game {
@@ -8,7 +8,19 @@ export interface Game {
   users: User[]
 }
 const initialGame = {
-  dashboards: [initDashBoard, initDashBoard, initDashBoard, initDashBoard],
+  dashboards: [{
+    ...initDashBoard,
+    miBaoColor: MiBaoColor.blue,
+  }, {
+    ...initDashBoard,
+    miBaoColor: MiBaoColor.green,
+  }, {
+    ...initDashBoard,
+    miBaoColor: MiBaoColor.red,
+  }, {
+    ...initDashBoard,
+    miBaoColor: MiBaoColor.yellow,
+  }],
   users: []
 }
 

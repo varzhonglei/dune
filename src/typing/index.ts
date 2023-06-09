@@ -1,3 +1,6 @@
+import { shuffle } from "lodash"
+import { TCard, basicCards, c1_spice_control } from "../libs/cards"
+import { StationIcon } from "../libs/station"
 import { User } from "./user"
 
 export enum Role {
@@ -15,7 +18,7 @@ export enum Role {
   'yeye' = 'yeye'
 }
 
-enum MiBaoColor {
+export enum MiBaoColor {
   'yellow' = 'yellow',
   'blue' = 'blue',
   'red' = 'red',
@@ -39,6 +42,16 @@ export type Dashboard = {
   troopsCamp: number
   troopsBattle: number
   troopsSupply: number
+  troopsKeji: number
+
+  mibao: {
+    location: 'free' | StationIcon,
+  } []
+
+  playedCards: TCard[]
+  dropCards: TCard[]
+  handCards: TCard[]
+  moCards: TCard[]
 
   role: Role
 }
@@ -56,5 +69,18 @@ export const initDashBoard: Dashboard = {
   troopsCamp: 5,
   troopsBattle: 0,
   troopsSupply: 7,
+  troopsKeji: 0,
+
+  mibao: [{
+    location: 'free',
+  }, {
+    location: 'free',
+  }],
+
+  playedCards: [],
+  dropCards: [c1_spice_control],
+  handCards: [],
+  moCards: [...basicCards],
+
 }
 
