@@ -2,7 +2,7 @@ import { roles } from "../libs/roles"
 import { Game, Table, tableListStore } from "../round-table/tables"
 import { DataStore } from "../store/momento"
 import { Role, initDashBoard } from "../typing"
-import { random } from "lodash"
+import { random, shuffle, slice } from "lodash"
 
 
 
@@ -49,10 +49,35 @@ const setFirstPlayer = (table: Table) => {
   } as any)
 }
 
+const firstDrawCard = (table: Table) => {
+  table.store.setState((draft) => {
+    [0,1,2,3].forEach(k => {
+      const d = draft.dashboards[k]
+      const operationCards = shuffle(d.moCards)
+      d.handCards = slice(operationCards, 0, 5)
+      d.moCards = slice(operationCards, 5)
+    })
+  })
+}
+
+const firstDrawYin = (table: Table) => {
+  table.store.setState((draft) => {
+    const operationCards = shuffle(draft.yinCards);
+    [0,1,2,3].forEach(k => {
+      const d = draft.dashboards[k]
+      d.yinCards = [operationCards[k]]
+    })
+    draft.yinCards = slice(operationCards, 4)
+  })
+}
+
+
 export const setup = (tableId: number) => {
   const table = tableListStore.find(t => t.id === tableId)
   if (!table) return
   
   setRoles(table)
   setFirstPlayer(table)
+  firstDrawCard(table)
+  firstDrawYin(table)
 }

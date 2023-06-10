@@ -1,3 +1,6 @@
+import { TCard, fremenCards, spacingGuidCards, spiceMustFlowCards } from "../libs/cards"
+import { storeCards } from "../libs/cards-store"
+import { yinCards } from "../libs/yin-card"
 import { DataStore } from "../store/momento"
 import { Dashboard, MiBaoColor, initDashBoard } from "../typing"
 import { User } from "../typing/user"
@@ -6,8 +9,14 @@ export interface Game {
   firstPlayer?: User
   dashboards: Dashboard[]
   users: User[]
+  storeCards: TCard[]
+  spiceMustFlowCards: TCard[]
+  fremenCards: TCard[]
+  spacingGuidCards: TCard[]
+  yinCards: any[]
+  mentat: number
 }
-const initialGame = {
+const initialGame: Game = {
   dashboards: [{
     ...initDashBoard,
     miBaoColor: MiBaoColor.blue,
@@ -21,7 +30,16 @@ const initialGame = {
     ...initDashBoard,
     miBaoColor: MiBaoColor.yellow,
   }],
-  users: []
+  users: [],
+  storeCards: storeCards,
+  spiceMustFlowCards: spiceMustFlowCards,
+  fremenCards: fremenCards,
+  spacingGuidCards: spacingGuidCards,
+
+  yinCards: yinCards,
+
+  mentat: 1,
+
 }
 
 
@@ -40,4 +58,4 @@ const createTable = (id: number) => {
   }
 }
 
-export const tableListStore: Table[] = [1,2,3,4,5].map(i => createTable(i))
+export const tableListStore: Table[] = [0,1,2].map(i => createTable(i))

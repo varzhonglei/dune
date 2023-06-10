@@ -3,9 +3,9 @@ import { StationIcon } from "./station"
 
 export type TCard = {
   name: string
-  playEffect: any
-  revealEffect: any
-  icons: StationIcon[]
+  playEffect?: any
+  revealEffect?: any
+  icons?: StationIcon[]
   img?: any
 }
 

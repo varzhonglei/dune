@@ -1,4 +1,3 @@
-import { shuffle } from "lodash"
 import { TCard, basicCards, c1_spice_control } from "../libs/cards"
 import { StationIcon } from "../libs/station"
 import { User } from "./user"
@@ -49,9 +48,12 @@ export type Dashboard = {
   } []
 
   playedCards: TCard[]
-  dropCards: TCard[]
+  qiCards: TCard[]
   handCards: TCard[]
   moCards: TCard[]
+  trashedCards: TCard[]
+
+  yinCards: any[]
 
   role: Role
 }
@@ -78,9 +80,12 @@ export const initDashBoard: Dashboard = {
   }],
 
   playedCards: [],
-  dropCards: [c1_spice_control],
+  qiCards: [c1_spice_control],
   handCards: [],
   moCards: [...basicCards],
+  trashedCards: [],
+
+  yinCards: [],
 
 }
 
