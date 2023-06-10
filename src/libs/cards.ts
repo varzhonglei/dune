@@ -12,79 +12,57 @@ export type TCard = {
 export const c1_spice_control:TCard = {
   name: '香料控制',
   icons: [StationIcon.triangle],
-  playEffect: {
-    get: [{
+  playEffect:  [{
       key: EEffect.constraint,
       con: [{ key: EConstraint.paySpice }],
       conBonus: [{ key: EEffect.trashCard },{ key: EEffect.getTroops }]
-    }]
-  },
-  revealEffect: {
-    get: [{ key: EEffect.cardBuy }]
-  }
+    }],
+  revealEffect:  [{ key: EEffect.cardBuy }]
 }
 
 const c2 = {
   name: '外交',
   icons: [StationIcon.fremen, StationIcon.sister, StationIcon.union, StationIcon.empire],
-  playEffect: {},
-  revealEffect: {
-    get: [{ key: EEffect.cardBuy }]
-  }
+  revealEffect:  [{ key: EEffect.cardBuy }]
 }
 
 const c3 = {
   name: '寻求盟友',
   icons: [StationIcon.fremen, StationIcon.sister, StationIcon.union, StationIcon.empire],
-  playEffect: { get: [{ key: EEffect.trashCardSelf }] },
-  revealEffect: {
-    get: [{ key: EEffect.cardBuy }]
-  }
+  playEffect:[{ key: EEffect.trashCardSelf }],
+  revealEffect:  [{ key: EEffect.cardBuy }]
 }
 
 const c4 = {
   name: 'todo 三角',
   icons: [StationIcon.triangle],
-  playEffect: { get: [{ key: EEffect.research }] },
-  revealEffect: {
-    get: [{ key: EEffect.cardBuy }, { key: EEffect.TLLBuy }]
-  }
+  playEffect: [{ key: EEffect.research }],
+  revealEffect:  [{ key: EEffect.cardBuy }, { key: EEffect.TLLBuy }]
 }
 
 const c5 = {
   name: '土地测量',
   icons: [StationIcon.circle],
-  playEffect: {},
-  revealEffect: {
-    get: [{ key: EEffect.cardBuy }]
-  }
+  revealEffect:  [{ key: EEffect.cardBuy }]
 }
 
 const c6 = {
   name: '说服',
   icons: [],
-  playEffect: {},
-  revealEffect: {
-    get: [{ key: EEffect.cardBuy, number: 2 }]
-  }
+  revealEffect:  [{ key: EEffect.cardBuy, number: 2 }]
 }
 
 const c7 = {
   name: '匕首',
   icons: [StationIcon.pentagon],
-  playEffect: {},
-  revealEffect: {
-    get: [{ key: EEffect.dao }]
-  }
+  revealEffect:  [{ key: EEffect.dao }]
 }
 
 const c8 = {
   name: '印章戒指',
   icons: [StationIcon.pentagon, StationIcon.triangle, StationIcon.circle],
-  playEffect: { get: [{ key: EEffect.roleSkill }] },
-  revealEffect: {
-    get: [{ key: EEffect.cardBuy }]
-  }
+  playEffect:[{ key: EEffect.roleSkill }],
+  revealEffect:  [{ key: EEffect.cardBuy }]
 }
 
 
@@ -94,10 +72,7 @@ const spiceMustFlow = {
   name: '香料永流传',
   price: 9,
   icons: [],
-  playEffect: {},
-  revealEffect: {
-    get: [{ key: EEffect.getSpice }]
-  }
+  revealEffect:  [{ key: EEffect.getSpice }]
 }
 export const spiceMustFlowCards = Array.from({length: 10}).map(_ => spiceMustFlow)
 
@@ -105,10 +80,7 @@ const fremen = {
   name: 'fremen bro',
   price: 2,
   icons: [StationIcon.pentagon, StationIcon.circle],
-  playEffect: {},
-  revealEffect: {
-    get: [{ key: EEffect.getSpice }]
-  }
+  revealEffect:  [{ key: EEffect.getSpice }]
 }
 
 export const fremenCards = Array.from({length: 9}).map(_ => fremen)
@@ -116,10 +88,7 @@ export const fremenCards = Array.from({length: 9}).map(_ => fremen)
 const spacingGuid = {
   name: 'Spacing Guid',
   icons: Object.values(StationIcon),
-  playEffect: {
-    get: [{ key: EEffect.drawCard }]
-  },
-  revealEffect: {}
+  playEffect:  [{ key: EEffect.drawCard }],
 }
 
 export const spacingGuidCards = Array.from({length: 6}).map(_ => spacingGuid)

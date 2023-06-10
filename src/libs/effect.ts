@@ -59,4 +59,10 @@ export enum EEffect {
   'killTroopCamp' = 'killTroopCamp',
   'deployTroop' = 'deployTroop',
   'powerPlay' = 'powerPlay',
+  'lookAtTop' = 'lookAtTop',
+  'workflow' = 'workflow',
+  'shuffle' = 'shuffle',
+  'passTurn' = 'passTurn',
+  'noop' = 'noop',
+  'retreat' = 'retreat',
 }
