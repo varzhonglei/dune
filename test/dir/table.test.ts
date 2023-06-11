@@ -19,12 +19,15 @@ describe('set up', function() {
     setup(0)
     const roles = Object.values(tableListStore[0].store.getState().dashboards || {}).map(d => d.role)
     assert.equal(roles.length, 4)
-    console.log('0', tableListStore[0].store.getState().dashboards[0])
-    console.log('1', tableListStore[0].store.getState().dashboards[1])
-    console.log('2', tableListStore[0].store.getState().dashboards[2])
-    console.log('3', tableListStore[0].store.getState().dashboards[3])
-    console.log('yin', tableListStore[0].store.getState().yinCards)
   })
 })
 
+
+describe('action', function() {
+  it('dong', function() {
+    setup(0)
+    const roles = Object.values(tableListStore[0].store.getState().dashboards || {}).map(d => d.role)
+    assert.equal(roles.length, 4)
+  })
+})
 

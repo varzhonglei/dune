@@ -43,9 +43,8 @@ const setRoles = (table: Table) => {
   })
 }
 const setFirstPlayer = (table: Table) => {
-  const users = table.store.getState().users
   table.store.setState({
-    firstPlayer: users[random(0,3)]
+    turn: random(0,3)
   } as any)
 }
 
@@ -70,6 +69,7 @@ const firstDrawYin = (table: Table) => {
     draft.yinCards = slice(operationCards, 4)
   })
 }
+
 
 
 export const setup = (tableId: number) => {

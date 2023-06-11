@@ -6,7 +6,7 @@ import { Dashboard, MiBaoColor, initDashBoard } from "../typing"
 import { User } from "../typing/user"
 
 export interface Game {
-  firstPlayer?: User
+  turn: number
   dashboards: Dashboard[]
   users: User[]
   storeCards: TCard[]
@@ -17,6 +17,7 @@ export interface Game {
   mentat: number
 }
 const initialGame: Game = {
+  turn: 0,
   dashboards: [{
     ...initDashBoard,
     miBaoColor: MiBaoColor.blue,
@@ -51,7 +52,6 @@ export interface Table {
 
 const createTable = (id: number) => {
   const store = new DataStore<Game>(initialGame);
-
   return {
     id,
     store: store,
