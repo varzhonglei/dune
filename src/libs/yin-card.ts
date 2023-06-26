@@ -1,8 +1,14 @@
 import { EConstraint, EEffect } from "./effect"
 
+export type TYinCard = {
+  cardName: string,
+  playEffect?: any[],
+  battleEffect?: any[],
+  endEffect?: any[],
+}
 
-export const yinCards: any[] = []
-const add = (...args: any[]) => {
+export const yinCards: TYinCard[] = []
+const add = (...args: TYinCard[]) => {
   yinCards.push(...args)
 }
 

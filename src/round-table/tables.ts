@@ -1,6 +1,6 @@
 import { TCard, fremenCards, spacingGuidCards, spiceMustFlowCards } from "../libs/cards"
 import { storeCards } from "../libs/cards-store"
-import { yinCards } from "../libs/yin-card"
+import { TYinCard, yinCards } from "../libs/yin-card"
 import { DataStore } from "../store/momento"
 import { Dashboard, MiBaoColor, initDashBoard } from "../typing"
 import { User } from "../typing/user"
@@ -13,7 +13,8 @@ export interface Game {
   spiceMustFlowCards: TCard[]
   fremenCards: TCard[]
   spacingGuidCards: TCard[]
-  yinCards: any[]
+  yinCards: TYinCard[]
+  yinCardsPlayed: TYinCard[]
   mentat: number
 }
 const initialGame: Game = {
@@ -38,6 +39,7 @@ const initialGame: Game = {
   spacingGuidCards: spacingGuidCards,
 
   yinCards: yinCards,
+  yinCardsPlayed: [],
 
   mentat: 1,
 
