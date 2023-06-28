@@ -38,10 +38,13 @@ export type Dashboard = {
   union: number
   empire: number
   //
-  troopsCamp: number
-  troopsBattle: number
-  troopsSupply: number
-  troopsKeji: number
+
+  troops: {
+    troopsCamp: number[]
+    troopsBattle: number[]
+    troopsSupply: number[]
+    troopsKeji: number[]
+  }
 
   mibao: {
     location: 'free' | StationIcon,
@@ -68,10 +71,13 @@ export const initDashBoard: Dashboard = {
   union: 0,
   empire: 0,
   role: Role.polo,
-  troopsCamp: 5,
-  troopsBattle: 0,
-  troopsSupply: 7,
-  troopsKeji: 0,
+  
+  troops: {
+    troopsCamp: Array.from({length: 5}).map(_ => 1),
+    troopsBattle: [],
+    troopsSupply: Array.from({length: 7}).map(_ => 1),
+    troopsKeji: [],
+  },
 
   mibao: [{
     location: 'free',

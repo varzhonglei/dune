@@ -2,7 +2,7 @@ import { TCard } from "../libs/cards"
 import { StationIcon } from "../libs/station"
 import { tableListStore } from "../round-table"
 
-enum EActionType {
+export enum EActionType {
   'playYin' = 'playYin',
   'miBao' = 'miBao',
   'endTurn' = 'endTurn',
@@ -10,7 +10,7 @@ enum EActionType {
   'deploy' = 'deploy',
 }
 
-type TAction = {
+export type TAction = {
   card?: TCard
   location?: StationIcon
   yinCard?: any
