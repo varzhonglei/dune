@@ -44,7 +44,11 @@ export type Dashboard = {
     troopsBattle: number[]
     troopsSupply: number[]
     troopsKeji: number[]
+    troopsTLL: number[]
   }
+
+  cardBuy: number
+  revealDao: number
 
   mibao: {
     location: 'free' | StationIcon,
@@ -77,7 +81,11 @@ export const initDashBoard: Dashboard = {
     troopsBattle: [],
     troopsSupply: Array.from({length: 7}).map(_ => 1),
     troopsKeji: [],
+    troopsTLL: [],
   },
+
+  cardBuy: 0,
+  revealDao: 0,
 
   mibao: [{
     location: 'free',
