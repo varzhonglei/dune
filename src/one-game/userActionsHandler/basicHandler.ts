@@ -1,150 +1,75 @@
 import { Table } from "../../round-table/tables"
 import { Dashboard } from "../../typing"
 
-type TCreateHandlerP<T> = {
-  table: Table
-  token: string,
-  fn: (dashboard:Dashboard ) => void
-}
-export const CreateHandler = <T>({
-  table,
-  token,
-  fn
-}: TCreateHandlerP<T>) => {
-  table.store.setState(s => {
-    const dashboard = s.dashboards.find(d => d.user?.token === token)
-    if (dashboard) {
-      return fn(dashboard)
-    } 
-  }) 
-}
-
-type THandler<T> = {
+type TCreateHandlerP<T> = (dashboard:Dashboard, payload: T ) => void
+type Handler<T> = {
   table: Table
   token: string,
   payload: T
 }
+export const CreateHandler = <T>(fn: TCreateHandlerP<T>) => ({
+    table,
+    token,
+    payload }: Handler<T>
+  ) => {
+    table.store.setState(s => {
+      const dashboard = s.dashboards.find(d => d.user?.token === token)
+      if (dashboard) {
+        fn(dashboard, payload) 
+      }
+  }) 
+}
 
-type TTrashCard = THandler<{
+type trashCardP = {
   from: 'playedCards' | 'qiCards' | 'handCards',
   cardName: string
-}>
-export const trashCard = ({
-  table,
-  token,
-  payload,
-}: TTrashCard) => {
-  return CreateHandler({
-    table,
-    token,
-    fn: (dashboard) => {
-      const ind = dashboard[payload.from].findIndex(c => c.name === payload.cardName)
-      const trashedCard = dashboard[payload.from].splice(ind,1)
-      trashedCard[0] && dashboard.trashedCards.push(trashedCard[0])
-    }
-  })
 }
+export const trashCard = CreateHandler<trashCardP>((dashboard, payload) => {
+    const ind = dashboard[payload.from].findIndex(c => c.name === payload.cardName)
+    const trashedCard = dashboard[payload.from].splice(ind,1)
+    trashedCard[0] && dashboard.trashedCards.push(trashedCard[0])
+  })
 
-
-type TNumberHandler = THandler<{
+type numberP = {
   number: number
-}>
-export const getTroops = ({
-  table,
-  token,
-  payload,
-}: TNumberHandler) => {
-  return CreateHandler({
-    table,
-    token,
-    fn: (dashboard) => {
-      for(let i = 0; i < payload.number; i++) {
-        let bin = dashboard.troops.troopsSupply.pop()
-        if (!bin) bin = dashboard.troops.troopsTLL.pop()
-        bin && dashboard.troops.troopsCamp.push(bin)
-      }
-    }
-  })
 }
-
-export const getMoney = ({
-  table,
-  token,
-  payload,
-}: TNumberHandler) => {
-  return CreateHandler({
-    table,
-    token,
-    fn: (dashboard) => {
-      dashboard.money = dashboard.money + payload.number
-    }
-  })
-}
-
-export const getWater = ({
-  table,
-  token,
-  payload,
-}: TNumberHandler) => {
-  return CreateHandler({
-    table,
-    token,
-    fn: (dashboard) => {
-      dashboard.water = dashboard.water + payload.number
-    }
-  })
-}
-
-export const getSpice = ({
-  table,
-  token,
-  payload,
-}: TNumberHandler) => {
-  return CreateHandler({
-    table,
-    token,
-    fn: (dashboard) => {
-      dashboard.spice = dashboard.spice + payload.number
-    }
-  })
-}
-
-export const cardBuy = ({
-  table,
-  token,
-  payload,
-}: TNumberHandler) => {
-  return CreateHandler({
-    table,
-    token,
-    fn: (dashboard) => {
-      dashboard.cardBuy = dashboard.cardBuy + payload.number
-    }
-  })
-}
+export const getTroops = CreateHandler<numberP>((dashboard, payload) => {
+  for(let i = 0; i < payload.number; i++) {
+    let bin = dashboard.troops.troopsSupply.pop()
+    if (!bin) bin = dashboard.troops.troopsTLL.pop()
+    bin && dashboard.troops.troopsCamp.push(bin)
+  }
+})
 
 
-export const TLLBuy = ({
-  table,
-  token,
-  payload,
-}: TNumberHandler) => {
-  return CreateHandler({
-    table,
-    token,
-    fn: (dashboard) => {
-      for(let i = 0; i < payload.number; i++) {
-        const bin = dashboard.troops.troopsSupply.pop()
-        bin && dashboard.troops.troopsCamp.push(bin)
-      }
-    }
-  })
-}
+export const getMoney = CreateHandler<numberP>((dashboard, payload) => {
+    dashboard.money = dashboard.money + payload.number
+})
 
 
+export const getWater = CreateHandler<numberP>((dashboard, payload) => {
+  dashboard.water = dashboard.water + payload.number
+})
 
+export const getSpice = CreateHandler<numberP>((dashboard, payload) => {
+  dashboard.spice = dashboard.spice + payload.number
+})
 
-  // 'dao' = 'dao', 
+export const cardBuy = CreateHandler<numberP>((dashboard, payload) => {
+  dashboard.cardBuy = dashboard.cardBuy + payload.number
+})
+
+export const TLLBuy = CreateHandler<numberP>((dashboard, payload) => {
+  for(let i = 0; i < payload.number; i++) {
+    const bin = dashboard.troops.troopsSupply.pop()
+    bin && dashboard.troops.troopsCamp.push(bin)
+  }
+})
+
+export const dao = CreateHandler<numberP>((dashboard, payload) => {
+  dashboard.revealDao = dashboard.revealDao + payload.number
+})
+
   // 'trashCardSelf' = 'trashCardSelf',
   // 'roleSkill' = "roleSkill",
   // 'research' = 'research',
