@@ -1,15 +1,20 @@
 import { EConstraint, EEffect } from "./effect"
+import { addYinCardIds } from "./utils"
 
-export type TYinCard = {
+export type TYinCardPart = {
   cardName: string,
   playEffect?: any[],
   battleEffect?: any[],
   endEffect?: any[],
 }
+export type TYinCard = TYinCardPart & {
+  id: string
+}
 
 export const yinCards: TYinCard[] = []
-const add = (...args: TYinCard[]) => {
-  yinCards.push(...args)
+
+const add = (...args: TYinCardPart[]) => {
+  yinCards.push(...addYinCardIds(args))
 }
 
 const c1 = {

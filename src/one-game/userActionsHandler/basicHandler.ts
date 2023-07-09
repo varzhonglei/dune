@@ -1,13 +1,23 @@
+import { TCard } from "../../libs/cards"
 import { Table } from "../../round-table/tables"
 import { Dashboard } from "../../typing"
 
-type TCreateHandlerP<T> = (dashboard:Dashboard, payload: T ) => void
+type TCreateHandler<T> = (dashboard:Dashboard, payload: T ) => void
 type Handler<T> = {
   table: Table
   token: string,
   payload: T
 }
-export const CreateHandler = <T>(fn: TCreateHandlerP<T>) => ({
+
+type numberPayload = {
+  number: number
+}
+
+type idPayload = {
+  id: string
+}
+
+export const CreateHandler = <T>(fn: TCreateHandler<T>) => ({
     table,
     token,
     payload }: Handler<T>
@@ -20,20 +30,24 @@ export const CreateHandler = <T>(fn: TCreateHandlerP<T>) => ({
   }) 
 }
 
-type trashCardP = {
-  from: 'playedCards' | 'qiCards' | 'handCards',
-  cardName: string
-}
-export const trashCard = CreateHandler<trashCardP>((dashboard, payload) => {
-    const ind = dashboard[payload.from].findIndex(c => c.name === payload.cardName)
-    const trashedCard = dashboard[payload.from].splice(ind,1)
+export const trashCard = CreateHandler<idPayload>((dashboard, payload) => {
+    let trashedCard:TCard[] = []
+
+    const ind1 = dashboard.qiCards.findIndex(c => c.id === payload.id)
+    if (ind1 !== -1) trashedCard = dashboard.qiCards.splice(ind1,1)
+
+    const ind2 = dashboard.playedCards.findIndex(c => c.id === payload.id)
+    if (ind2 !== -1) trashedCard = dashboard.playedCards.splice(ind1,1)
+
+    const ind3 = dashboard.playedCards.findIndex(c => c.id === payload.id)
+    if (ind3 !== -1) trashedCard = dashboard.playedCards.splice(ind1,1)
+
     trashedCard[0] && dashboard.trashedCards.push(trashedCard[0])
+
   })
 
-type numberP = {
-  number: number
-}
-export const getTroops = CreateHandler<numberP>((dashboard, payload) => {
+
+export const getTroops = CreateHandler<numberPayload>((dashboard, payload) => {
   for(let i = 0; i < payload.number; i++) {
     let bin = dashboard.troops.troopsSupply.pop()
     if (!bin) bin = dashboard.troops.troopsTLL.pop()
@@ -42,35 +56,37 @@ export const getTroops = CreateHandler<numberP>((dashboard, payload) => {
 })
 
 
-export const getMoney = CreateHandler<numberP>((dashboard, payload) => {
+export const getMoney = CreateHandler<numberPayload>((dashboard, payload) => {
     dashboard.money = dashboard.money + payload.number
 })
 
 
-export const getWater = CreateHandler<numberP>((dashboard, payload) => {
+export const getWater = CreateHandler<numberPayload>((dashboard, payload) => {
   dashboard.water = dashboard.water + payload.number
 })
 
-export const getSpice = CreateHandler<numberP>((dashboard, payload) => {
+export const getSpice = CreateHandler<numberPayload>((dashboard, payload) => {
   dashboard.spice = dashboard.spice + payload.number
 })
 
-export const cardBuy = CreateHandler<numberP>((dashboard, payload) => {
+export const cardBuy = CreateHandler<numberPayload>((dashboard, payload) => {
   dashboard.cardBuy = dashboard.cardBuy + payload.number
 })
 
-export const TLLBuy = CreateHandler<numberP>((dashboard, payload) => {
+export const TLLBuy = CreateHandler<numberPayload>((dashboard, payload) => {
   for(let i = 0; i < payload.number; i++) {
     const bin = dashboard.troops.troopsSupply.pop()
     bin && dashboard.troops.troopsCamp.push(bin)
   }
 })
 
-export const dao = CreateHandler<numberP>((dashboard, payload) => {
+export const dao = CreateHandler<numberPayload>((dashboard, payload) => {
   dashboard.revealDao = dashboard.revealDao + payload.number
 })
 
-  // 'trashCardSelf' = 'trashCardSelf',
+//todo
+export const trashCardSelf = trashCard
+
   // 'roleSkill' = "roleSkill",
   // 'research' = 'research',
   // 'paoC' = 'paoC',

@@ -1,4 +1,4 @@
-import { TCard, basicCards, c1_spice_control } from "../libs/cards"
+import { TCard, basicCards, c1 } from "../libs/cards"
 import { StationIcon } from "../libs/station"
 import { User } from "./user"
 
@@ -94,7 +94,7 @@ export const initDashBoard: Dashboard = {
   }],
 
   playedCards: [],
-  qiCards: [c1_spice_control],
+  qiCards: [c1],
   handCards: [],
   moCards: [...basicCards],
   trashedCards: [],

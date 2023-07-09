@@ -1,5 +1,7 @@
+import { TCard, TCardPart } from "./cards"
 import { EConstraint, EEffect } from "./effect"
 import { StationIcon } from "./station"
+import { addCardIds } from "./utils"
 
 enum ECardCamp {
   'fremen' = 'fremen',
@@ -7,9 +9,9 @@ enum ECardCamp {
   'union' = 'union',
   'empire' = 'empire',
 }
-export const storeCards: any[] = []
-const add = (...args: any[]) => {
-  storeCards.push(...args)
+export const storeCards: TCard[] = []
+const add = (...args: TCardPart[]) => {
+  storeCards.push(...addCardIds(args))
 }
 
 const c1 = {

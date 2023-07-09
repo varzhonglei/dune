@@ -17,6 +17,7 @@ describe('join table', function() {
 describe('set up', function() {
   it('set up game', function() {
     setup(0)
+    console.log('before dong')
     const roles = Object.values(tableListStore[0].store.getState().dashboards || {}).map(d => d.role)
     assert.equal(roles.length, 4)
   })
@@ -25,9 +26,7 @@ describe('set up', function() {
 
 describe('action', function() {
   it('dong', function() {
-    setup(0)
-    const roles = Object.values(tableListStore[0].store.getState().dashboards || {}).map(d => d.role)
-    assert.equal(roles.length, 4)
+    console.log('store turn', tableListStore[0].store.getState().turn)
   })
 })
 

@@ -40,7 +40,7 @@ export class DataStore<T> {
       const newState = produce(this.getState(), p as any) as any
       newState && this._setState(newState)
     } else {
-      const newState = merge(this.getState(), p)
+      const newState = merge({},this.getState(), p)
       this._setState(cloneDeep(newState))
     }
   }

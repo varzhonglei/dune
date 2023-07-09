@@ -44,7 +44,7 @@ const setRoles = (table: Table) => {
 }
 const setFirstPlayer = (table: Table) => {
   table.store.setState({
-    turn: random(0,3)
+    turn: random(0, 3)
   } as any)
 }
 
