@@ -12,7 +12,10 @@ export enum EActionType {
 
 export type TAction = {
   card?: TCard
-  location?: StationIcon
+  miBaoAction?: {
+    miBaoId: number
+    location: StationIcon
+  } 
   yinCard?: any
   todoEffects?: {
     index: number
@@ -38,6 +41,11 @@ export const userAction = ({
 }: P) => {
     const table = tableListStore.find(t => t.id === tableId)
     if (ActionType === EActionType.playYin) {
-      
+      //todo
+      return 
     }
+    if (ActionType === EActionType.miBao) {
+      return 
+    }
+
 }

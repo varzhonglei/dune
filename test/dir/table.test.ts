@@ -26,7 +26,8 @@ describe('set up', function() {
 
 describe('action', function() {
   it('dong', function() {
-    console.log('store turn', tableListStore[0].store.getState().turn)
-  })
+    const turn = tableListStore[0].store.getState().turn
+    console.log('store turn', turn)
+  }) 
 })
 

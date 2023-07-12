@@ -25,6 +25,7 @@ export enum MiBaoColor {
 }
 
 export type Dashboard = {
+  effects: any[]
   user?: User
   miBaoColor?: MiBaoColor
   point: number
@@ -50,7 +51,10 @@ export type Dashboard = {
   cardBuy: number
   revealDao: number
 
+
+
   mibao: {
+    id: number,
     location: 'free' | StationIcon,
   } []
 
@@ -66,6 +70,7 @@ export type Dashboard = {
 }
 
 export const initDashBoard: Dashboard = {
+  effects: [],
   point: 0,
   money: 0,
   water: 1,
@@ -88,8 +93,10 @@ export const initDashBoard: Dashboard = {
   revealDao: 0,
 
   mibao: [{
+    id: 1,
     location: 'free',
   }, {
+    id: 2,
     location: 'free',
   }],
 
