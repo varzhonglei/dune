@@ -12,6 +12,12 @@ export enum StationIcon {
   empire = 'empire',
 }
 
+export type Location = {
+  icon: StationIcon,
+  require?: EConstraint,
+  get: [{ key: EEffect.paoC, number: 2}]
+}
+
 export const station = {
   //三角
   paoCLower: {
