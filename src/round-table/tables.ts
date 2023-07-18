@@ -1,56 +1,10 @@
-import { TCard, fremenCards, spacingGuidCards, spiceMustFlowCards } from "../libs/cards"
-import { storeCards } from "../libs/cards-store"
-import { TYinCard, yinCards } from "../libs/yin-card"
+import { Game, initialGame } from "../one-game/game"
 import { DataStore } from "../store/momento"
-import { Dashboard, MiBaoColor, initDashBoard } from "../typing"
-import { User } from "../typing/user"
-
-export interface Game {
-  turn: number
-  dashboards: Dashboard[]
-  users: User[]
-  storeCards: TCard[]
-  spiceMustFlowCards: TCard[]
-  fremenCards: TCard[]
-  spacingGuidCards: TCard[]
-  yinCards: TYinCard[]
-  yinCardsPlayed: TYinCard[]
-  mentat: number
-}
-const initialGame: Game = {
-  turn: 0,
-  dashboards: [{
-    ...initDashBoard,
-    miBaoColor: MiBaoColor.blue,
-  }, {
-    ...initDashBoard,
-    miBaoColor: MiBaoColor.green,
-  }, {
-    ...initDashBoard,
-    miBaoColor: MiBaoColor.red,
-  }, {
-    ...initDashBoard,
-    miBaoColor: MiBaoColor.yellow,
-  }],
-  users: [],
-  storeCards: storeCards,
-  spiceMustFlowCards: spiceMustFlowCards,
-  fremenCards: fremenCards,
-  spacingGuidCards: spacingGuidCards,
-
-  yinCards: yinCards,
-  yinCardsPlayed: [],
-
-  mentat: 1,
-
-}
-
 
 export interface Table {
   id: number,
   store: DataStore<Game>;
 }
-
 
 const createTable = (id: number) => {
   const store = new DataStore<Game>(initialGame);

@@ -66,3 +66,14 @@ export enum EEffect {
   'noop' = 'noop',
   'retreat' = 'retreat',
 }
+
+export type TConstraint = {
+  key: EConstraint, number?: Number
+}
+
+export type TEffect = {
+  key: EEffect, number?: Number
+  con?: TConstraint[]
+  conBonus?: TEffect[]
+  options?: TEffect[]
+}

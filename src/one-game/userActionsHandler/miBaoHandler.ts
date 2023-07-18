@@ -39,10 +39,11 @@ export const miBaoHandler = ({
     table.store.setState(s => {
       const dashboard = s.dashboards.find(d => d.user?.token === token)
       if (dashboard) {
-        const miBao = dashboard.mibao.find(m => m.id === payload.miBaoAction?.miBaoId)
-        if (miBao && payload.miBaoAction?.location) {
-          miBao.location = payload.miBaoAction.location
-        }
+        // todo
+        // const miBao = dashboard.mibao.find(m => m.id === payload.miBaoAction?.miBaoId)
+        // if (miBao && payload.miBaoAction?.location) {
+        //   miBao.location = payload.miBaoAction.location
+        // }
       }
   })}
 }

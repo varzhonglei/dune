@@ -6,8 +6,9 @@ import { TYinCard, TYinCardPart } from "../yin-card"
 const ids = {
     card: 1,
     yinCard: 1,
+    miBao: 1,
 }
-type IdNamespace = 'card' | 'yinCard'
+type IdNamespace = 'card' | 'yinCard' | 'miBao'
 
 export const uuid = (nameSpace?: IdNamespace) => {
     let res = ''

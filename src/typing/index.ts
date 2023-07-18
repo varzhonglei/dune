@@ -1,5 +1,4 @@
-import { TCard, basicCards, c1 } from "../libs/cards"
-import { StationIcon } from "../libs/station"
+import { TCard } from "../libs/cards"
 import { User } from "./user"
 
 export enum Role {
@@ -22,6 +21,13 @@ export enum MiBaoColor {
   'blue' = 'blue',
   'red' = 'red',
   'green' = 'green',
+  'black' = 'black'
+}
+
+export type TMibao = {
+  id: string,
+  color: MiBaoColor,
+  mentat?: boolean
 }
 
 export type Dashboard = {
@@ -50,13 +56,7 @@ export type Dashboard = {
 
   cardBuy: number
   revealDao: number
-
-
-
-  mibao: {
-    id: number,
-    location: 'free' | StationIcon,
-  } []
+  mibao: TMibao[]
 
   playedCards: TCard[]
   qiCards: TCard[]
@@ -69,44 +69,4 @@ export type Dashboard = {
   role: Role
 }
 
-export const initDashBoard: Dashboard = {
-  effects: [],
-  point: 0,
-  money: 0,
-  water: 1,
-  spice: 0,
-  fremen: 0,
-  sister: 0,
-  union: 0,
-  empire: 0,
-  role: Role.polo,
-  
-  troops: {
-    troopsCamp: Array.from({length: 5}).map(_ => 1),
-    troopsBattle: [],
-    troopsSupply: Array.from({length: 7}).map(_ => 1),
-    troopsKeji: [],
-    troopsTLL: [],
-  },
-
-  cardBuy: 0,
-  revealDao: 0,
-
-  mibao: [{
-    id: 1,
-    location: 'free',
-  }, {
-    id: 2,
-    location: 'free',
-  }],
-
-  playedCards: [],
-  qiCards: [c1],
-  handCards: [],
-  moCards: [...basicCards],
-  trashedCards: [],
-
-  yinCards: [],
-
-}
 
