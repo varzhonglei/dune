@@ -1,5 +1,5 @@
 import { TCard } from "../libs/cards"
-import { StationIcon } from "../libs/station"
+import { TLocationId } from "../libs/station"
 import { tableListStore } from "../round-table"
 
 export enum EActionType {
@@ -11,10 +11,10 @@ export enum EActionType {
 }
 
 export type TAction = {
-  card?: TCard
   miBaoAction?: {
+    cardId: string
     miBaoId: number
-    location: StationIcon
+    locationId: TLocationId
   } 
   yinCard?: any
   todoEffects?: {

@@ -36,14 +36,17 @@ export const miBaoHandler = ({
   payload,
 }: P) => {
   if (payload.miBaoAction) {
+    const ap = payload.miBaoAction
     table.store.setState(s => {
       const dashboard = s.dashboards.find(d => d.user?.token === token)
-      if (dashboard) {
-        // todo
-        // const miBao = dashboard.mibao.find(m => m.id === payload.miBaoAction?.miBaoId)
-        // if (miBao && payload.miBaoAction?.location) {
-        //   miBao.location = payload.miBaoAction.location
-        // }
+      const location = s.station.find(s => s.id === ap?.locationId)
+      const card = s.allCard.find(c => c.id === ap.cardId)
+      if (dashboard && location && card) {
+        const mibao = dashboard.mibao.pop()
+        mibao && location.miBao?.push(mibao)
+        dashboard.effects.push(...location.get)
+        dashboard.handCards = dashboard.handCards.filter(c => c.id !== card?.id)
+        dashboard.playedCards.push(card)
       }
   })}
 }

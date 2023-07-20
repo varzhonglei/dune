@@ -14,6 +14,7 @@ export interface Game {
   spiceMustFlowCards: TCard[]
   fremenCards: TCard[]
   spacingGuidCards: TCard[]
+  allCard: TCard[]
   yinCards: TYinCard[]
   yinCardsPlayed: TYinCard[]
   mentat: TMibao
@@ -91,6 +92,7 @@ export const initialGame: Game = {
   spiceMustFlowCards: spiceMustFlowCards,
   fremenCards: fremenCards,
   spacingGuidCards: spacingGuidCards,
+  allCard:[...storeCards, ...spiceMustFlowCards, ...fremenCards, ...spacingGuidCards, ...basicCards],
 
   yinCards: yinCards,
   yinCardsPlayed: [],
