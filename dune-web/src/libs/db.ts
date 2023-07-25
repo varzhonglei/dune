@@ -11,7 +11,7 @@ export class MySubClassedDexie extends Dexie {
   files!: Table<ModFile>; 
 
   constructor() {
-    super('myDatabase1');
+    super('DuneMods');
     this.version(1).stores({
       files: '++id, name, file' // Primary key and indexed props
     });

@@ -44,6 +44,7 @@ export const miBaoHandler = ({
       if (dashboard && location && card) {
         const mibao = dashboard.mibao.pop()
         mibao && location.miBao?.push(mibao)
+        
         dashboard.effects.push(...location.get)
         dashboard.handCards = dashboard.handCards.filter(c => c.id !== card?.id)
         dashboard.playedCards.push(card)
