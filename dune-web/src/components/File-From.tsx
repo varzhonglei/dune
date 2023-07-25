@@ -1,22 +1,13 @@
 import { useState } from "react"
-import { db } from "../libs/db"
+import { unzipFileAndSave } from "../libs/file"
 
 export function AddFileForm() {
   const [file, setFile] = useState<File | null>(null);
 
-  async function addFile() {
-    try {
-      if (file) {
-        const id = await db.files.add({
-          name: file.name,
-          file: file,
-        });
-        console.log(`File successfully added: ${file.name}. Got id ${id}`)
-      }
-
-    } catch (error) {
-      console.log(`Failed to add ${file?.name}: ${error}`)
-    }
+  function addFile() {
+    file && unzipFileAndSave({
+      data: file,
+    })
   }
 
   return <>
