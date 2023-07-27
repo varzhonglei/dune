@@ -1,0 +1,9 @@
+@import './bulma.scss';
+@import './custom.scss';
+
+html,#root, body {
+  overflow-y: unset;
+  width: 100vw;
+  height: 100vh;
+}
+

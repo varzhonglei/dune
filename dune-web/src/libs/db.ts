@@ -4,7 +4,7 @@ import Dexie, { Table } from 'dexie';
 export interface ModFile {
   id?: number;
   name: string;
-  file: Uint8Array
+  file: File
 }
 
 export class MySubClassedDexie extends Dexie {
