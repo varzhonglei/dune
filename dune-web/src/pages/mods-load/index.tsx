@@ -1,9 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { saveFileToDB } from "../../libs/file"
 import { useModsFile } from "../../libs/hooks/useModsFile"
 import styled from "@emotion/styled"
 import Icon from '@mdi/react';
 import { mdiUpload } from '@mdi/js';
+import { useNavigate } from "react-router-dom"
+import { ROUTES } from "../../App"
+import { CenterLoading } from "../../components/loading"
 
 
 
@@ -15,7 +18,8 @@ const Container = styled.div`
 
 
 export const ModsLoad = () => {
-  const fs = useModsFile()
+  const { files, loading } = useModsFile()
+  const navigate = useNavigate()
 
   const [curFile, setCurFile] = useState<File | null>(null)
   const save = () => {
@@ -24,9 +28,16 @@ export const ModsLoad = () => {
       name: curFile.name
     })
   }
-  console.log('fs', fs)
+
+  const hasMods = files?.[0]?.name === 'mods.zip'
   const fileName = curFile?.name
 
+
+  if (loading) return <CenterLoading/>
+
+  if (hasMods) {
+    navigate(ROUTES.tables)
+  }
   return <Container className="flex-center is-flex-direction-column">
     <div className="columns flex-center">
       <div className="file has-name mr-2">
@@ -37,7 +48,7 @@ export const ModsLoad = () => {
           <span className="file-cta">
             <Icon path={mdiUpload} size={1} />
             <span className="file-label">
-              Please choose a mods.zip
+              Please choose the mods.zip
             </span>
           </span>
           <span className="file-name">
@@ -49,5 +60,8 @@ export const ModsLoad = () => {
         Add
       </button>
     </div>
+    {
+      //todo: add online mods file
+    }
   </Container>
 }

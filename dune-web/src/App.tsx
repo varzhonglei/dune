@@ -7,13 +7,18 @@ import {
 } from "react-router-dom";
 import { TablesPage } from './pages/tables'
 
+export enum ROUTES {
+  home = '/',
+  tables = '/tables'
+}
+
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTES.home,
     element: <ModsLoad/>,
   },
   {
-    path: "/tables",
+    path: ROUTES.tables,
     element: <TablesPage/>,
   },
 ])
