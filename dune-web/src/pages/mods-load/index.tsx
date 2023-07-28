@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { saveFileToDB } from "../../libs/file"
-import { useModsFile } from "../../libs/hooks/useModsFile"
+import { useModsFile, useModsWithLoading } from "../../libs/hooks/useModsFile"
 import styled from "@emotion/styled"
 import Icon from '@mdi/react';
 import { mdiUpload } from '@mdi/js';
@@ -18,7 +18,7 @@ const Container = styled.div`
 
 
 export const ModsLoad = () => {
-  const { files, loading } = useModsFile()
+  const { files, loading:loadingFromDB } = useModsFile()
   const navigate = useNavigate()
 
   const [curFile, setCurFile] = useState<File | null>(null)
@@ -29,15 +29,22 @@ export const ModsLoad = () => {
     })
   }
 
+
+
+  
+  const { modsLoadProgress } = useModsWithLoading()
   const hasMods = files?.[0]?.name === 'mods.zip'
   const fileName = curFile?.name
 
 
-  if (loading) return <CenterLoading/>
 
-  if (hasMods) {
+  if (loadingFromDB) return <CenterLoading/>
+  if (hasMods && modsLoadProgress === 100) {
     navigate(ROUTES.tables)
   }
+  if (modsLoadProgress <= 100 || hasMods) return <Container className="flex-center is-flex-direction-column">
+    <progress className="progress is-primary max-w-400" value={modsLoadProgress} max="100"></progress>
+  </Container>
   return <Container className="flex-center is-flex-direction-column">
     <div className="columns flex-center">
       <div className="file has-name mr-2">

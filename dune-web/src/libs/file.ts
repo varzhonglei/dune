@@ -11,20 +11,23 @@ type TMod = {
 export const unzipFile = ({
   file,
   onFinishCallback,
+  onProgress,
 }: {
   file: File
   onFinishCallback?: (res:TMod[]) => void
+  onProgress?:(percent: number) => void
 }) => {
   const res:TMod[] = []
   JSZip.loadAsync(file).then(async function (zip) {
     const groupedFs = groupBy(zip.files, 'dir')
-    for (let i = groupedFs['false'].length - 1; i >= 0; i--) {
-      const file = groupedFs['false'][i]
+     // 忽略 mac 上的 隐藏文件
+    const files = groupedFs['false'].filter(f => !(f.name.startsWith('__MACOSX') || file.name.includes('.DS_Store')))
+    const total = files.length
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
       if (file) {
-        // 忽略 mac 上的 隐藏文件
-        if (file.name.startsWith('__MACOSX') || file.name.includes('.DS_Store')) continue;
-
         const data = await file.async('blob')
+        onProgress && onProgress(Math.floor(i/total * 100))
         res.push({
           file: data,
           name: getFilename(file.name || '-')
