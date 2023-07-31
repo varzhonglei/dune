@@ -1,7 +1,7 @@
 import { writeJson, readJson } from "fs-extra"
 import path from "path"
 import { dbPath } from "../../utils/path"
-import { setUserList } from "../../round-table/user/users"
+import { setUserList } from "../../round-table/users"
 import { setTableList } from "../../round-table/tables"
 
 export enum dbKey {

@@ -45,12 +45,11 @@ export const TablesPage = () => {
       <Card>4</Card>
     </Table>
     <Table>
-       <Card>1</Card>
+      <Card>1</Card>
       <Card>2</Card>
       <Card>3</Card>
       <Card>4</Card>
     </Table>
-
   </Container>
 }
 

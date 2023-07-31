@@ -1,6 +1,6 @@
 import { TCard } from "../libs/cards"
 import { TLocationId } from "../libs/station"
-import { tableListStore } from "../round-table"
+import { tableListStore } from "../round-table/tables"
 
 export enum EActionType {
   'playYin' = 'playYin',

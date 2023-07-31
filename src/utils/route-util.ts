@@ -11,3 +11,9 @@ export const getUserSub = (req: Request) => {
   }>(token).sub
 }
 
+
+export const getUserToken = (req: Request) => {
+  const token = req.get('Authorization')
+  return token || ''
+}
+

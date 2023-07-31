@@ -16,6 +16,7 @@ app.use('/user', userRouter)
 const main = async () => {
   await jdb.init()
   app.listen(PORT)
+  console.log(`dune BE started at: port ${PORT}`)
 }
 
 main()
