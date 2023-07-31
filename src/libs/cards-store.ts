@@ -1,7 +1,7 @@
 import { TCard, TCardPart } from "./cards"
 import { EConstraint, EEffect } from "./effect"
 import { StationIcon } from "./station"
-import { addCardIds } from "./utils"
+import { addCardIds } from "../utils"
 
 enum ECardCamp {
   'fremen' = 'fremen',

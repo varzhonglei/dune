@@ -1,7 +1,7 @@
 import { TCard, basicCards, c1, fremenCards, spacingGuidCards, spiceMustFlowCards } from "../libs/cards"
 import { storeCards } from "../libs/cards-store"
 import { TStation, station } from "../libs/station"
-import { uuid } from "../libs/utils"
+import { uuid } from "../utils"
 import { TYinCard, yinCards } from "../libs/yin-card"
 import { Dashboard, MiBaoColor, Role, TMibao } from "../typing"
 import { User } from "../typing/user"
@@ -102,7 +102,7 @@ export const initialGame: Game = {
     color: MiBaoColor.black,
     mentat: true
   },
-
+  
   station: station
 
 }

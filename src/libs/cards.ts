@@ -1,6 +1,6 @@
 import { EConstraint, EEffect } from "./effect"
 import { StationIcon } from "./station"
-import { addCardId, addCardIds } from "./utils"
+import { addCardId, addCardIds } from "../utils"
 
 export type TCardPart = {
   name: string

@@ -1,31 +1,40 @@
-import { useLiveQuery } from "dexie-react-hooks"
-import { db } from "../db"
+import { ModFile, db } from "../db"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { ROUTES } from "../../App"
 import { createSyncExternalAtom, useSyncExternalState } from "./useSyncStore"
 import { unzipFile } from "../file"
 import { unionBy } from "lodash"
 
 
 export const useModsFile = () => {
-  const [loading, setLoading] = useState(true)
-  const files = useLiveQuery(
-     async() => {
+  const [res, setRes] = useState<{
+    loading:boolean,
+    files: ModFile[],
+  }>({
+    loading: false,
+    files: [],
+  })
+  useEffect(() => {
+    const fun = async () => {
+      setRes({
+        loading: true,
+        files: [],
+      })
       try {
-        setLoading(true)
-        const res = await db.files.where('name').equals('mods.zip').toArray()
-        setLoading(false)
-        return res
+        const fs = await db.files.where('name').equals('mods.zip').toArray() 
+        setRes({
+          loading: false,
+          files: fs,
+        })
       } catch (error) {
-        setLoading(false)
+        setRes({
+          loading: false,
+          files: [],
+        })
       }
-     }
-  )
-  return {
-    loading,
-    files,
-  }
+    }
+    fun()
+  }, [])
+  return res
 }
 
 type TMod = {
@@ -34,38 +43,34 @@ type TMod = {
 }
 const modNumber = 231
 
-export const modsStore = createSyncExternalAtom([] as TMod[])
-export const useModsStore = () => useSyncExternalState(modsStore)
+export const modsState = createSyncExternalAtom([] as TMod[])
+export const useModsState = () => useSyncExternalState(modsState)
+const modsLoadingState = createSyncExternalAtom(false)
+const modsLoadProgressState = createSyncExternalAtom(0)
 
 export const useModsWithLoading = () => {
-  const { files, loading: loadFormIndexDB } = useModsFile()
+  const { files } = useModsFile()
   const modsZip = files?.[0]
   const hasMods = modsZip?.name === 'mods.zip'
-  const navigate = useNavigate()
-  useEffect(() => {
-    if (!loadFormIndexDB && !hasMods) {
-      navigate(ROUTES.home)
-    }
-  }, [loadFormIndexDB, hasMods, navigate])
+  const mods = useModsState()
+  const modsLoading = useSyncExternalState(modsLoadingState)
+  const modsLoadProgress = useSyncExternalState(modsLoadProgressState)
 
-  const mods = useModsStore()
-  const [modsLoading, setModsLoading] = useState(false)
-  const [modsLoadProgress, setProgress] = useState(0)
   useEffect(() => {
-    if (mods.length < modNumber && !modsLoading && modsZip && hasMods) {
-      setProgress(0)
-      setModsLoading(true)
+    if (!modsLoading && hasMods && mods.length === 0 ) {
+      modsLoadProgressState.setState(0)
+      modsLoadingState.setState(true)
       unzipFile({
         file: modsZip.file,
-        onProgress: (p) => setProgress(p),
+        onProgress: (p) => modsLoadProgressState.setState(p),
         onFinishCallback: (res) => {
-          modsStore.setState(unionBy(res, 'name'))
-          setProgress(100)
-          setModsLoading(false)
+          modsState.setState(unionBy(res, 'name'))
+          modsLoadProgressState.setState(100)
+          modsLoadingState.setState(false)
         }
       })
     }
-  }, [mods, modsLoading, hasMods, modsZip])
+  }, [mods, modsLoading, hasMods, modsZip?.file])
   return {
     modsLoadProgress: modsLoadProgress,
     mods,
@@ -73,12 +78,6 @@ export const useModsWithLoading = () => {
 }
 
 export const useMods = () => {
-  const mods = useModsStore()
-  const navigate = useNavigate()
-  useEffect(() => {
-    if (mods.length !== modNumber) {
-      navigate(ROUTES.home)
-    }
-  }, [mods, navigate])
+  const mods = useModsState()
   return mods
 }

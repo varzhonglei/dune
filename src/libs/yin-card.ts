@@ -1,5 +1,5 @@
 import { EConstraint, EEffect } from "./effect"
-import { addYinCardIds } from "./utils"
+import { addYinCardIds } from "../utils"
 
 export type TYinCardPart = {
   cardName: string,

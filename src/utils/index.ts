@@ -1,7 +1,7 @@
 import { map } from "lodash"
 import { v4 } from "uuid"
-import { TCardPart, TCard } from "../cards"
-import { TYinCard, TYinCardPart } from "../yin-card"
+import { TCardPart, TCard } from "../libs/cards"
+import { TYinCard, TYinCardPart } from "../libs/yin-card"
 
 const ids = {
     card: 1,

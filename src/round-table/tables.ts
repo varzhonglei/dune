@@ -14,4 +14,7 @@ const createTable = (id: number) => {
   }
 }
 
-export const tableListStore: Table[] = [0,1,2].map(i => createTable(i))
+export let tableListStore: Table[] = [0,1,2].map(i => createTable(i))
+export const setTableList = (t: Table[]) => {
+  tableListStore = t
+}

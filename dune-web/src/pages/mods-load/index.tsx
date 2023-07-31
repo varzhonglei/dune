@@ -1,14 +1,12 @@
 import { useState } from "react"
 import { saveFileToDB } from "../../libs/file"
-import { useModsFile, useModsWithLoading } from "../../libs/hooks/useModsFile"
+import { useModsFile } from "../../libs/hooks/useModsFile"
 import styled from "@emotion/styled"
 import Icon from '@mdi/react';
 import { mdiUpload } from '@mdi/js';
 import { useNavigate } from "react-router-dom"
 import { ROUTES } from "../../App"
 import { CenterLoading } from "../../components/loading"
-
-
 
 
 const Container = styled.div`
@@ -29,22 +27,14 @@ export const ModsLoad = () => {
     })
   }
 
-
-
-  
-  const { modsLoadProgress } = useModsWithLoading()
   const hasMods = files?.[0]?.name === 'mods.zip'
   const fileName = curFile?.name
 
 
-
   if (loadingFromDB) return <CenterLoading/>
-  if (hasMods && modsLoadProgress === 100) {
+  if (hasMods) {
     navigate(ROUTES.tables)
   }
-  if (modsLoadProgress <= 100 || hasMods) return <Container className="flex-center is-flex-direction-column">
-    <progress className="progress is-primary max-w-400" value={modsLoadProgress} max="100"></progress>
-  </Container>
   return <Container className="flex-center is-flex-direction-column">
     <div className="columns flex-center">
       <div className="file has-name mr-2">
