@@ -7,6 +7,7 @@ export const getTables = async () => {
   const res = await axios.get<{
     data: {
       id: number
+      admin: string
       userList: User[]
     }[],
     type: RES_TYPE,
@@ -25,4 +26,19 @@ export const joinTable = async (params: {
   })
   return res.data
 }
+
+export const createTable = async () => {
+  const res = await axios.post<{
+    type: RES_TYPE,
+  }>(`${APP_URL}/table/create`)
+  return res.data
+}
+
+export const deleteTable = async (id: number) => {
+  const res = await axios.delete<{
+    type: RES_TYPE,
+  }>(`${APP_URL}/table/${id}`)
+  return res.data
+}
+
 
