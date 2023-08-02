@@ -6,6 +6,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { TablesPage } from './pages/tables'
+import { SWRConfig } from 'swr'
+import { WithSidebar } from './components/side-bar/SideBar'
 
 export enum ROUTES {
   home = '/',
@@ -19,12 +21,19 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTES.tables,
-    element: <TablesPage/>,
+    element: WithSidebar(<TablesPage/>),
   },
 ])
 
 export const App = () => <>
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <SWRConfig
+      value={ {
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+      }}
+    >
+      <RouterProvider router={router} />
+    </SWRConfig>
   </React.StrictMode>
 </>

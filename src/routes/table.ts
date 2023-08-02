@@ -1,15 +1,14 @@
 import express from "express"
-import { RES_TYPE, TypedResponse } from "../typing/req"
+import { RES_TYPE, TypedRequestBody, TypedResponse } from "../typing/req"
 import { tableListStore } from "../round-table/tables"
 import { getUserToken } from "../utils/route-util"
 import { userList } from "../round-table/users"
-
-
 
 export const tableRouter = express.Router()
 
 tableRouter.get('/list', async (req, res: TypedResponse, next) => {
   const tables = tableListStore.map(t => ({
+    id: t.id,
     userList: t.store.getState().users
   }))
 
@@ -19,29 +18,41 @@ tableRouter.get('/list', async (req, res: TypedResponse, next) => {
   })
 })
 
-const joinTable = (id: number, token: string) => {
+const joinTable = (id: number, token: string, ind: number) => {
   const table = tableListStore.find(t => t.id === id)
   if (table) {
     table.store.setState(draft => {
       const user = userList.find(u => u.token === token)
       if (user) {
-        draft.dashboards[draft.users.length].user = user
-        draft.users.push(user)
+        const oldIndex = draft.users.findIndex(u => u?.token === token)
+        if (oldIndex === -1 ) {
+          // join
+          draft.dashboards[ind].user = user
+          draft.users[ind] = user
+        } else {
+          // 换座位
+          draft.dashboards[ind].user = user
+          draft.users[ind] = user
+
+          draft.dashboards[oldIndex].user = undefined
+          draft.users[oldIndex] = null
+        }
       }
     })
   }
 }
 
-tableRouter.post('/join/:id', async (req, res: TypedResponse, next) => {
+tableRouter.post('/join/:id', async (req:TypedRequestBody<{ ind: number }>, res: TypedResponse, next) => {
   const id = Number(req.params.id)
+  const ind = req.body.ind
   const token = getUserToken(req) 
-  if (!id) {
+  if (!id || typeof ind !== 'number') {
     return  res.status(400).send({
       type: RES_TYPE.error,
-      message: 'missing table id'
+      message: 'wrang id or ind'
     })
   }
-  joinTable(id, token)
+  joinTable(id, token, ind)
   res.status(200).send({
     data: '',
     type: RES_TYPE.success,

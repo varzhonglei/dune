@@ -1,17 +1,17 @@
-import { writeJson, readJson } from "fs-extra"
+import { outputJson, readJson } from "fs-extra"
 import path from "path"
 import { dbPath } from "../../utils/path"
 import { setUserList } from "../../round-table/users"
 import { setTableList } from "../../round-table/tables"
 
 export enum dbKey {
-  'tables' = 'tables',
-  'users' = 'users'
+  'tables' = 'tables.json',
+  'users' = 'users.json'
 }
 
 
 const save = async (key: dbKey, data: any) => {
-  return await writeJson(path.join(dbPath, key), data)
+  return await outputJson(path.join(dbPath, key), data)
 }
 const get = async (key: dbKey) => {
   try {

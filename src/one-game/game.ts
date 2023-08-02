@@ -9,7 +9,7 @@ import { User } from "../typing/user"
 export interface Game {
   turn: number
   dashboards: Dashboard[]
-  users: User[]
+  users: (User | null)[]
   storeCards: TCard[]
   spiceMustFlowCards: TCard[]
   fremenCards: TCard[]
@@ -87,7 +87,7 @@ export const initialGame: Game = {
       color: MiBaoColor.yellow
     }))
   }],
-  users: [],
+  users: [null, null, null, null],
   storeCards: storeCards,
   spiceMustFlowCards: spiceMustFlowCards,
   fremenCards: fremenCards,
