@@ -42,6 +42,10 @@ const joinTable = (id: number, token: string, ind: number) => {
   }
 }
 
+
+// join  
+// move 
+// quit the table: join 现在的位置（ind）会自动退出该座位
 tableRouter.post('/join/:id', async (req:TypedRequestBody<{ ind: number }>, res: TypedResponse, next) => {
   const id = Number(req.params.id)
   const ind = req.body.ind

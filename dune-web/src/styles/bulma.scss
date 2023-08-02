@@ -25,15 +25,13 @@ $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 
-// Import only what you need from Bulma
-@import "../node_modules/bulma/bulma.sass";
-// @import "../node_modules/bulma/sass/base/_all.sass";
-// @import "../node_modules/bulma/sass/grid/columns";
 
-// @import "../node_modules/bulma/sass/elements/button.sass";
-// @import "../node_modules/bulma/sass/elements/container.sass";
-// @import "../node_modules/bulma/sass/elements/title.sass";
-// @import "../node_modules/bulma/sass/form/_all.sass";
-// @import "../node_modules/bulma/sass/components/navbar.sass";
-// @import "../node_modules/bulma/sass/layout/hero.sass";
-// @import "../node_modules/bulma/sass/layout/section.sass";
+$primary: #5AC1B3;
+// $link: $blue
+// $info: $cyan
+// $success: $green
+// $warning: $yellow
+// $danger: $red
+// $dark: $grey-darker
+// $text: $grey-dark
+@import "../node_modules/bulma/bulma.sass";

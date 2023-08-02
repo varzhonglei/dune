@@ -14,7 +14,7 @@ export const getToken  = () => {
 
 export const useToken = () =>  useSyncExternalState(tokenState)
 
-export const useName = () => {
+export const useMyName = () => {
   const token =  useSyncExternalState(tokenState)
   let name = ''
   try {

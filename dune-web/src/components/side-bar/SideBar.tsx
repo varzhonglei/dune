@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { setToken, useName } from '../../libs/auth'
+import { setToken, useMyName } from '../../libs/auth'
 import LogoImg from '../../assets/logo.jpg'
 import { useState } from 'react'
 import { createUser } from '../../libs/api/user'
@@ -17,7 +17,7 @@ const Img = styled.img`
 `
 
 export const SideBar = () => {
-  const name = useName()
+  const name = useMyName()
   const [name2, setName2] = useState('')
 
   const handleCreate = async () => {
