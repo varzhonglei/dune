@@ -26,11 +26,19 @@ export const SideBar = () => {
       setToken(res.data)
     }
   }
+  const logout = () => {
+    setToken('')
+  }
 
   return <Container>
-    { name ? <div className='m-3 is-flex is-align-items-center'>
+    { name ? <div className='m-3 is-flex is-align-items-center hover-f'>
       <Img src={LogoImg}/>
       { name }
+      <div 
+        onClick={logout}
+        className="tag is-light align-items-center ml-4 hover-c is-pointer">
+          登出
+      </div>
     </div>
     : <div className='m-3'>
         <div className='mb-2'>创建用户：</div>
