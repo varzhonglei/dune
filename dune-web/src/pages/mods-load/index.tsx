@@ -4,37 +4,44 @@ import { useModsFile } from "../../libs/hooks/useModsFile"
 import styled from "@emotion/styled"
 import Icon from '@mdi/react';
 import { mdiUpload } from '@mdi/js';
-import { useNavigate } from "react-router-dom"
-import { ROUTES } from "../../App"
 import { CenterLoading } from "../../components/loading"
+import { modsFileName } from "../../libs/const"
+import { useModLinks } from "./useModLinks"
+import { addToast } from "../../components/alert"
 
 
 const Container = styled.div`
+  padding: 30px 20px;
   width: 100%;
-  height: 100%;
+  align-items: baseline !important;
 `
-
 
 export const ModsLoad = () => {
   const { files, loading:loadingFromDB } = useModsFile()
-  const navigate = useNavigate()
-
   const [curFile, setCurFile] = useState<File | null>(null)
   const save = () => {
+    if (!curFile) return
+    if (curFile?.name !== modsFileName) {
+      addToast({
+        text: `只接受指定文件：${modsFileName}`,
+        type: 'danger'
+      })
+      return 
+    }
     curFile && saveFileToDB({
       file: curFile,
       name: curFile.name
     })
   }
 
-  const hasMods = files?.[0]?.name === 'mods.zip'
+  const hasMods = files?.[0]?.name === modsFileName
   const fileName = curFile?.name
 
+  const content = useModLinks()
 
-  if (loadingFromDB) return <CenterLoading/>
-  if (hasMods) {
-    navigate(ROUTES.tables)
-  }
+
+  if (loadingFromDB) return <Container><CenterLoading/></Container>
+  if (hasMods) return null
   return <Container className="flex-center is-flex-direction-column">
     <div className="columns flex-center">
       <div className="file has-name mr-2">
@@ -44,13 +51,10 @@ export const ModsLoad = () => {
             className="file-input" type="file"/>
           <span className="file-cta">
             <Icon path={mdiUpload} size={1} />
-            <span className="file-label">
-              Please choose the mods.zip
-            </span>
           </span>
-          <span className="file-name">
-          { fileName || '...' }
-          </span>
+          <div className="file-name max-w-120 min-w-120 ellipsis">
+            { fileName || 'choose mods.zip' }
+          </div>
         </label>
       </div>
       <button className="button is-primary is-light" onClick={save}>
@@ -58,7 +62,7 @@ export const ModsLoad = () => {
       </button>
     </div>
     {
-      //todo: add online mods file
+     content
     }
   </Container>
 }

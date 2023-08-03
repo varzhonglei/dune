@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { createSyncExternalAtom, useSyncExternalState } from "./useSyncStore"
 import { unzipFile } from "../file"
 import { unionBy } from "lodash"
+import { modsFileName } from "../const"
 
 
 export const useModsFile = () => {
@@ -20,7 +21,7 @@ export const useModsFile = () => {
         files: [],
       })
       try {
-        const fs = await db.files.where('name').equals('mods.zip').toArray() 
+        const fs = await db.files.where('name').equals(modsFileName).toArray() 
         setRes({
           loading: false,
           files: fs,
@@ -41,7 +42,7 @@ type TMod = {
   file: Blob,
   name: string,
 }
-const modNumber = 231
+
 
 export const modsState = createSyncExternalAtom([] as TMod[])
 export const useModsState = () => useSyncExternalState(modsState)
@@ -51,7 +52,7 @@ const modsLoadProgressState = createSyncExternalAtom(0)
 export const useModsWithLoading = () => {
   const { files } = useModsFile()
   const modsZip = files?.[0]
-  const hasMods = modsZip?.name === 'mods.zip'
+  const hasMods = modsZip?.name === modsFileName
   const mods = useModsState()
   const modsLoading = useSyncExternalState(modsLoadingState)
   const modsLoadProgress = useSyncExternalState(modsLoadProgressState)

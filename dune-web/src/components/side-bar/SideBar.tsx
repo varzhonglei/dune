@@ -4,6 +4,7 @@ import LogoImg from '../../assets/logo.jpg'
 import { useState } from 'react'
 import { createUser } from '../../libs/api/user'
 import { RES_TYPE } from '../../typing'
+import { ModsLoad } from '../../pages/mods-load'
 const Container = styled.div`
   width: 300px;
   height: 100vh;
@@ -19,6 +20,8 @@ const Img = styled.img`
 export const SideBar = () => {
   const name = useMyName()
   const [name2, setName2] = useState('')
+
+
 
   const handleCreate = async () => {
     const res = await createUser({ name: name2 })
@@ -54,6 +57,7 @@ export const SideBar = () => {
         </div>
       </div>
     }
+    <ModsLoad />
   </Container>
 }
 

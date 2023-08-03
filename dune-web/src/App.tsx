@@ -1,6 +1,5 @@
 import React from 'react'
 import './styles/App.scss'
-import { ModsLoad } from './pages/mods-load'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -8,19 +7,16 @@ import {
 import { TablesPage } from './pages/tables'
 import { SWRConfig } from 'swr'
 import { WithSidebar } from './components/side-bar/SideBar'
+import { SimpleToast } from './components/alert'
 
 export enum ROUTES {
   home = '/',
-  tables = '/tables'
+  table = '/table/:id'
 }
 
 const router = createBrowserRouter([
   {
     path: ROUTES.home,
-    element: <ModsLoad/>,
-  },
-  {
-    path: ROUTES.tables,
     element: WithSidebar(<TablesPage/>),
   },
 ])
@@ -35,5 +31,6 @@ export const App = () => <>
     >
       <RouterProvider router={router} />
     </SWRConfig>
+    <SimpleToast />
   </React.StrictMode>
 </>

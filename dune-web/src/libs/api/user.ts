@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { APP_URL } from './table'
 import { RES_TYPE } from '../../typing'
+import { APP_BE_URL } from '../const'
 
 
 export const createUser = async (data: {
@@ -9,6 +9,6 @@ export const createUser = async (data: {
   const res = await axios.post<{
     data: string
     type: RES_TYPE
-  }>(`${APP_URL}/user/create`, data)
+  }>(`${APP_BE_URL}/user/create`, data)
   return res?.data
 }
