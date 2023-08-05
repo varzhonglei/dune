@@ -8,6 +8,12 @@
   white-space: nowrap;
 }
 
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .is-pointer {
   cursor: pointer;
 }
@@ -38,11 +44,7 @@
   height: 20px;
 }
 
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 
 .min-w-20 {
   min-width: 20px

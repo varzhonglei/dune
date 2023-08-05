@@ -4,7 +4,7 @@ import LogoImg from '../../assets/logo.jpg'
 import { useState } from 'react'
 import { createUser } from '../../libs/api/user'
 import { RES_TYPE } from '../../typing'
-import { ModsLoad } from '../../pages/mods-load'
+import { ModsLoad } from '../mods-load'
 const Container = styled.div`
   width: 300px;
   height: 100vh;

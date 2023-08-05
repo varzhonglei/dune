@@ -1,5 +1,5 @@
 import JSZip from 'jszip'
-import { groupBy, throttle, noop} from "lodash"
+import { groupBy } from "lodash"
 import { db } from './db'
 
 
@@ -17,7 +17,6 @@ export const unzipFile = ({
   onFinishCallback?: (res:TMod[]) => void
   onProgress?:(percent: number) => void
 }) => {
-  const throttleOnProgress = throttle(onProgress || noop, 100)
   const res:TMod[] = []
   JSZip.loadAsync(file).then(async function (zip) {
     const groupedFs = groupBy(zip.files, 'dir')
@@ -28,7 +27,10 @@ export const unzipFile = ({
       const file = files[i]
       if (file) {
         const data = await file.async('blob')
-        throttleOnProgress(Math.floor(i/total * 100))
+        const p = Math.floor(i/total * 100)
+        if (p % 2 === 0) {
+          onProgress && onProgress(p)
+        }
         res.push({
           file: data,
           name: getFilename(file.name || '-')

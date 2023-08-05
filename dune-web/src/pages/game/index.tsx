@@ -10,7 +10,7 @@ const Container = styled.div`
 
 export const GamePage = () => {
   const { modsLoadProgress } = useModsWithLoading()
-  if (modsLoadProgress <= 100) return <Container className="flex-center is-flex-direction-column">
+  if (modsLoadProgress < 100) return <Container className="flex-center is-flex-direction-column">
     <progress className="progress is-primary max-w-400" value={modsLoadProgress} max="100"></progress>
   </Container>
   return <Game></Game>

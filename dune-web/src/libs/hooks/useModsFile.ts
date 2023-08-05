@@ -5,8 +5,12 @@ import { unzipFile } from "../file"
 import { unionBy } from "lodash"
 import { modsFileName } from "../const"
 
+const keyState = createSyncExternalAtom(1)
+
+export const mutateModsFromBD = () => keyState.setState(old => old + 1)
 
 export const useModsFile = () => {
+  const key = useSyncExternalState(keyState)
   const [res, setRes] = useState<{
     loading:boolean,
     files: ModFile[],
@@ -34,7 +38,7 @@ export const useModsFile = () => {
       }
     }
     fun()
-  }, [])
+  }, [key])
   return res
 }
 

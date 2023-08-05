@@ -49,11 +49,17 @@ tableRouter.delete('/:id', async (req, res: TypedResponse, next) => {
 // quit the table: join 现在的位置（ind）会自动退出该座位
 const joinTable = (id: number, token: string, ind: number) => {
   const table = tableListStore.find(t => t.id === id)
+  let res: string | RES_TYPE = RES_TYPE.success
   if (table) {
     table.store.setState(draft => {
       const user = userList.find(u => u.token === token)
       if (user) {
         const oldIndex = draft.users.findIndex(u => u?.token === token)
+        const thePerson = draft.dashboards[ind]?.user
+        if (thePerson && thePerson?.token !== token) {
+          res = '这个位置已经有人了'
+          return 
+        }
         if (oldIndex === -1 ) {
           // join
           draft.dashboards[ind].user = user
@@ -69,6 +75,7 @@ const joinTable = (id: number, token: string, ind: number) => {
       }
     })
   }
+  return res
 }
 
 tableRouter.post('/join/:id', async (req:TypedRequestBody<{ ind: number }>, res: TypedResponse, next) => {
@@ -87,10 +94,19 @@ tableRouter.post('/join/:id', async (req:TypedRequestBody<{ ind: number }>, res:
       message: 'wrang id or ind'
     })
   }
-  joinTable(id, token, ind)
-  res.status(200).send({
-    data: '',
-    type: RES_TYPE.success,
-  })
+  const r = joinTable(id, token, ind)
+  if (r === RES_TYPE.success) {
+    res.status(200).send({
+      data: '',
+      type: RES_TYPE.success,
+    })
+  } else {
+    res.status(400).send({
+      data: '',
+      message: r,
+      type: RES_TYPE.error,
+    })
+  }
+
 })
 

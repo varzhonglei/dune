@@ -8,6 +8,7 @@ import { createTable, deleteTable, joinTable } from "../../libs/api/table"
 import { RES_TYPE } from "../../typing"
 import { useMyName } from "../../libs/auth"
 import { isSupperAdmin } from '../../../../common/is-super-admin'
+import { useNavigate } from "react-router-dom"
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -18,9 +19,15 @@ const Container = styled.div`
   overflow: auto;
 `
 
-const Card = styled.button`
+const Button = styled.button`
   min-width: 50px;
 `
+
+const Column = styled.div`
+  width: 50px;
+  flex: 1;
+`
+
 const NameWrap = styled.div`
   min-width: 50px;
   max-width: 130px;
@@ -51,13 +58,18 @@ const TableHeader = styled.div`
 export const TablesPage = () => {
   useModsWithLoading()
   const myName = useMyName()
+  const nav = useNavigate()
   const { data, isLoading, mutate } = useTables()
   const isAdmin = isSupperAdmin(myName)
   const tables = data?.data || []
 
   const handleCardClick = async (params: { ind: number, id: number }) => {
-    const res = await joinTable(params)
-    if (res.type === RES_TYPE.success) {
+    try {
+      const res = await joinTable(params)
+      if (res.type === RES_TYPE.success) {
+        mutate()
+      }
+    } catch (error) {
       mutate()
     }
   }
@@ -75,13 +87,17 @@ export const TablesPage = () => {
     } 
   }
 
+  const handleSha = (tableId: number) => {
+    nav(`/table/${tableId}`)
+  }
+
   if (isLoading) return <CenterLoading />
   return <Container>
     {
       tables.map((t, ind) => {
         const u = t.userList
         const showDeleteBtn = ind > 2 && (isAdmin || t.admin === myName)
-        return  <div className='hover-f'>
+        return  <div className='hover-f' key={t.id} >
           <div className='is-flex'>
             <TableHeader>桌号：{t.id}</TableHeader>
             {showDeleteBtn && <div 
@@ -93,17 +109,30 @@ export const TablesPage = () => {
           </div>
           <Table>
             {
-              Array.from({length:4}).map((i, ind) => <Card
-                className="button is-primary is-rounded"
-                style={{ cursor: 'pointer' }}
-                disabled={ !!(u[ind]?.name && u[ind]?.name !== myName) }
-                onClick={handleCardClick.bind(null, { ind, id: t.id })}
+              Array.from({length:4}).map((i, ind) => 
+              <Column
+                key={ind}
               >
-                { 
-                u[ind] ? <NameWrap>{u[ind]?.name}</NameWrap>  : <Icon path={mdiPlusCircleOutline} size={1} />
-                }
-              </Card>)
+                <Button
+                  className="button is-primary is-rounded max-w-120"
+                  style={{ cursor: 'pointer' }}
+                  disabled={ !!(u[ind]?.name && u[ind]?.name !== myName) }
+                  onClick={handleCardClick.bind(null, { ind, id: t.id })}
+                >
+                  { 
+                  u[ind] ? <NameWrap>{u[ind]?.name}</NameWrap>  : <Icon path={mdiPlusCircleOutline} size={1} />
+                  }
+                </Button>
+              </Column>
+              )
             }
+              <Button
+                  className="button is-rounded"
+                  style={{ cursor: 'pointer' }}
+                  onClick={handleSha.bind(null, t.id)}
+                >
+                  开沙
+                </Button>
           </Table>
         </div>
       })

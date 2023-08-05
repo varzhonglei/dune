@@ -8,6 +8,7 @@ import { TablesPage } from './pages/tables'
 import { SWRConfig } from 'swr'
 import { WithSidebar } from './components/side-bar/SideBar'
 import { SimpleToast } from './components/alert'
+import { GamePage } from './pages/game'
 
 export enum ROUTES {
   home = '/',
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.home,
     element: WithSidebar(<TablesPage/>),
+  },
+  {
+    path: ROUTES.table,
+    element: WithSidebar(<GamePage/>),
   },
 ])
 

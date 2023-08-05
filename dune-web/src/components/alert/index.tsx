@@ -21,7 +21,7 @@ export const addToast = (i: TAlert) => {
     alertStore.setState(cur => {
       return cur.filter(c => c.id !== id)
     })
-  }, 6000)
+  }, 4000)
   alertId++
 }
 
