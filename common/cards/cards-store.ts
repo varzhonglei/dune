@@ -1,7 +1,7 @@
 import { TCard, TCardPart } from "./cards"
-import { EConstraint, EEffect } from "./effect"
-import { StationIcon } from "./station"
-import { addCardIds } from "../utils"
+import { EConstraint, EEffect } from "../typing/effect"
+import { StationIcon } from "../station/station"
+import { addCardIds } from "../../src/utils"
 
 enum ECardCamp {
   'fremen' = 'fremen',
@@ -106,7 +106,6 @@ const c6 = {
   dropEffect: [{key: EEffect.infSister,}]
 }
 add(c6, c6)
-
 
 const c7 = {
   name: '权利之网',

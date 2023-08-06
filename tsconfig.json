@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist",
   },
-  "include": ["src"],
+  "include": ["src", "common/cards/cards-store.ts", "common/typing/index.ts", "common/typing/user.d.ts", "common/typing/get-effect.ts", "common/cards/cards.ts", "common/typing/effect.ts", "common/roles/roles.ts", "common/yin-card/yin-card.ts", "common/station/station.ts"],
   "exclude": ["node_modules"]
 }

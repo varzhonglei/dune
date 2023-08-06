@@ -1,4 +1,4 @@
-import { EConstraint, EEffect } from "../libs/effect"
+import { EConstraint, EEffect } from "./effect"
 
 // [{ key: EEffect.paoC, number: 2}]
 // get: [{

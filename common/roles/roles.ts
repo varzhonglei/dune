@@ -1,4 +1,4 @@
-import { deepFreeze } from '../utils/deep-freeze'
+import { deepFreeze } from '../../src/utils/deep-freeze'
 import { Role } from '../typing'
 
 const polo = { 

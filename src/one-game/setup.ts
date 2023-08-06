@@ -1,7 +1,7 @@
-import { roles } from "../libs/roles"
+import { roles } from "../../common/roles/roles"
 import { Table, tableListStore } from "../round-table/tables"
 import { DataStore } from "../store/momento"
-import { Role } from "../typing"
+import { Role } from "../../common/typing"
 import { random, shuffle, slice } from "lodash"
 import { Game, initDashBoard } from "./game"
 

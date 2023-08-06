@@ -1,5 +1,5 @@
-import { EConstraint, EEffect } from "./effect"
-import { addYinCardIds } from "../utils"
+import { EConstraint, EEffect } from "../typing/effect"
+import { addYinCardIds } from "../../src/utils"
 
 export type TYinCardPart = {
   cardName: string,

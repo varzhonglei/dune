@@ -1,10 +1,10 @@
-import { TCard, basicCards, c1, fremenCards, spacingGuidCards, spiceMustFlowCards } from "../libs/cards"
-import { storeCards } from "../libs/cards-store"
-import { TStation, station } from "../libs/station"
+import { TCard, basicCards, c1, fremenCards, spacingGuidCards, spiceMustFlowCards } from "../../common/cards/cards"
+import { storeCards } from "../../common/cards/cards-store"
+import { TStation, station } from "../../common/station/station"
 import { uuid } from "../utils"
-import { TYinCard, yinCards } from "../libs/yin-card"
-import { Dashboard, MiBaoColor, Role, TMibao } from "../typing"
-import { User } from "../typing/user"
+import { TYinCard, yinCards } from "../../common/yin-card/yin-card"
+import { Dashboard, MiBaoColor, Role, TMibao } from "../../common/typing"
+import { User } from "../../common/typing/user"
 
 export interface Game {
   turn: number

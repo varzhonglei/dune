@@ -68,11 +68,11 @@ export enum EEffect {
 }
 
 export type TConstraint = {
-  key: EConstraint, number?: Number
+  key: EConstraint, number?: number
 }
 
 export type TEffect = {
-  key: EEffect, number?: Number
+  key: EEffect, number?: number
   con?: TConstraint[]
   conBonus?: TEffect[]
   options?: TEffect[]

@@ -9,6 +9,7 @@ import { SWRConfig } from 'swr'
 import { WithSidebar } from './components/side-bar/SideBar'
 import { SimpleToast } from './components/alert'
 import { GamePage } from './pages/game'
+import { useSocket } from './libs/socket'
 
 export enum ROUTES {
   home = '/',
@@ -26,16 +27,18 @@ const router = createBrowserRouter([
   },
 ])
 
-export const App = () => <>
-  <React.StrictMode>
-    <SWRConfig
-      value={ {
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-      }}
-    >
-      <RouterProvider router={router} />
-    </SWRConfig>
-    <SimpleToast />
-  </React.StrictMode>
-</>
+export const App = () => {
+  useSocket()
+  return  <React.StrictMode>
+  <SWRConfig
+    value={ {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }}
+  >
+    <RouterProvider router={router} />
+  </SWRConfig>
+  <SimpleToast />
+</React.StrictMode>
+}
+ 

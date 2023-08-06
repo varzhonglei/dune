@@ -21,6 +21,7 @@
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
     "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.13",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/fs-extra": "^9.0.13",
@@ -30,6 +31,7 @@
     "@types/mongodb": "^4.0.7",
     "@types/node": "^17.0.32",
     "@types/uuid": "^9.0.2",
+    "@types/ws": "^8.5.5",
     "assert": "^2.0.0",
     "eslint": "^8.38.0",
     "mocha": "^10.1.0",
@@ -51,8 +53,8 @@
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "mongodb": "^4.8.0",
-    "socket.io": "^4.6.1",
     "uuid": "^9.0.0",
+    "ws": "^8.13.0",
     "zlib": "^1.0.5"
   }
 }

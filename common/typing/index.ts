@@ -1,4 +1,4 @@
-import { TCard } from "../libs/cards"
+import { TCard } from "../cards/cards"
 import { User } from "./user"
 
 export enum Role {

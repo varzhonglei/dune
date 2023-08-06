@@ -1,6 +1,6 @@
-import { TCard } from "../../libs/cards"
+import { TCard } from "../../../common/cards/cards"
 import { Table } from "../../round-table/tables"
-import { Dashboard } from "../../typing"
+import { Dashboard } from "../../../common/typing"
 
 type TCreateHandler<T> = (dashboard:Dashboard, payload: T ) => void
 type Handler<T> = {

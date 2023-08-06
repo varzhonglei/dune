@@ -1,5 +1,5 @@
-import { TCard } from "../libs/cards"
-import { TLocationId } from "../libs/station"
+import { TCard } from "../../common/cards/cards"
+import { TLocationId } from "../../common/station/station"
 import { tableListStore } from "../round-table/tables"
 
 export enum EActionType {

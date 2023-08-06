@@ -4,6 +4,7 @@ import { addTable, deleteTable, tableListStore } from "../round-table/tables"
 import { getUserToken } from "../utils/route-util"
 import { userList } from "../round-table/users"
 import { getUserName } from "./tools"
+import { sendTableMessage } from "../libs/socket"
  
 export const tableRouter = express.Router()
 
@@ -96,6 +97,9 @@ tableRouter.post('/join/:id', async (req:TypedRequestBody<{ ind: number }>, res:
   }
   const r = joinTable(id, token, ind)
   if (r === RES_TYPE.success) {
+    sendTableMessage({
+      tableId: id,
+    })
     res.status(200).send({
       data: '',
       type: RES_TYPE.success,

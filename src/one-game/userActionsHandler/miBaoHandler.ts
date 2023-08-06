@@ -1,5 +1,5 @@
 import { Table } from "../../round-table/tables"
-import { Dashboard } from "../../typing"
+import { Dashboard } from "../../../common/typing"
 import { TAction } from "../userActions"
 
 

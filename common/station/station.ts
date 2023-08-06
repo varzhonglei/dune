@@ -1,5 +1,5 @@
 import { TMibao } from "../typing"
-import { EConstraint, EEffect, TConstraint, TEffect } from "./effect"
+import { EConstraint, EEffect, TConstraint, TEffect } from "../typing/effect"
 
 
 export enum StationIcon {
