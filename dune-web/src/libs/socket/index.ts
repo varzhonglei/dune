@@ -1,10 +1,13 @@
 import { useEffect } from "react"
 import { getToken, useToken } from "../auth"
 import { socket_URL } from "../const";
-import { MessageType } from '../../../../common/typing/socket'
+import { MessageType, TMessage } from '../../../../common/typing/socket'
 
-let socket: any = null;
-const maxReconnectAttempts = 20;
+export let socket: WebSocket | undefined
+type TMessageHandle<T extends MessageType> = (message: TMessage<T>) => void
+const handlers:TMessageHandle<any>[]= [] 
+
+const maxReconnectAttempts = 30;
 let currentReconnectAttempts = 0;
 const reconnectInterval = 3000; // 重连间隔时间（毫秒）
 
@@ -18,8 +21,15 @@ function connectWebSocket() {
   };
 
   socket.onmessage = (event: any) => {
-    console.log('收到消息:', event.data);
-    // 处理接收到的消息
+    // console.log('收到消息:', event.data);
+    try {
+      // 调用所有的消息处理器
+      handlers.forEach(handler => {
+        handler(event.data);
+      })
+    } catch (error) {
+      console.error('解析消息出错:', error);
+    }
   };
 
   socket.onclose = (event: any) => {
@@ -46,6 +56,16 @@ function sendToken() {
       type: MessageType.token
     }));
   }
+}
+
+export const sendMessage = <T extends MessageType>(body: TMessage<T>) => {
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(body));
+  }
+}
+
+export function addMessageHandler<T extends MessageType>(handler: TMessageHandle<T>) {
+  handlers.push(handler)
 }
 
 export const useSocket = () => {

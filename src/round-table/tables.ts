@@ -1,4 +1,4 @@
-import { Game, initialGame } from "../one-game/game"
+import { Game, initialGame } from "../../common/game"
 import { DataStore } from "../store/momento"
 import { isSupperAdmin } from '../../common/is-super-admin'
 

@@ -3,9 +3,7 @@ import { Table, tableListStore } from "../round-table/tables"
 import { DataStore } from "../store/momento"
 import { Role } from "../../common/typing"
 import { random, shuffle, slice } from "lodash"
-import { Game, initDashBoard } from "./game"
-
-
+import { Game, initDashBoard } from "../../common/game"
 
 const setRole = ( {
   store,
@@ -36,12 +34,16 @@ const setRoles = (table: Table) => {
   const rs = Object.values(roles)
   rs.sort((a,b) => random(-1.1, 1.1))
   rs.slice(0, 4).forEach((role, ind) => {
-    setRole({
-      store: table.store,
-      token: users[ind].token,
-      role: role.key,
-    })
+    const user = users[ind]
+    if (user) {
+      setRole({
+        store: table.store,
+        token: user.token,
+        role: role.key,
+      })
+    }
   })
+
 }
 const setFirstPlayer = (table: Table) => {
   table.store.setState({

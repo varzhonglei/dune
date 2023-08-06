@@ -1,6 +1,6 @@
 import WebSocket from 'ws'
 import { socketProt } from './const'
-import { MessageType } from '../../common/typing/socket'
+import { MessageType, TMessage } from '../../common/typing/socket'
 import { tableListStore } from '../round-table/tables'
 
 const wss = new WebSocket.Server({ port: socketProt })
@@ -16,11 +16,9 @@ const initWS  = () => {
       // 将Buffer转换为字符串
       const messageString = message.toString();
       try {
-        const parsedMessage = JSON.parse(messageString);
-        const { type, data } = parsedMessage
-        if (type === MessageType.token) {
-          clients.set(data, ws);
-        }
+        const parsedMessage = JSON.parse(messageString)
+        messageHandler(parsedMessage, ws)
+
       } catch (error) {
         console.error('解析消息出错:', error);
       }
@@ -40,28 +38,39 @@ const initWS  = () => {
   })
 }
 
-const sendMessage = (params: {
-  token: string,
-  data: any
-}) => {
-  const s = clients.get(params.token)
-  if (s) {
-    s.send(JSON.stringify({ data:params.data, type: MessageType.data }));
+const messageHandler = (message: TMessage<any>, ws: WebSocket) => {
+  const { type } = message
+  if (type === MessageType.token) {
+    const { data } = message as TMessage<MessageType.token>
+    clients.set(data, ws);
+  } else if (type === MessageType.reqData) {
+    //todo 
+    // sendMessage()
   }
 }
 
-const sendTableMessage = (params: {
+const sendMessage = <T extends MessageType>(params: {
+  token: string,
+  body: TMessage<T>
+}) => {
+  const s = clients.get(params.token)
+  if (s) {
+    s.send(JSON.stringify(params.body));
+  }
+}
+
+const sendTableMessage = <T extends MessageType>(params: {
   tableId: number,
-  data?: any
+  data: TMessage<T>
 }) => {
   const table = tableListStore.find(t => t.id === params.tableId)
   if (table) {
     const game = table.store.getState()
     game.users.forEach(u => {
       if (u?.token) {
-        sendMessage({
+        sendMessage<T>({
           token: u.token,
-          data: params.data || game
+          body: params.data
         })
       }
     })
