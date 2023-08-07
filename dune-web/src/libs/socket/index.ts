@@ -7,7 +7,7 @@ export let socket: WebSocket | undefined
 type TMessageHandle<T extends MessageType> = (message: TMessage<T>) => void
 const handlers:TMessageHandle<any>[]= [] 
 
-const maxReconnectAttempts = 30;
+const maxReconnectAttempts = 10000;
 let currentReconnectAttempts = 0;
 const reconnectInterval = 3000; // 重连间隔时间（毫秒）
 
@@ -21,11 +21,11 @@ function connectWebSocket() {
   };
 
   socket.onmessage = (event: any) => {
-    // console.log('收到消息:', event.data);
     try {
       // 调用所有的消息处理器
+      const data = JSON.parse(event.data)
       handlers.forEach(handler => {
-        handler(event.data);
+        handler(data)
       })
     } catch (error) {
       console.error('解析消息出错:', error);

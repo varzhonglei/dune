@@ -2,6 +2,7 @@ import WebSocket from 'ws'
 import { socketProt } from './const'
 import { MessageType, TMessage } from '../../common/typing/socket'
 import { tableListStore } from '../round-table/tables'
+import { messageHandler } from './messageHandler'
 
 const wss = new WebSocket.Server({ port: socketProt })
 
@@ -12,13 +13,12 @@ const initWS  = () => {
   wss.on('connection', (ws) => {
     console.log('WebSocket连接已建立');
     ws.on('message', (message) => {
-      console.log('收到消息:', message);
       // 将Buffer转换为字符串
       const messageString = message.toString();
+      // console.log('收到消息:', messageString);
       try {
         const parsedMessage = JSON.parse(messageString)
-        messageHandler(parsedMessage, ws)
-
+        messageHandler(parsedMessage, ws, clients)
       } catch (error) {
         console.error('解析消息出错:', error);
       }
@@ -38,16 +38,6 @@ const initWS  = () => {
   })
 }
 
-const messageHandler = (message: TMessage<any>, ws: WebSocket) => {
-  const { type } = message
-  if (type === MessageType.token) {
-    const { data } = message as TMessage<MessageType.token>
-    clients.set(data, ws);
-  } else if (type === MessageType.reqData) {
-    //todo 
-    // sendMessage()
-  }
-}
 
 const sendMessage = <T extends MessageType>(params: {
   token: string,
@@ -61,7 +51,7 @@ const sendMessage = <T extends MessageType>(params: {
 
 const sendTableMessage = <T extends MessageType>(params: {
   tableId: number,
-  data: TMessage<T>
+  body: TMessage<T>
 }) => {
   const table = tableListStore.find(t => t.id === params.tableId)
   if (table) {
@@ -70,7 +60,7 @@ const sendTableMessage = <T extends MessageType>(params: {
       if (u?.token) {
         sendMessage<T>({
           token: u.token,
-          body: params.data
+          body: params.body
         })
       }
     })

@@ -6,6 +6,7 @@ import { addMessageHandler } from '../../../libs/socket'
 export const gameStore = createSyncExternalAtom(initialGame)
 
 addMessageHandler<MessageType.data>((receivedData) => {
+  console.log('receivedData', receivedData)
   if (receivedData.type === MessageType.data && receivedData.data) {
     gameStore.setState(receivedData?.data)
   }
