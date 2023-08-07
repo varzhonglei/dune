@@ -21,8 +21,6 @@ export const SideBar = () => {
   const name = useMyName()
   const [name2, setName2] = useState('')
 
-
-
   const handleCreate = async () => {
     const res = await createUser({ name: name2 })
     if (res.type === RES_TYPE.success) {

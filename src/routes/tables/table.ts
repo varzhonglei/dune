@@ -1,9 +1,10 @@
 import express from "express"
-import { RES_TYPE, TypedRequestBody, TypedResponse } from "../typing/req"
-import { addTable, deleteTable, tableListStore } from "../round-table/tables"
-import { getUserToken } from "../utils/route-util"
-import { userList } from "../round-table/users"
-import { getUserName } from "./tools"
+import { RES_TYPE, TypedRequestBody, TypedResponse } from "../../typing/req"
+import { addTable, deleteTable, tableListStore } from "../../round-table/tables"
+import { getUserToken } from "../../utils/route-util"
+import { userList } from "../../round-table/users"
+import { getUserName } from "../tools"
+import { sendTableChange } from "./sendTableChange"
  
 export const tableRouter = express.Router()
 
@@ -24,6 +25,7 @@ tableRouter.post('/create', async (req, res: TypedResponse, next) => {
   const name = getUserName(req)
   if (name) {
     addTable(name)
+    sendTableChange()
     res.status(200).send({
       data: '',
       type: RES_TYPE.success,
@@ -36,6 +38,7 @@ tableRouter.delete('/:id', async (req, res: TypedResponse, next) => {
   const id = Number(req.params.id)
   if (name && id) {
     deleteTable(name, id)
+    sendTableChange()
     res.status(200).send({
       data: '',
       type: RES_TYPE.success,
@@ -96,6 +99,7 @@ tableRouter.post('/join/:id', async (req:TypedRequestBody<{ ind: number }>, res:
   }
   const r = joinTable(id, token, ind)
   if (r === RES_TYPE.success) {
+    sendTableChange(id)
     res.status(200).send({
       data: '',
       type: RES_TYPE.success,
@@ -107,6 +111,5 @@ tableRouter.post('/join/:id', async (req:TypedRequestBody<{ ind: number }>, res:
       type: RES_TYPE.error,
     })
   }
-
 })
 

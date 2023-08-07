@@ -17,11 +17,11 @@ export enum Role {
 }
 
 export enum MiBaoColor {
-  'yellow' = 'yellow',
-  'blue' = 'blue',
-  'red' = 'red',
-  'green' = 'green',
-  'black' = 'black'
+  'yellow' = '#CCC9A4',
+  'blue' = '#519ABA',
+  'red' = '#C56D52',
+  'green' = '#2BA246',
+  'black' = '#2E2E2E'
 }
 
 export type TMibao = {

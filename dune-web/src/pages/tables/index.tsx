@@ -5,7 +5,6 @@ import { CenterLoading } from "../../components/loading"
 import Icon from '@mdi/react';
 import { mdiPlusCircleOutline } from '@mdi/js';
 import { createTable, deleteTable, joinTable } from "../../libs/api/table"
-import { RES_TYPE } from "../../typing"
 import { useMyName } from "../../libs/auth"
 import { isSupperAdmin } from '../../../../common/is-super-admin'
 import { useNavigate } from "react-router-dom"
@@ -59,32 +58,23 @@ export const TablesPage = () => {
   useModsWithLoading()
   const myName = useMyName()
   const nav = useNavigate()
-  const { data, isLoading, mutate } = useTables()
+  const { data, isLoading } = useTables()
   const isAdmin = isSupperAdmin(myName)
   const tables = data?.data || []
 
   const handleCardClick = async (params: { ind: number, id: number }) => {
     try {
-      const res = await joinTable(params)
-      if (res.type === RES_TYPE.success) {
-        mutate()
-      }
+     await joinTable(params)
     } catch (error) {
-      mutate()
+      //
     }
   }
   const handleCreateTable = async () => {
-    const res = await createTable()
-    if (res.type === RES_TYPE.success) {
-      mutate()
-    } 
+    await createTable()
   }
 
   const handleDeleteTable = async (id: number) => {
-    const res = await deleteTable(id)
-    if (res.type === RES_TYPE.success) {
-      mutate()
-    } 
+    await deleteTable(id)
   }
 
   const handleSha = (tableId: number) => {

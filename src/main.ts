@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import { userRouter } from './routes/user'
 import { jdb } from './store/json-db'
-import { tableRouter } from './routes/table'
+import { tableRouter } from './routes/tables/table'
 import { expressPort } from './libs/const'
 import { initWS } from './libs/socket'
 const app = express();

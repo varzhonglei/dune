@@ -67,9 +67,20 @@ const sendTableMessage = <T extends MessageType>(params: {
   }
 }
 
+const sendMessage2All = <T extends MessageType>(body: TMessage<T>) => {
+  for (const key of clients.keys()) {
+    sendMessage<T>({
+      token: key,
+      body: body
+    })
+  }
+}
+
 export  {
+  clients,
   initWS,
   sendMessage,
-  sendTableMessage
+  sendTableMessage,
+  sendMessage2All
 }
 
