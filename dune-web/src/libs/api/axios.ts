@@ -1,8 +1,8 @@
 import axios from "axios"
-import { getToken } from "../auth"
+import { clearToken, getToken } from "../auth"
 import { merge } from "lodash"
-import { RES_TYPE } from "../../typing"
 import { addToast } from "../../components/alert"
+import { RES_TYPE } from '../../../../common/typing/rest-req'
 
 export function initialAxios () {
   axios.interceptors.request.use(async config => {
@@ -22,6 +22,15 @@ export function initialAxios () {
             text: error.response?.data?.message,
             type: 'danger'
           })
+        } else if (error.response?.data?.type === RES_TYPE.unauthorized) {
+          const token = getToken()
+          if (token) {
+            addToast({ 
+              text: '认证已过期, 请重新创建角色',
+              type: 'danger'
+            })
+            clearToken()
+          }
         }
       } else if (error.request) {
         // 请求发出但没有收到响应，可能是网络问题

@@ -1,10 +1,11 @@
 import express from "express"
-import { RES_TYPE, TypedRequestBody, TypedResponse } from "../../typing/req"
+import { TypedRequestBody, TypedResponse } from "../../typing/req"
 import { addTable, deleteTable, tableListStore } from "../../round-table/tables"
 import { getUserToken } from "../../utils/route-util"
 import { userList } from "../../round-table/users"
 import { getUserName } from "../tools"
 import { sendTableChange } from "./sendTableChange"
+import { RES_TYPE } from "../../../common/typing/rest-req"
  
 export const tableRouter = express.Router()
 
@@ -85,10 +86,10 @@ tableRouter.post('/join/:id', async (req:TypedRequestBody<{ ind: number }>, res:
   const id = Number(req.params.id)
   const ind = req.body.ind
   const token = getUserToken(req) 
-  if (!token) {
+  if (token === 401) {
     return  res.status(401).send({
-      type: RES_TYPE.error,
-      message: 'unauthorized'
+      type: RES_TYPE.unauthorized,
+      message: "unauthorized"
     })
   }
   if (!id || typeof ind !== 'number') {

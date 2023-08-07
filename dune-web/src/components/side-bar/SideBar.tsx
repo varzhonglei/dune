@@ -3,8 +3,8 @@ import { setToken, useMyName } from '../../libs/auth'
 import LogoImg from '../../assets/logo.jpg'
 import { useState } from 'react'
 import { createUser } from '../../libs/api/user'
-import { RES_TYPE } from '../../typing'
 import { ModsLoad } from '../mods-load'
+import { RES_TYPE } from '../../../../common/typing/rest-req'
 const Container = styled.div`
   width: 300px;
   height: 100vh;

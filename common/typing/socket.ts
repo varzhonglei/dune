@@ -4,6 +4,7 @@ export enum MessageType {
   //to client
   'data' = 'data',
   'tableChange' = 'tableChange',
+  'unauthorized' = 'unauthorized',
 
   //to server
   'token' = 'token',

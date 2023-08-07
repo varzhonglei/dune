@@ -1,7 +1,8 @@
 import { useEffect } from "react"
-import { getToken, useToken } from "../auth"
+import { clearToken, getToken, useToken } from "../auth"
 import { socket_URL } from "../const";
 import { MessageType, TMessage } from '../../../../common/typing/socket'
+import { addToast } from "../../components/alert";
 
 export let socket: WebSocket | undefined
 type TMessageHandle<T extends MessageType> = (message: TMessage<T>) => void
@@ -36,8 +37,11 @@ function connectWebSocket() {
     console.log('WebSocket连接已关闭');
     if (currentReconnectAttempts < maxReconnectAttempts) {
       // 尝试重新连接
-      currentReconnectAttempts++;
-      setTimeout(connectWebSocket, reconnectInterval);
+      if (getToken()) {
+        currentReconnectAttempts++;
+        setTimeout(connectWebSocket, reconnectInterval);
+      }
+      
     } else {
       console.log('已达到最大重连次数');
     }
@@ -74,3 +78,14 @@ export const useSocket = () => {
     token && connectWebSocket()
   }, [token])
 }
+
+addMessageHandler((message) => {
+  if (message.type === MessageType.unauthorized) {
+    addToast({
+      text: '认证已经过期，请重新创建角色',
+      type: 'danger'
+    })
+    clearToken()
+    socket?.close()
+  }
+})

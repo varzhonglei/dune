@@ -1,5 +1,6 @@
 import { Request } from "express"
 import jwt_decode from "jwt-decode"
+import { userList } from "../round-table/users";
 
 export const getUserSub = (req: Request) => {
   const token = req.get('Authorization')
@@ -14,6 +15,11 @@ export const getUserSub = (req: Request) => {
 
 export const getUserToken = (req: Request) => {
   const token = req.get('Authorization')
-  return token || ''
+  const u = userList.find(u => u.token === token)
+  if (u) {
+    return u.token
+  }else {
+    return 401
+  }
 }
 

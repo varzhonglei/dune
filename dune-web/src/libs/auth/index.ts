@@ -12,6 +12,11 @@ export const getToken  = () => {
   return tokenState.getState()
 }
 
+export const clearToken = () => {
+  localStorage.setItem('token', '')
+  tokenState.setState('')
+}
+
 export const useToken = () =>  useSyncExternalState(tokenState)
 
 export const useMyName = () => {

@@ -1,8 +1,9 @@
 import express from "express"
 import jwt from "jsonwebtoken";
-import { RES_TYPE, TypedRequestBody, TypedResponse } from "../typing/req"
+import {  TypedRequestBody, TypedResponse } from "../typing/req"
 import { userList } from "../round-table/users"
 import { dbKey, jdb } from "../store/json-db"
+import { RES_TYPE } from "../../common/typing/rest-req";
 
 const DuplicateName = 'username already exist'
 
