@@ -95,7 +95,7 @@ tableRouter.post('/join/:id', async (req:TypedRequestBody<{ ind: number }>, res:
   if (!id || typeof ind !== 'number') {
     return  res.status(400).send({
       type: RES_TYPE.error,
-      message: 'wrang id or ind'
+      message: 'wrong id or ind'
     })
   }
   const r = joinTable(id, token, ind)

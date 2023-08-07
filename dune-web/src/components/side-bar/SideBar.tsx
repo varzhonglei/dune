@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { createUser } from '../../libs/api/user'
 import { ModsLoad } from '../mods-load'
 import { RES_TYPE } from '../../../../common/typing/rest-req'
+import { useDashboards } from './useDashboards'
 const Container = styled.div`
   width: 300px;
   height: 100vh;
@@ -30,6 +31,8 @@ export const SideBar = () => {
   const logout = () => {
     setToken('')
   }
+  const { content: DashBoards } = useDashboards()
+
 
   return <Container>
     { name ? <div className='m-3 is-flex is-align-items-center hover-f'>
@@ -56,6 +59,7 @@ export const SideBar = () => {
       </div>
     }
     <ModsLoad />
+    {DashBoards}
   </Container>
 }
 
