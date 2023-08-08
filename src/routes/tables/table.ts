@@ -13,7 +13,7 @@ tableRouter.get('/list', async (req, res: TypedResponse, next) => {
   const tables = tableListStore.map(t => ({
     id: t.id,
     admin: t.admin,
-    userList: t.store.getState().users
+    userList: t.store.getState().dashboards?.map(d => d.user)
   }))
 
   res.status(200).send({
@@ -58,7 +58,7 @@ const joinTable = (id: number, token: string, ind: number) => {
     table.store.setState(draft => {
       const user = userList.find(u => u.token === token)
       if (user) {
-        const oldIndex = draft.users.findIndex(u => u?.token === token)
+        const oldIndex = draft.dashboards.findIndex(d => d.user?.token === token)
         const thePerson = draft.dashboards[ind]?.user
         if (thePerson && thePerson?.token !== token) {
           res = '这个位置已经有人了'
@@ -67,14 +67,11 @@ const joinTable = (id: number, token: string, ind: number) => {
         if (oldIndex === -1 ) {
           // join
           draft.dashboards[ind].user = user
-          draft.users[ind] = user
         } else {
           // 换座位
           draft.dashboards[ind].user = user
-          draft.users[ind] = user
 
           draft.dashboards[oldIndex].user = undefined
-          draft.users[oldIndex] = null
         }
       }
     })

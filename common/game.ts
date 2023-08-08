@@ -4,12 +4,11 @@ import { TStation, station } from "./station/station"
 import { uuid } from "../src/utils"
 import { TYinCard, yinCards } from "./yin-card/yin-card"
 import { Dashboard, MiBaoColor, Role, TMibao } from "./typing"
-import { User } from "./typing/user"
 
 export interface Game {
   turn: number
+  stage: number
   dashboards: Dashboard[]
-  users: (User | null)[]
   storeCards: TCard[]
   spiceMustFlowCards: TCard[]
   fremenCards: TCard[]
@@ -58,6 +57,7 @@ export const initDashBoard: Dashboard = {
 
 export const initialGame: Game = {
   turn: 0,
+  stage: 0,
   dashboards: [{
     ...initDashBoard,
     miBaoColor: MiBaoColor.blue,
@@ -87,7 +87,6 @@ export const initialGame: Game = {
       color: MiBaoColor.yellow
     }))
   }],
-  users: [null, null, null, null],
   storeCards: storeCards,
   spiceMustFlowCards: spiceMustFlowCards,
   fremenCards: fremenCards,

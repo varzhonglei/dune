@@ -1,6 +1,5 @@
 
 
-
 export const cls = (...args: (string | { [key in string]: boolean })[]) => {
   return args.reduce((pre, cur) => {
     if (typeof cur === 'string') {
@@ -9,5 +8,5 @@ export const cls = (...args: (string | { [key in string]: boolean })[]) => {
       const classNames = Object.keys(cur).filter(key => cur[key]);
       return pre + ' ' + classNames.join(' ');
     }
-  }, '');
-};
+  }, '') as string
+}

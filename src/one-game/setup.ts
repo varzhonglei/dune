@@ -30,7 +30,7 @@ const setRole = ( {
 }
 
 const setRoles = (table: Table) => {
-  const users = table.store.getState().users
+  const users = table.store.getState().dashboards?.map(d => d.user)
   const rs = Object.values(roles)
   rs.sort((a,b) => random(-1.1, 1.1))
   rs.slice(0, 4).forEach((role, ind) => {

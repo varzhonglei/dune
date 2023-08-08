@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { RES_TYPE, User } from '../../typing'
+import { User } from '../../typing'
 import { APP_BE_URL } from '../const'
+import { RES_TYPE } from '../../../../common/typing/rest-req'
 
 
 

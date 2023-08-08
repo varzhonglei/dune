@@ -1,14 +1,17 @@
 import { Game } from "../game"
+import { User } from "./user"
 
 export enum MessageType {
   //to client
   'data' = 'data',
   'tableChange' = 'tableChange',
   'unauthorized' = 'unauthorized',
+  'someoneReady' = 'someoneReady',
 
   //to server
   'token' = 'token',
   'reqData' = 'reqData',
+  'iAmReady' = 'iAmReady',
 
   //common
 }
@@ -31,6 +34,17 @@ export type TMessage<T extends MessageType>  = {
   ?  { 
     tableId: number,
   } | null
+
+  : T extends MessageType.iAmReady
+  ? { 
+    tableId: number,
+    token: string
+  }
+
+  : T extends MessageType.someoneReady
+  ? { 
+    user: User | undefined
+  } 
   
   : undefined
 }

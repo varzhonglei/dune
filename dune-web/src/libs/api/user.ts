@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { RES_TYPE } from '../../typing'
 import { APP_BE_URL } from '../const'
+import { RES_TYPE } from '../../../../common/typing/rest-req'
 
 
 export const createUser = async (data: {

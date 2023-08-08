@@ -5,14 +5,17 @@ import { createSyncExternalAtom, useSyncExternalState } from '../../../libs/hook
 import { addMessageHandler, sendMessage } from '../../../libs/socket'
 import { useParams } from 'react-router-dom'
 import { getToken } from '../../../libs/auth'
-import { useCurrentTableBasicInfo } from '../../tables/use-tables'
+import { getTableIdFromUrl } from '../../../libs/utils/common'
 
 export const gameStore = createSyncExternalAtom(initialGame)
 export const useGame = () => useSyncExternalState(gameStore)
 
+
+export const gameStoreKey = createSyncExternalAtom(1)
+export const useQueryKey = () => useSyncExternalState(gameStoreKey)
 export const useGameSubscribe = () => {
   const { id: tableId } = useParams()
-  const tableBasicInfo = useCurrentTableBasicInfo()
+  const queryKey = useQueryKey()
   useEffect(() => {
     if (tableId) {
       sendMessage({
@@ -23,12 +26,35 @@ export const useGameSubscribe = () => {
         }
       })
     }
-  }, [tableId, tableBasicInfo?.userList?.map(u => u?.name).join()])
+  }, [tableId, queryKey])
 }
 
 
 addMessageHandler<MessageType.data>((message) => {
   if (message.type === MessageType.data && message.data) {
     gameStore.setState(message?.data)
+  }
+})
+
+addMessageHandler<MessageType.tableChange>((message) => {
+  if (message.type === MessageType.tableChange) {
+    const currentTableId = Number(getTableIdFromUrl(location.href))
+    if (currentTableId === message.data?.tableId) {
+      gameStoreKey.setState(old => old + 1)
+    } 
+  }
+})
+
+addMessageHandler<MessageType.someoneReady>((message) => {
+  if (message.type === MessageType.someoneReady) {
+    const user = message.data?.user
+    if (user) {
+      gameStore.setStateImmer(old => {
+        const d = old.dashboards?.find(d => d.user?.token === user.token)
+        if (d) {
+          d.user = user
+        }
+      })
+    }
   }
 })
