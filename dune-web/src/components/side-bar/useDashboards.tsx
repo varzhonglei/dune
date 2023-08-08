@@ -9,6 +9,7 @@ import { sendMessage } from "../../libs/socket"
 import { MessageType } from "../../../../common/typing/socket"
 import { useToken } from "../../libs/auth"
 import { cls } from "../../libs/utils/class-names"
+import { ModImage } from "../mod-image"
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Container = styled.div`
@@ -16,6 +17,7 @@ const Container = styled.div`
   width: 100%;
   border-top: 1px dashed #eee;
   height: fit-content;
+  margin-top: 20px;
 `
 
 
@@ -53,7 +55,7 @@ export const useDashboards = () => {
         return <Container
           key={d.miBaoColor}
         >
-          <div className="tags hover-f">
+          <div className="tags hover-f mb-1">
             <span 
               onClick={user?.name ? noop : handleJoinTable.bind(null, {
                 ind,
@@ -79,6 +81,23 @@ export const useDashboards = () => {
                 ready ? '取消' : '准备'
               }</span> : null
             }
+          </div>
+          <div className="is-flex">
+            {
+              //todo: fixme warter
+            }
+            <div className="flex-center mr-4">
+              <ModImage height={30} name={'warter.jpg'}/> 
+              <div className="ml-1">{d.water}</div>
+            </div>
+            <div className="flex-center mr-4">
+              <ModImage height={30} name={'spice.jpg'}/> 
+              <div className="ml-1">{d.spice}</div>
+            </div>
+            <div className="flex-center mr-4">
+              <ModImage height={30} name={'money.jpg'}/> 
+              <div className="ml-1">{d.money}</div>
+            </div>
           </div>
         </Container>
       })
