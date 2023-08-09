@@ -31,8 +31,10 @@ export type TMibao = {
   color: MiBaoColor,
   mentat?: boolean
 }
+export type TTurn = 'inturn' | 'pass' | 'wait'
 
 export type Dashboard = {
+  turn: TTurn
   effects: any[]
   user?: User
   miBaoColor?: MiBaoColor

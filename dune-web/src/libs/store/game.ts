@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
-import { initialGame } from '../../../../../common/game'
-import { MessageType } from '../../../../../common/typing/socket'
-import { createSyncExternalAtom, useSyncExternalState } from '../../../libs/hooks/useSyncStore'
-import { addMessageHandler, sendMessage } from '../../../libs/socket'
+import { initialGame } from '../../../../common/game'
+import { MessageType } from '../../../../common/typing/socket'
+import { createSyncExternalAtom, useSyncExternalState } from '../hooks/useSyncStore'
+import { addMessageHandler, sendMessage } from '../socket'
 import { useParams } from 'react-router-dom'
-import { getToken } from '../../../libs/auth'
-import { getTableIdFromUrl } from '../../../libs/utils/common'
+import { getToken } from '../auth'
+import { getTableIdFromUrl } from '../utils/common'
 
 export const gameStore = createSyncExternalAtom(initialGame)
 export const useGame = () => useSyncExternalState(gameStore)

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { useGame } from "../../pages/game/store/game"
+import { useGame } from "../../libs/store/game"
 import Icon from '@mdi/react'
 import { mdiPlusCircleOutline } from '@mdi/js'
 import { joinTable } from "../../libs/api/table"
@@ -13,26 +13,27 @@ import { Image } from "../image"
 import MoneyImg  from '../../assets/money.svg'
 import WaterImg  from '../../assets/water.svg'
 import SpiceImg  from '../../assets/spice.svg'
+import TurnImg  from '../../assets/turn.svg'
 import { ModImage } from "../mod-image"
 import { getRoleByKey } from '../../../../common/roles/roles'
+import { useIsStart } from "../../libs/hooks/useGame"
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Container = styled.div`
   padding: 10px;
   width: 100%;
-  border-top: 1px dashed #eee;
+  border-bottom: 1px dashed #eee;
   height: fit-content;
-  margin-top: 20px;
+  margin-bottom: 8px;
 `
 
 
 
 export const useDashboards = () => {
 
-  const gameData = useGame()
   const token = useToken()
-
-  const gameStart = gameData.stage !== 0
+  const gameData = useGame()
+  const gameStart = useIsStart()
 
   const { id: tableId } = useParams()
 
@@ -68,18 +69,24 @@ export const useDashboards = () => {
                 ind,
                 id: Number(tableId),
               })}
-              className="tag" 
+              className="tag mb-0" 
               style={{background: d.miBaoColor, color: '#fff'}}>
               {
                 user?.name ? user.name : <Icon path={mdiPlusCircleOutline} size={0.7} />
               }
-              { ready && '👌' }   
+              { ready && !gameStart && '👌' }   
             </span>
             {
-              user?.token === token ? <span 
+              gameStart && gameData.firstPlayer === ind && <div className='tag is-light mb-0'>先手</div>
+            }
+            {
+              gameStart &&  d.turn === 'inturn' && <Image title={'turn'} width={25} src={TurnImg}/>
+            }
+            {
+              user?.token === token && !gameStart ? <span 
               onClick={handleReady}
               className={
-                cls('tag is-link is-light', {
+                cls('tag is-link is-light mb-0', {
                   'is-primary': ready,
                   'is-info': !ready,
                   'hover-c': ready,

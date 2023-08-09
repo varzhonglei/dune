@@ -1,54 +1,34 @@
 import { roles } from "../../common/roles/roles"
-import { Table } from "../round-table/tables"
-import { DataStore } from "../store/momento"
 import { Role } from "../../common/typing"
+import { Table } from "../round-table/tables"
 import { random, shuffle, slice } from "lodash"
-import { Game, initDashBoard } from "../../common/game"
 
-const setRole = ( {
-  store,
-  token,
-  role,
-}:{
-  store: DataStore<Game>,
-  token: string
-  role: Role
-}) => {
-  const ex = { ...initDashBoard }
-  if (role === Role.queen) {
-    ex.water = 0
-  }
-  if (role === Role.fanshu2) {
-    ex.money = 1
-    ex.spice = 1
-  }
-  
-  store.setState(draft => {
-    const d  = draft.dashboards.find(d => d.user?.token === token)
-    d && (d.role = role)
-  })
-}
 
 const setRoles = (table: Table) => {
-  const users = table.store.getState().dashboards?.map(d => d.user)
   const rs = Object.values(roles)
   rs.sort((a,b) => random(-1.1, 1.1))
   rs.slice(0, 4).forEach((role, ind) => {
-    const user = users[ind]
-    if (user) {
-      setRole({
-        store: table.store,
-        token: user.token,
-        role: role.key,
-      })
-    }
+    table.store.setState(draft => {
+
+      const dbs = draft.dashboards[ind]
+      dbs.role = role.key
+      if (role.key === Role.queen) {
+        dbs.water = 0
+      }
+      if (role.key === Role.fanshu2) {
+        dbs.money = 1
+        dbs.spice = 1
+      }
+    })
   })
 
 }
 const setFirstPlayer = (table: Table) => {
-  table.store.setState({
-    turn: random(0, 3)
-  } as any)
+  const randomNum = random(0, 3)
+  table.store.setState(draft => {
+    draft.dashboards[randomNum].turn = 'inturn'
+    draft.firstPlayer = randomNum
+  })
 }
 
 const firstDrawCard = (table: Table) => {

@@ -6,7 +6,7 @@ import { TYinCard, yinCards } from "./yin-card/yin-card"
 import { Dashboard, MiBaoColor, Role, TMibao } from "./typing"
 
 export interface Game {
-  turn: number
+  firstPlayer: number
   stage: number
   dashboards: Dashboard[]
   storeCards: TCard[]
@@ -21,6 +21,7 @@ export interface Game {
 }
 
 export const initDashBoard: Dashboard = {
+  turn: 'wait',
   effects: [],
   point: 0,
   money: 0,
@@ -56,7 +57,7 @@ export const initDashBoard: Dashboard = {
 }
 
 export const initialGame: Game = {
-  turn: 0,
+  firstPlayer: 0,
   stage: 0,
   dashboards: [{
     ...initDashBoard,

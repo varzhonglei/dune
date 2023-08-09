@@ -1,5 +1,5 @@
 import { ModImage } from "../../components/mod-image"
-import { useGameSubscribe } from "./store/game"
+import { useGameSubscribe } from "../../libs/store/game"
 
 
 export const Game = () => {

@@ -6,6 +6,7 @@ import { createUser } from '../../libs/api/user'
 import { ModsLoad } from '../mods-load'
 import { RES_TYPE } from '../../../../common/typing/rest-req'
 import { useDashboards } from './useDashboards'
+import { useIsStart } from '../../libs/hooks/useGame'
 const Container = styled.div`
   width: 300px;
   height: 100vh;
@@ -20,6 +21,7 @@ const Img = styled.img`
 
 export const SideBar = () => {
   const name = useMyName()
+  const gameStart = useIsStart()
   const [name2, setName2] = useState('')
 
   const handleCreate = async () => {
@@ -35,29 +37,34 @@ export const SideBar = () => {
 
 
   return <Container>
-    { name ? <div className='m-3 is-flex is-align-items-center hover-f'>
-      <Img src={LogoImg}/>
-      { name }
-      <div 
-        onClick={logout}
-        className="tag is-light align-items-center ml-4 hover-c is-pointer">
-          登出
-      </div>
-    </div>
-    : <div className='m-3'>
-        <div className='mb-2'>创建用户：</div>
-        <div className='is-flex'>
-          <input
-            onChange={(e) => {setName2(e.target.value)}}
-            className="input is-primary mr-2" 
-            type="text" 
-            placeholder='用户名'
-            value={name2}
-          />
-          <button onClick={handleCreate} className="button is-primary">创建</button>
+    {
+      !gameStart && <>
+        { name ? <div className='m-3 is-flex is-align-items-center hover-f'>
+        <Img src={LogoImg}/>
+        { name }
+        <div 
+          onClick={logout}
+          className="tag is-light align-items-center ml-4 hover-c is-pointer">
+            登出
         </div>
       </div>
+      : <div className='m-3'>
+          <div className='mb-2'>创建用户：</div>
+          <div className='is-flex'>
+            <input
+              onChange={(e) => {setName2(e.target.value)}}
+              className="input is-primary mr-2" 
+              type="text" 
+              placeholder='用户名'
+              value={name2}
+            />
+            <button onClick={handleCreate} className="button is-primary">创建</button>
+          </div>
+        </div>
+      }
+      </>
     }
+    
     <ModsLoad />
     {DashBoards}
   </Container>
