@@ -1,5 +1,5 @@
 import { roles } from "../../common/roles/roles"
-import { Table, tableListStore } from "../round-table/tables"
+import { Table } from "../round-table/tables"
 import { DataStore } from "../store/momento"
 import { Role } from "../../common/typing"
 import { random, shuffle, slice } from "lodash"
@@ -75,10 +75,10 @@ const firstDrawYin = (table: Table) => {
 
 
 
-export const setup = (tableId: number) => {
-  const table = tableListStore.find(t => t.id === tableId)
-  if (!table) return
-  
+export const setupDune = (table: Table) => {  
+  table.store.setState(s => {
+    s.stage = 1
+  })
   setRoles(table)
   setFirstPlayer(table)
   firstDrawCard(table)

@@ -3,7 +3,7 @@ import { MessageType, TMessage } from "../../common/typing/socket"
 import { tableListStore } from "../round-table/tables"
 import { sendMessage, sendTableMessage } from "./socket"
 import { userList } from "../round-table/users"
-import { someoneReady } from "../one-game/userActionsHandler/gameSet"
+import { checkAllReadyAndSetup, someoneReady } from "../one-game/userActionsHandler/gameSet"
 
 export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: Map<string, WebSocket>) => {
   const { type } = message
@@ -46,6 +46,8 @@ export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: M
           }
         }
       })
+      // 如果全员准备，直接开始
+      checkAllReadyAndSetup(table)
     }
   }
 }

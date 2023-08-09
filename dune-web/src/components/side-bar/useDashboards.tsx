@@ -9,7 +9,12 @@ import { sendMessage } from "../../libs/socket"
 import { MessageType } from "../../../../common/typing/socket"
 import { useToken } from "../../libs/auth"
 import { cls } from "../../libs/utils/class-names"
+import { Image } from "../image"
+import MoneyImg  from '../../assets/money.svg'
+import WaterImg  from '../../assets/water.svg'
+import SpiceImg  from '../../assets/spice.svg'
 import { ModImage } from "../mod-image"
+import { getRoleByKey } from '../../../../common/roles/roles'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Container = styled.div`
@@ -26,6 +31,8 @@ export const useDashboards = () => {
 
   const gameData = useGame()
   const token = useToken()
+
+  const gameStart = gameData.stage !== 0
 
   const { id: tableId } = useParams()
 
@@ -82,23 +89,29 @@ export const useDashboards = () => {
               }</span> : null
             }
           </div>
+          {
+            gameStart && <> 
           <div className="is-flex">
-            {
-              //todo: fixme warter
-            }
             <div className="flex-center mr-4">
-              <ModImage height={30} name={'warter.jpg'}/> 
+              <Image height={30} src={WaterImg}/> 
               <div className="ml-1">{d.water}</div>
             </div>
             <div className="flex-center mr-4">
-              <ModImage height={30} name={'spice.jpg'}/> 
+              <Image height={30} src={SpiceImg}/> 
               <div className="ml-1">{d.spice}</div>
             </div>
             <div className="flex-center mr-4">
-              <ModImage height={30} name={'money.jpg'}/> 
+              <Image height={30} src={MoneyImg}/> 
               <div className="ml-1">{d.money}</div>
             </div>
           </div>
+          <div className="is-flex">
+            <ModImage name={getRoleByKey(d.role)?.srcName} />
+          </div>
+            
+            </>
+          }
+          
         </Container>
       })
   }</>

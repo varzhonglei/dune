@@ -13,7 +13,9 @@ export enum Role {
   'wanguijie' = 'wanguijie',
   'longbo' = 'longbo',
   'shui' = 'shui',
-  'yeye' = 'yeye'
+  'yeye' = 'yeye',
+  'leto' = 'leto',
+  'dagong' = 'dagong',
 }
 
 export enum MiBaoColor {
