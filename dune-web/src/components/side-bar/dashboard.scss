@@ -1,0 +1,11 @@
+.dashboard-source{
+    position: relative;
+    &-count{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        font-weight: 500;
+    }
+}

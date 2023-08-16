@@ -10,6 +10,7 @@ import { WithSidebar } from './components/side-bar/SideBar'
 import { SimpleToast } from './components/alert'
 import { GamePage } from './pages/game'
 import { useSocket } from './libs/socket'
+import { GlobalViewer } from './components/global-viewer';
 
 export enum ROUTES {
   home = '/',
@@ -39,6 +40,7 @@ export const App = () => {
     <RouterProvider router={router} />
   </SWRConfig>
   <SimpleToast />
+  <GlobalViewer />
 </React.StrictMode>
 }
  

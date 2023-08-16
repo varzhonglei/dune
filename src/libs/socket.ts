@@ -11,7 +11,7 @@ const clients = new Map<string, WebSocket>();
 
 const initWS  = () => {
   wss.on('connection', (ws) => {
-    console.log('WebSocket连接已建立');
+    console.log(`ws 建立, 数量：${wss.clients.size}`);
     ws.on('message', (message) => {
       // 将Buffer转换为字符串
       const messageString = message.toString();
@@ -24,7 +24,7 @@ const initWS  = () => {
       }
     })
     ws.on('close', () => {
-      console.log('WebSocket连接已关闭');
+      console.log(`ws 关闭, 数量：${wss.clients.size}`);
       // 从客户端连接映射中移除断开连接的客户端
       clients.forEach((client, key) => {
         if (client === ws) {

@@ -17,6 +17,7 @@ import TurnImg  from '../../assets/turn.svg'
 import { ModImage } from "../mod-image"
 import { getRoleByKey } from '../../../../common/roles/roles'
 import { useIsStart } from "../../libs/hooks/useGame"
+import './dashboard.scss'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Container = styled.div`
@@ -60,6 +61,8 @@ export const useDashboards = () => {
       dashboardsData?.map((d, ind) => {
         const user = d.user
         const ready = user?.readyStatus === 'ready'
+        const role = getRoleByKey(d.role)
+        const isMe = d.user?.token === token
         return <Container
           key={d.miBaoColor}
         >
@@ -99,29 +102,28 @@ export const useDashboards = () => {
           {
             gameStart && <> 
           <div className="is-flex">
-            <div className="flex-center mr-4">
+            <div className="is-flex">
+              <ModImage  className="mr-2"  style={{borderRadius: '20px'}} name={role.srcName} sprite={role.sprite} width={40} height={40}/>
+            </div>
+            <div className="flex-center mr-2 dashboard-source">
               <Image height={30} src={WaterImg}/> 
-              <div className="ml-1">{d.water}</div>
+              <div className="has-text-white dashboard-source-count">{d.water}</div>
             </div>
-            <div className="flex-center mr-4">
+            <div className="flex-center mr-2 dashboard-source">
               <Image height={30} src={SpiceImg}/> 
-              <div className="ml-1">{d.spice}</div>
+              <div className="has-text-white dashboard-source-count">{d.spice}</div>
             </div>
-            <div className="flex-center mr-4">
+            <div className="flex-center mr-2 dashboard-source">
               <Image height={30} src={MoneyImg}/> 
-              <div className="ml-1">{d.money}</div>
+              <div className="has-text-white dashboard-source-count">{d.money}</div>
             </div>
-          </div>
-          <div className="is-flex">
-            <ModImage name={getRoleByKey(d.role)?.srcName} />
-          </div>
-            
+          </div>       
             </>
           }
-          
         </Container>
       })
-  }</>
+  }
+  </>
   return {
     content
   }

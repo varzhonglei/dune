@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react"
 import { useMods } from "../../libs/hooks/useModsFile"
 import { useLatestValue } from "../../libs/hooks/useLatestValue"
+import { TSprite } from '../../../../common/typing/ui'
+import { isNumber } from "lodash"
 
-export const ModImage = (props: {
+export const ModImage = ({
+    name, width, height, style, sprite, className
+}: {
     name: string
-    width?: number | string
-    height?: number | string
+    width?: number
+    height?: number
     style?:  React.CSSProperties
+    sprite?: TSprite
     className?: string
 }) => {
     const [src, setSrc] = useState<string | null>(null)
     const latestSrc = useLatestValue(src)
     const mods = useMods()
     useEffect(() => {
-        const file = mods.find(m => m.name === props.name)
+        const file = mods.find(m => m.name === name)
         if (file) {
         setSrc(old => {
             if (old) {
@@ -27,19 +32,58 @@ export const ModImage = (props: {
             URL.revokeObjectURL(latestSrc.current)
         }
        }
-    }, [mods, props.name])
+    }, [mods, name])
 
-    const style: React.CSSProperties ={
-        width: props.width,
-        height: props.height,
-        ...(props.style || {})
+    const style2: React.CSSProperties ={
+        width: isNumber(width) ? `${width}px` : undefined,
+        height: isNumber(height) ? `${height}px` :undefined,
+        ...(style || {})
     }
   
     if (!src) return <div 
-        className={props.className ? props.className : undefined}
-        style={style}
+        className={className ? className : ''}
+        style={style2}
     /> 
+    if (sprite && width && height) {
+        return <SpriteImage 
+            className={className ? className : ''}
+            style={style2}
+            src={src}
+            width={width}
+            height={height}
+            sprite={sprite}
+        />
+    }
+
     return <img 
-        className={props.className ? props.className : undefined}
-        src={src} style={style}/>
+        className={className ? className : ''}
+        src={src} style={style2}/>
   }
+
+  export const SpriteImage = ({ sprite, className, src, style, width, height }: {
+    src: string
+    sprite: TSprite
+    width: number 
+    height: number
+    style?: React.CSSProperties
+    className?: string
+  }) => {
+    const { position, size, clip } = sprite
+    const base =  width / clip.width
+    
+    const style2: React.CSSProperties ={
+        width: isNumber(width) ? `${width}px` : undefined,
+        height: isNumber(height) ? `${height}px` :undefined,
+        ...(style || {})
+    }
+    const imageStyle = {
+      backgroundImage: `url(${src})`,
+      backgroundPosition: `-${position.x * base}px -${position.y * base}px`,
+      backgroundSize: `${size.width * base}px ${size.height * base}px`,
+      overflow: 'hidden',
+      ...(style2 || {})
+    };
+  
+    return <div className={className ? className : ''} style={imageStyle}></div>;
+  };
+  
