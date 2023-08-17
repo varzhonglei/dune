@@ -11,7 +11,7 @@ const clients = new Map<string, WebSocket>();
 
 const initWS  = () => {
   wss.on('connection', (ws) => {
-    console.log(`ws 建立, 数量：${wss.clients.size}`);
+    // console.log(`ws 建立, 数量：${wss.clients.size}`);
     ws.on('message', (message) => {
       // 将Buffer转换为字符串
       const messageString = message.toString();
@@ -24,7 +24,7 @@ const initWS  = () => {
       }
     })
     ws.on('close', () => {
-      console.log(`ws 关闭, 数量：${wss.clients.size}`);
+      // console.log(`ws 关闭, 数量：${wss.clients.size}`);
       // 从客户端连接映射中移除断开连接的客户端
       clients.forEach((client, key) => {
         if (client === ws) {
@@ -37,6 +37,17 @@ const initWS  = () => {
     })
   })
 }
+setInterval(() => {
+  const memoryUsage = process.memoryUsage();
+  const memoryUsageMB = {
+    rss: Math.round(memoryUsage.rss / 1024 / 1024),
+    heapTotal: Math.round(memoryUsage.heapTotal / 1024 / 1024),
+    heapUsed: Math.round(memoryUsage.heapUsed / 1024 / 1024),
+    external: Math.round(memoryUsage.external / 1024 / 1024)
+  };
+  console.log('memoryUsageMB:',memoryUsageMB);
+  console.log(`ws 数量：${wss.clients.size}`);
+}, 1000 * 60)
 
 
 const sendMessage = <T extends MessageType>(params: {

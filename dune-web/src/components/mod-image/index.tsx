@@ -3,6 +3,7 @@ import { useMods } from "../../libs/hooks/useModsFile"
 import { useLatestValue } from "../../libs/hooks/useLatestValue"
 import { TSprite } from '../../../../common/typing/ui'
 import { isNumber } from "lodash"
+import { useMouseHoverRef } from "../global-viewer"
 
 export const ModImage = ({
     name, width, height, style, sprite, className
@@ -15,6 +16,13 @@ export const ModImage = ({
     className?: string
 }) => {
     const [src, setSrc] = useState<string | null>(null)
+    const ref = useMouseHoverRef<HTMLImageElement>({
+        name,
+        //todo: fix me
+        width: 1150,
+        height: 804
+    })
+    console.log('ref', ref.current)
     const latestSrc = useLatestValue(src)
     const mods = useMods()
     useEffect(() => {
@@ -46,6 +54,7 @@ export const ModImage = ({
     /> 
     if (sprite && width && height) {
         return <SpriteImage 
+            name={name}
             className={className ? className : ''}
             style={style2}
             src={src}
@@ -56,11 +65,13 @@ export const ModImage = ({
     }
 
     return <img 
+        ref={ref}
         className={className ? className : ''}
         src={src} style={style2}/>
   }
 
-  export const SpriteImage = ({ sprite, className, src, style, width, height }: {
+  export const SpriteImage = ({ name, sprite, className, src, style, width, height }: {
+    name: string
     src: string
     sprite: TSprite
     width: number 
@@ -68,6 +79,12 @@ export const ModImage = ({
     style?: React.CSSProperties
     className?: string
   }) => {
+    const ref = useMouseHoverRef<HTMLDivElement>({
+        name,
+        //todo: fix me
+        width: 1150,
+        height: 804
+    })
     const { position, size, clip } = sprite
     const base =  width / clip.width
     
@@ -84,6 +101,6 @@ export const ModImage = ({
       ...(style2 || {})
     };
   
-    return <div className={className ? className : ''} style={imageStyle}></div>;
+    return <div ref={ref} className={className ? className : ''} style={imageStyle}></div>;
   };
   
