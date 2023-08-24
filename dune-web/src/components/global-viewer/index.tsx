@@ -1,8 +1,7 @@
 import styled from "@emotion/styled"
 import { useEffect, useRef, useState } from "react"
 import { createSyncExternalAtom, useSyncExternalState } from "../../libs/hooks/useSyncStore"
-import { useLatestValue } from "../../libs/hooks/useLatestValue"
-import { useMods } from "../../libs/hooks/useModsFile"
+import { useSrcByName } from "../mod-image"
 
 const Container = styled.div`
   position: fixed;
@@ -11,10 +10,12 @@ const Container = styled.div`
 
 const globalPreviewState = createSyncExternalAtom<{
   name: null | string,
-  position: {}
+  style: React.CSSProperties,
+  content?: any | null
 }>({
   name: null,
-  position: {}
+  style: {},
+  content: null
 })
 
 
@@ -23,26 +24,7 @@ const __ModImage = ({
 }: {
   name: string
 }) => {
-  const [src, setSrc] = useState<string | null>(null)
-  const latestSrc = useLatestValue(src)
-  const mods = useMods()
-  useEffect(() => {
-      const file = mods.find(m => m.name === name)
-      if (file) {
-      setSrc(old => {
-          if (old) {
-              URL.revokeObjectURL(old)
-          }
-          return file?.file && URL.createObjectURL(file.file)
-      })
-     }
-     return () => {
-      if (latestSrc.current) {
-          URL.revokeObjectURL(latestSrc.current)
-      }
-     }
-  }, [mods, name])
-
+  const src = useSrcByName(name)
   if (!src) return null
   return <img 
       src={src}
@@ -53,11 +35,10 @@ const __ModImage = ({
 export const GlobalViewer = () => {
     const [open, setOpen] = useState(false)
     const info = useSyncExternalState(globalPreviewState)
-    console.log('info', info)
 
     useEffect(() => {
       const fun = function(event:KeyboardEvent) {
-        if (event.keyCode === 32) { // 按下空格键的keyCode是32
+        if (event.key === 'Alt' || event.code === 'AltLeft' || event.code === 'AltRight') { 
           setOpen(old => !old)
         }
       }
@@ -67,12 +48,22 @@ export const GlobalViewer = () => {
       }
     }, [])
 
+
     if (!open || !info.name) {
       return null
     } else {
+      if (info.content) {
+        return <Container
+          style={{
+            ...info.style
+          }}
+        >
+          {info.content}
+        </Container>
+      }
       return <Container
         style={{
-          ...info.position
+          ...info.style
         }}
       >
         <__ModImage 
@@ -83,32 +74,64 @@ export const GlobalViewer = () => {
  
 }
 
-export const useMouseHoverRef = <T extends Element>(imgInfo: { name: string, width: number, height: number }) => {
+export const useMouseHoverRef = <T extends Element>(imgInfo: { name: string, width: number, height: number,
+  content?: any
+}) => {
   const ref = useRef<T>(null);
 
   useEffect(() => {
     const fn = () => {
       const { width, height } = imgInfo;
-      const rect = ref.current?.getBoundingClientRect();
 
-      if (rect) {
-        const { top, bottom, left, right } = rect;
+
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect()
+        const { top, bottom, left, right } = rect
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
-
-        const position = {
-          top: top - (height / 2),
-          bottom: viewportHeight - (bottom + (height / 2)),
-          left: left - (width / 2),
-          right: viewportWidth - (right + (width / 2))
-        };
-
-        globalPreviewState.setStateImmer(draft => {
-          draft.name = imgInfo.name;
-          draft.position = position;
-        });
+        if (imgInfo.content) {
+          //todo// optimize position
+          const rectToBottom = viewportHeight - bottom
+          const rectToRight = viewportWidth - right
+          const tb = Math.max(Math.min(top, rectToBottom), 0)
+          const lr =  Math.max(Math.min(left, rectToRight), 0)
+          const isCloserTop = top < rectToBottom
+          const isCloserLeft = left < rectToRight
+          const position = {
+            top:  isCloserTop ? tb : 'unset',
+            bottom:  !isCloserTop ? tb : 'unset',
+            left:  isCloserLeft ? lr : 'unset',
+            right: !isCloserLeft ? lr : 'unset',
+          }
+  
+          globalPreviewState.setStateImmer(draft => {
+            draft.name = imgInfo.name;
+            draft.style = {
+              ...position,
+              transform: "scale(4)",
+              transformOrigin: `${isCloserTop ? 'top' : 'bottom'} ${isCloserLeft ? 'left' : 'right'}`
+            };
+            draft.content = imgInfo.content
+          })
+          
+        } else {
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+  
+          const position = {
+            top: Math.max(top - (height / 2), 0) ,
+            bottom: Math.max(viewportHeight - (bottom + (height / 2)), 0),
+            left: Math.max(left - (width / 2), 0),
+            right: Math.max(viewportWidth - (right + (width / 2)), 0)
+          }
+  
+          globalPreviewState.setStateImmer(draft => {
+            draft.name = imgInfo.name;
+            draft.style = position;
+          })
+        }
       }
-    };
+    }
 
     if (ref.current) {
       ref.current.addEventListener('mouseover', fn);

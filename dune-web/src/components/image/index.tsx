@@ -1,5 +1,6 @@
 export const Image = (props: {
-    src: string
+    src: string | null
+    ref?: any
     title?: string
     width?: number | string
     height?: number | string
@@ -13,11 +14,13 @@ export const Image = (props: {
     }
   
     if (!props.src) return <div 
+        ref={props.ref}
         title={props.title}
         className={props.className ? props.className : undefined}
         style={style}
     /> 
     return <img 
+        ref={props.ref}
         title={props.title}
         className={props.className ? props.className : undefined}
         src={props.src} style={style}/>

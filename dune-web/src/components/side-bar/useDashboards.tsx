@@ -14,7 +14,7 @@ import MoneyImg  from '../../assets/money.svg'
 import WaterImg  from '../../assets/water.svg'
 import SpiceImg  from '../../assets/spice.svg'
 import TurnImg  from '../../assets/turn.svg'
-import { ModImage } from "../mod-image"
+import { SpriteImageWithEnlarge } from "../mod-image"
 import { getRoleByKey } from '../../../../common/roles/roles'
 import { useIsStart } from "../../libs/hooks/useGame"
 import './dashboard.scss'
@@ -103,7 +103,7 @@ export const useDashboards = () => {
             gameStart && <> 
           <div className="is-flex">
             <div className="is-flex">
-              <ModImage  className="mr-2"  style={{borderRadius: '20px'}} name={role.srcName} sprite={role.sprite} width={40} height={40}/>
+              <SpriteImageWithEnlarge isViewAll  className="mr-2"  style={{borderRadius: '20px'}} name={role.srcName} sprite={role.sprite} width={40} height={40}/>
             </div>
             <div className="flex-center mr-2 dashboard-source">
               <Image height={30} src={WaterImg}/> 

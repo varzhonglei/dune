@@ -2,27 +2,11 @@ import { useEffect, useState } from "react"
 import { useMods } from "../../libs/hooks/useModsFile"
 import { useLatestValue } from "../../libs/hooks/useLatestValue"
 import { TSprite } from '../../../../common/typing/ui'
-import { isNumber } from "lodash"
 import { useMouseHoverRef } from "../global-viewer"
+import { Image } from "../image"
 
-export const ModImage = ({
-    name, width, height, style, sprite, className
-}: {
-    name: string
-    width?: number
-    height?: number
-    style?:  React.CSSProperties
-    sprite?: TSprite
-    className?: string
-}) => {
+export const useSrcByName = (name: string) => {
     const [src, setSrc] = useState<string | null>(null)
-    const ref = useMouseHoverRef<HTMLImageElement>({
-        name,
-        //todo: fix me
-        width: 1150,
-        height: 804
-    })
-    console.log('ref', ref.current)
     const latestSrc = useLatestValue(src)
     const mods = useMods()
     useEffect(() => {
@@ -41,66 +25,111 @@ export const ModImage = ({
         }
        }
     }, [mods, name])
+    return src
+}
 
-    const style2: React.CSSProperties ={
-        width: isNumber(width) ? `${width}px` : undefined,
-        height: isNumber(height) ? `${height}px` :undefined,
-        ...(style || {})
-    }
-  
-    if (!src) return <div 
-        className={className ? className : ''}
-        style={style2}
-    /> 
-    if (sprite && width && height) {
-        return <SpriteImage 
-            name={name}
-            className={className ? className : ''}
-            style={style2}
-            src={src}
-            width={width}
-            height={height}
-            sprite={sprite}
-        />
-    }
+export const ModImage = (props: {
+    name: string
+    width?: number
+    height?: number
+    style?:  React.CSSProperties
+    className?: string
+}) => {
+    const src = useSrcByName(props.name)
+    return <Image src={src} {...props}/>
+}
 
-    return <img 
+  export const ModImageWithEnlarge = (props: {
+    name: string
+    title?: string
+    width?: number | string
+    height?: number | string
+    style?:  React.CSSProperties
+    className?: string
+}) => {
+    const src = useSrcByName(props.name) || ''
+    const ref = useMouseHoverRef<HTMLImageElement>({
+        name: props.name,
+        //todo: fix me
+        width: 1150,
+        height: 804,
+    })
+
+    return <Image 
         ref={ref}
-        className={className ? className : ''}
-        src={src} style={style2}/>
+        src={src}
+        {...props}
+    />
   }
 
-  export const SpriteImage = ({ name, sprite, className, src, style, width, height }: {
+  export const SpriteImage = (props: {
     name: string
-    src: string
     sprite: TSprite
     width: number 
-    height: number
+    height: number 
     style?: React.CSSProperties
     className?: string
   }) => {
-    const ref = useMouseHoverRef<HTMLDivElement>({
-        name,
-        //todo: fix me
-        width: 1150,
-        height: 804
-    })
+    const src = useSrcByName(props.name) || ''
+    const { sprite, className, width } = props
     const { position, size, clip } = sprite
     const base =  width / clip.width
-    
-    const style2: React.CSSProperties ={
-        width: isNumber(width) ? `${width}px` : undefined,
-        height: isNumber(height) ? `${height}px` :undefined,
-        ...(style || {})
+
+    const style: React.CSSProperties ={
+        width: props.width,
+        height: props.height,
+        ...(props.style || {})
     }
     const imageStyle = {
       backgroundImage: `url(${src})`,
       backgroundPosition: `-${position.x * base}px -${position.y * base}px`,
       backgroundSize: `${size.width * base}px ${size.height * base}px`,
       overflow: 'hidden',
-      ...(style2 || {})
+      ...(style || {})
+    }
+    return <div className={className ? className : ''} style={imageStyle}></div>;
+  }
+  
+
+  export const SpriteImageWithEnlarge = (props: {
+    name: string
+    sprite: TSprite
+    isViewAll?: boolean
+    width: number 
+    height: number
+    style?: React.CSSProperties
+    className?: string
+  }) => {
+    const src = useSrcByName(props.name) || ''
+    const { name, sprite, className, width, isViewAll } = props
+    const ref = useMouseHoverRef<HTMLDivElement>({
+        name,
+        //todo: fix me
+        width: 1150,
+        height: 804,
+        content: isViewAll ? null : <SpriteImage {...props}
+            style={{
+            ...(props.style || {}),
+        }}
+        />,
+    })
+    const { position, size, clip } = sprite
+    const base =  width / clip.width
+
+    const style: React.CSSProperties ={
+        width: props.width,
+        height: props.height,
+        ...(props.style || {})
+    }
+    
+    const imageStyle = {
+      backgroundImage: `url(${src})`,
+      backgroundPosition: `-${position.x * base}px -${position.y * base}px`,
+      backgroundSize: `${size.width * base}px ${size.height * base}px`,
+      overflow: 'hidden',
+      ...(style || {})
     };
   
     return <div ref={ref} className={className ? className : ''} style={imageStyle}></div>;
   };
-  
+
