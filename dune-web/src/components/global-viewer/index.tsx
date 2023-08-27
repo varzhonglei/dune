@@ -74,6 +74,7 @@ export const GlobalViewer = () => {
  
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useMouseHoverRef = <T extends Element>(imgInfo: { name: string, width: number, height: number,
   content?: any
 }) => {
@@ -139,8 +140,8 @@ export const useMouseHoverRef = <T extends Element>(imgInfo: { name: string, wid
 
     return () => {
       ref.current?.removeEventListener('mouseover', fn);
-    };
-  }, [ref.current, imgInfo.name, imgInfo.width, imgInfo.height]);
+    }
+  }, [ref.current, imgInfo.name, imgInfo.width, imgInfo.height])
 
   return ref
-};
+}

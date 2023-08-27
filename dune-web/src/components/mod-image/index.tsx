@@ -5,6 +5,7 @@ import { TSprite } from '../../../../common/typing/ui'
 import { useMouseHoverRef } from "../global-viewer"
 import { Image } from "../image"
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useSrcByName = (name: string) => {
     const [src, setSrc] = useState<string | null>(null)
     const latestSrc = useLatestValue(src)
@@ -24,6 +25,7 @@ export const useSrcByName = (name: string) => {
             URL.revokeObjectURL(latestSrc.current)
         }
        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mods, name])
     return src
 }
@@ -55,11 +57,17 @@ export const ModImage = (props: {
         height: 804,
     })
 
-    return <Image 
-        ref={ref}
-        src={src}
-        {...props}
-    />
+    const style: React.CSSProperties ={
+      width: props.width,
+      height: props.height,
+      ...(props.style || {})
+  }
+
+    return <img 
+    ref={ref}
+    title={props.title}
+    className={props.className ? props.className : undefined}
+    src={src} style={style}/>
   }
 
   export const SpriteImage = (props: {

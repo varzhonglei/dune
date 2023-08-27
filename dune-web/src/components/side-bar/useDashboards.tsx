@@ -14,7 +14,7 @@ import MoneyImg  from '../../assets/money.svg'
 import WaterImg  from '../../assets/water.svg'
 import SpiceImg  from '../../assets/spice.svg'
 import TurnImg  from '../../assets/turn.svg'
-import { SpriteImageWithEnlarge } from "../mod-image"
+import { ModImage, ModImageWithEnlarge, SpriteImageWithEnlarge } from "../mod-image"
 import { getRoleByKey } from '../../../../common/roles/roles'
 import { useIsStart } from "../../libs/hooks/useGame"
 import './dashboard.scss'
@@ -105,19 +105,28 @@ export const useDashboards = () => {
             <div className="is-flex">
               <SpriteImageWithEnlarge isViewAll  className="mr-2"  style={{borderRadius: '20px'}} name={role.srcName} sprite={role.sprite} width={40} height={40}/>
             </div>
+            <div className="flex-center mr-4 dashboard-source">
+              <ModImage name="point.jpg"  width={35} height={35}/> 
+              <div className="has-text-white dashboard-source-count is-size-6">{d.point}</div>
+            </div>
             <div className="flex-center mr-2 dashboard-source">
-              <Image height={30} src={WaterImg}/> 
+              <Image height={23} src={WaterImg}/> 
               <div className="has-text-white dashboard-source-count">{d.water}</div>
             </div>
             <div className="flex-center mr-2 dashboard-source">
-              <Image height={30} src={SpiceImg}/> 
+              <Image height={25} src={SpiceImg}/> 
               <div className="has-text-white dashboard-source-count">{d.spice}</div>
             </div>
             <div className="flex-center mr-2 dashboard-source">
-              <Image height={30} src={MoneyImg}/> 
+              <Image height={25} src={MoneyImg}/> 
               <div className="has-text-white dashboard-source-count">{d.money}</div>
             </div>
-          </div>       
+          </div>    
+          <div className="is-flex">
+            {
+              
+            }
+          </div>
             </>
           }
         </Container>
