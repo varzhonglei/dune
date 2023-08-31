@@ -18,6 +18,8 @@ import { ModImage, ModImageWithEnlarge, SpriteImageWithEnlarge } from "../mod-im
 import { getRoleByKey } from '../../../../common/roles/roles'
 import { useIsStart } from "../../libs/hooks/useGame"
 import './dashboard.scss'
+import { ColorFilters } from "../../libs/utils/colors"
+import { MiBaoColor } from "../../../../common/typing"
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Container = styled.div`
@@ -122,10 +124,24 @@ export const useDashboards = () => {
               <div className="has-text-white dashboard-source-count">{d.money}</div>
             </div>
           </div>    
-          <div className="is-flex">
-            {
-              
-            }
+          <div className="is-flex pt-2">
+            <div className="flex-center mr-2">
+              <ModImage name="mibao.jpg" style={{ filter: ColorFilters[d.miBaoColor || MiBaoColor.black]}} width={30}/> 
+            </div>
+            <div className="flex-center mr-2">
+              <ModImage name="mibao.jpg" style={{filter: ColorFilters[d.miBaoColor || MiBaoColor.black]}} width={30}/> 
+            </div>
+            <div className="flex-center mr-2">
+              <ModImage name="mibao.jpg" style={{filter: ColorFilters[d.miBaoColor || MiBaoColor.black]}} width={30}/> 
+            </div>
+            <div className="flex-center mr-2 dashboard-source">
+              <ModImage name="draw.jpg"  width={30}/> 
+              <div className="has-text-white dashboard-source-card-count">{d.handCards.length}</div>
+            </div>
+            <div className="flex-center mr-2 dashboard-source">
+              <ModImage name="draw-yin.jpg"  width={30}/> 
+              <div className="has-text-white dashboard-source-card-count">{d.yinCards.length}</div>
+            </div>
           </div>
             </>
           }
