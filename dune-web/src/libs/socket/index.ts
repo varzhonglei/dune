@@ -13,8 +13,8 @@ let currentReconnectAttempts = 0;
 const reconnectInterval = 3000; // 重连间隔时间（毫秒）
 
 function connectWebSocket() {
-  if (socket) {
-    socket.close()
+  if (socket?.readyState === 1) {
+    return
   }
   socket = new WebSocket(socket_URL);
 

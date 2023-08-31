@@ -37,17 +37,17 @@ const initWS  = () => {
     })
   })
 }
-setInterval(() => {
-  const memoryUsage = process.memoryUsage();
-  const memoryUsageMB = {
-    rss: Math.round(memoryUsage.rss / 1024 / 1024),
-    heapTotal: Math.round(memoryUsage.heapTotal / 1024 / 1024),
-    heapUsed: Math.round(memoryUsage.heapUsed / 1024 / 1024),
-    external: Math.round(memoryUsage.external / 1024 / 1024)
-  };
-  console.log('memoryUsageMB:',memoryUsageMB);
-  console.log(`ws 数量：${wss.clients.size}`);
-}, 1000 * 60)
+// setInterval(() => {
+//   const memoryUsage = process.memoryUsage();
+//   const memoryUsageMB = {
+//     rss: Math.round(memoryUsage.rss / 1024 / 1024),
+//     heapTotal: Math.round(memoryUsage.heapTotal / 1024 / 1024),
+//     heapUsed: Math.round(memoryUsage.heapUsed / 1024 / 1024),
+//     external: Math.round(memoryUsage.external / 1024 / 1024)
+//   };
+//   console.log('memoryUsageMB:',memoryUsageMB);
+//   console.log(`ws 数量：${wss.clients.size}`);
+// }, 1000 * 60)
 
 
 const sendMessage = <T extends MessageType>(params: {
