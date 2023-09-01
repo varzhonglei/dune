@@ -14,12 +14,11 @@ import MoneyImg  from '../../assets/money.svg'
 import WaterImg  from '../../assets/water.svg'
 import SpiceImg  from '../../assets/spice.svg'
 import TurnImg  from '../../assets/turn.svg'
-import { ModImage, ModImageWithEnlarge, SpriteImageWithEnlarge } from "../mod-image"
+import { ModImage, SpriteImageWithEnlarge } from "../mod-image"
 import { getRoleByKey } from '../../../../common/roles/roles'
 import { useIsStart } from "../../libs/hooks/useGame"
 import './dashboard.scss'
-import { ColorFilters } from "../../libs/utils/colors"
-import { MiBaoColor } from "../../../../common/typing"
+import { MiBaoEmptyIcon, MiBaoIcon } from "../../assets/svg"
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Container = styled.div`
@@ -126,13 +125,19 @@ export const useDashboards = () => {
           </div>    
           <div className="is-flex pt-2">
             <div className="flex-center mr-2">
-              <ModImage name="mibao.jpg" style={{ filter: ColorFilters[d.miBaoColor || MiBaoColor.black]}} width={30}/> 
+              {
+                d.mibao[0] ? <MiBaoIcon width={30} height={40} color={d.miBaoColor || ''}/> : <MiBaoEmptyIcon  width={30} height={40}/>
+              }
             </div>
             <div className="flex-center mr-2">
-              <ModImage name="mibao.jpg" style={{filter: ColorFilters[d.miBaoColor || MiBaoColor.black]}} width={30}/> 
+              {
+                d.mibao[1] ? <MiBaoIcon  width={30} height={40} color={d.miBaoColor || ''}/> : <MiBaoEmptyIcon  width={30} height={40}/>
+              }
             </div>
             <div className="flex-center mr-2">
-              <ModImage name="mibao.jpg" style={{filter: ColorFilters[d.miBaoColor || MiBaoColor.black]}} width={30}/> 
+              {
+                d.mibao[2] ? <MiBaoIcon  width={30} height={40} color={d.miBaoColor || ''}/> : <MiBaoEmptyIcon   width={30} height={40}/>
+              }
             </div>
             <div className="flex-center mr-2 dashboard-source">
               <ModImage name="draw.jpg"  width={30}/> 

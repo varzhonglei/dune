@@ -13,7 +13,7 @@ export const Game = () => {
 
   return <Container>
     <div className="is-flex">
-      <ModImage style={{flex:3, width: '1px'}} name={'bg2.jpg'}/>
+      <ModImage style={{flex:3, width: '1px', transform: 'scaleY(1.01)'}} name={'bg2.jpg'}/>
       <ModImage style={{flex:2, width: '1px'}} name={'bg4.jpg'}/>
     </div>
     <ModImage name={'bg1.jpg'}/>

@@ -73,6 +73,8 @@ export const SideBar = () => {
 
 const Wrapper = styled.div`
   display: flex;
+  padding-top: 50px;
+  padding-bottom: 100px;
 `
 const Left = styled.div`
   width: 100px;
