@@ -2,6 +2,7 @@ import { TCard, TCardPart } from "./cards"
 import { EConstraint, EEffect } from "../typing/effect"
 import { StationIcon } from "../station/station"
 import { addCardIds } from "../../src/utils"
+import { TSprite } from '../typing/ui'
 
 enum ECardCamp {
   'fremen' = 'fremen',
@@ -27,7 +28,10 @@ const c1 = {
         conBonus: [{ key: EEffect.inf2 }]
       }]
     }],
-  revealEffect: [{ key: EEffect.cardBuy, number: 2 }]
+  revealEffect: [{ key: EEffect.cardBuy, number: 2 }],
+  img: {
+    name: 'c85.jpg'
+  }
 }
 add(c1)
 
@@ -42,7 +46,10 @@ const c2 = {
       key: EEffect.constraint,
       con: [{ key: EConstraint.fremenBound}],
       conBonus: [{ key: EEffect.infFremen }]
-    }, { key: EEffect.dao }]
+    }, { key: EEffect.dao }],
+    img: {
+      name: 'c18.jpg'
+    }
 }
 add(c2)
 
@@ -61,7 +68,10 @@ const c3 = {
       key: EEffect.constraint,
       con: [{ key: EConstraint.fremenAlliance}],
       conBonus: [{ key: EEffect.dao, number: 2 }]
-    },]
+    },],
+    img: {
+      name: 'c33.jpg'
+    }
 }
 add(c3, c3)
 
@@ -75,7 +85,10 @@ const c4 = {
       conBonus: [{ key: EEffect.getTroops, number: 3 }]
     }],
   revealEffect: [{key: EEffect.dao,}, 
-    {key: EEffect.cardBuy, number: 2},]
+    {key: EEffect.cardBuy, number: 2},],
+    img: {
+      name: 'c11.jpg'
+    }
 }
 add(c4,c4)
 
@@ -85,7 +98,10 @@ const c5 = {
   icons: [StationIcon.circle, StationIcon.fremen],
   buyEffect: [{key: EEffect.infEmpire}],
   revealEffect: [{key: EEffect.liete,}, 
-    { key: EEffect.cardBuy, number: 2},]
+    { key: EEffect.cardBuy, number: 2},],
+    img: {
+      name: 'c84.jpg'
+    }
 }
 add(c5)
 
@@ -103,7 +119,10 @@ const c6 = {
       }]
     }],
   revealEffect: [{key: EEffect.infSister,}],
-  dropEffect: [{key: EEffect.infSister,}]
+  dropEffect: [{key: EEffect.infSister,}],
+  img: {
+    name: 'c62.jpg'
+  }
 }
 add(c6, c6)
 
@@ -130,6 +149,9 @@ const c7 = {
       },
     ],
   revealEffect: [{key: EEffect.cardBuy,}, {key: EEffect.inf,}],
+  img: {
+    name: 'c57.jpg'
+  }
 }
 add(c7)
 
@@ -145,17 +167,23 @@ const c8 = {
       },
     ],
   revealEffect: [{key: EEffect.cardBuy, number: 2}],
+  img: {
+    name: 'c94.jpg'
+  }
 }
 add(c8)
 
 const c9 = {
-  name: '3费的抽一卡',
+  name: '姐妹会新人',
   camp: [ECardCamp.sister],
   icons: [StationIcon.circle, StationIcon.triangle, StationIcon.pentagon],
   playEffect: [
       { key: EEffect.drawCard }
     ],
   revealEffect: [{key: EEffect.cardBuy }],
+  img: {
+    name: 'c93.jpg'
+  }
 }
 add(c9)
 
@@ -171,6 +199,9 @@ const c10 = {
       }
     ],
   revealEffect: [{key: EEffect.cardBuy }, {key: EEffect.drawYin }],
+  img: {
+    name: 'c74.jpg'
+  }
 }
 add(c10)
 
@@ -184,6 +215,9 @@ const c11 = {
       }
     ],
   revealEffect: [{key: EEffect.cardBuy }, {key: EEffect.getSpice }],
+  img: {
+    name: '.jpg'
+  }
 }
 add(c11, c11)
 
@@ -194,6 +228,9 @@ const c12 = {
       { key: EEffect.killTroopCamp}
     ],
   revealEffect: [{key: EEffect.dao, number: 3 }, {key: EEffect.deployTroop }],
+  img: {
+    name: 'c12.jpg'
+  }
 }
 add(c12, c12)
 
@@ -203,5 +240,8 @@ const c13 = {
   playEffect: [
       { key: EEffect.powerPlay}
     ],
+    img: {
+      name: 'c87.jpg'
+    }
 }
 add(c13, c13)

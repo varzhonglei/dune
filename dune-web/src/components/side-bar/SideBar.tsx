@@ -7,6 +7,7 @@ import { ModsLoad } from '../mods-load'
 import { RES_TYPE } from '../../../../common/typing/rest-req'
 import { useDashboards } from './useDashboards'
 import { useIsStart } from '../../libs/hooks/useGame'
+import { BottomBar } from '../action-bar'
 const Container = styled.div`
   width: 300px;
   height: 100vh;
@@ -74,7 +75,7 @@ export const SideBar = () => {
 const Wrapper = styled.div`
   display: flex;
   padding-top: 50px;
-  padding-bottom: 100px;
+  padding-bottom: 120px;
 `
 const Left = styled.div`
   width: 100px;
@@ -86,5 +87,6 @@ export const WithSidebar = (p: JSX.Element) => {
   return <Wrapper>
     <Left>{p}</Left>
     <SideBar />
+    <BottomBar />
   </Wrapper>
 }
