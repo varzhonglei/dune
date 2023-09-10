@@ -11,7 +11,13 @@ const handlers:TMessageHandle<any>[]= []
 const maxReconnectAttempts = 10000;
 let currentReconnectAttempts = 0;
 const reconnectInterval = 3000; // 重连间隔时间（毫秒）
+// WebSocket.CONNECTING (0): 这是初始状态，表示 WebSocket 连接正在建立中。当创建了 WebSocket 实例，但尚未建立连接时，它的 readyState 值为 CONNECTING。
 
+// WebSocket.OPEN (1): 当 WebSocket 连接成功建立时，readyState 的值将变为 OPEN。在这个状态下，可以通过 WebSocket 实例发送和接收数据。
+
+// WebSocket.CLOSING (2): 当 WebSocket 连接正在关闭过程中时，readyState 的值将变为 CLOSING。这表示连接正在进行关闭握手，但尚未完全关闭。
+
+// WebSocket.CLOSED (3): 当 WebSocket 连接已经关闭时，readyState 的值将变为 CLOSED。在这个状态下，无法发送或接收数据，且连接无法重新打开。
 function connectWebSocket() {
   if (socket?.readyState === 1) {
     return

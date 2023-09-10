@@ -11,35 +11,42 @@ const Container = styled.div`
 const globalPreviewState = createSyncExternalAtom<{
   name: null | string,
   style: React.CSSProperties,
+  imageStyle: React.CSSProperties,
   content?: any | null
 }>({
   name: null,
   style: {},
+  imageStyle: {},
   content: null
 })
 
 
 const __ModImage = ({
   name,
+  style,
 }: {
+  style:  React.CSSProperties,
   name: string
 }) => {
   const src = useSrcByName(name)
   if (!src) return null
   return <img 
+      style={style}
       src={src}
   />
 }
 
+export const globalPreviewOpen = createSyncExternalAtom(false)
+
 
 export const GlobalViewer = () => {
-    const [open, setOpen] = useState(false)
+    const open = useSyncExternalState(globalPreviewOpen)
     const info = useSyncExternalState(globalPreviewState)
 
     useEffect(() => {
       const fun = function(event:KeyboardEvent) {
         if (event.key === 'Alt' || event.code === 'AltLeft' || event.code === 'AltRight') { 
-          setOpen(old => !old)
+          globalPreviewOpen.setState(old => !old)
         }
       }
       document.addEventListener('keydown', fun)
@@ -67,6 +74,7 @@ export const GlobalViewer = () => {
         }}
       >
         <__ModImage 
+          style={info.imageStyle}
           name={info.name}
         />
       </Container>
@@ -84,53 +92,38 @@ export const useMouseHoverRef = <T extends Element>(imgInfo: { name: string, wid
     const fn = () => {
       const { width, height } = imgInfo;
 
-
+      const baseStyle = {
+        width: width + 'px',
+        height: height + 'px'
+      }
       if (ref.current) {
         const rect = ref.current.getBoundingClientRect()
         const { top, bottom, left, right } = rect
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
-        if (imgInfo.content) {
-          //todo// optimize position
-          const rectToBottom = viewportHeight - bottom
-          const rectToRight = viewportWidth - right
-          const tb = Math.max(Math.min(top, rectToBottom), 0)
-          const lr =  Math.max(Math.min(left, rectToRight), 0)
-          const isCloserTop = top < rectToBottom
-          const isCloserLeft = left < rectToRight
-          const position = {
-            top:  isCloserTop ? tb : 'unset',
-            bottom:  !isCloserTop ? tb : 'unset',
-            left:  isCloserLeft ? lr : 'unset',
-            right: !isCloserLeft ? lr : 'unset',
-          }
-  
-          globalPreviewState.setStateImmer(draft => {
-            draft.name = imgInfo.name;
-            draft.style = {
-              ...position,
-              transform: "scale(4)",
-              transformOrigin: `${isCloserTop ? 'top' : 'bottom'} ${isCloserLeft ? 'left' : 'right'}`
-            };
-            draft.content = imgInfo.content
-          })
-          
-        } else {
-          const viewportWidth = window.innerWidth;
-          const viewportHeight = window.innerHeight;
-  
-          const position = {
-            top: Math.max(top - (height / 2), 0) ,
-            bottom: Math.max(viewportHeight - (bottom + (height / 2)), 0),
-            left: Math.max(left - (width / 2), 0),
-            right: Math.max(viewportWidth - (right + (width / 2)), 0)
-          }
-  
-          globalPreviewState.setStateImmer(draft => {
-            draft.name = imgInfo.name;
-            draft.style = position;
-          })
+
+        const rectToBottom = viewportHeight - bottom
+        const rectToRight = viewportWidth - right
+        const tb = Math.max(Math.min(top, rectToBottom), 0)
+        const lr =  Math.max(Math.min(left, rectToRight), 0)
+        const isCloserTop = top < rectToBottom
+        const isCloserLeft = left < rectToRight
+        const position = {
+          top:  isCloserTop ? tb : 'unset',
+          bottom:  !isCloserTop ? tb : 'unset',
+          left:  isCloserLeft ? lr : 'unset',
+          right: !isCloserLeft ? lr : 'unset',
         }
+
+        globalPreviewState.setStateImmer(draft => {
+          draft.name = imgInfo.name;
+          draft.style = {
+            ...position,
+            transformOrigin: `${isCloserTop ? 'top' : 'bottom'} ${isCloserLeft ? 'left' : 'right'}`
+          },
+          draft.imageStyle = baseStyle,
+          draft.content = imgInfo.content
+        })
       }
     }
 

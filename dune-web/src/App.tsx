@@ -11,6 +11,7 @@ import { SimpleToast } from './components/alert'
 import { GamePage } from './pages/game'
 import { useSocket } from './libs/socket'
 import { GlobalViewer } from './components/global-viewer';
+import { useCursor } from './libs/hooks/useCursor'
 
 export enum ROUTES {
   home = '/',
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
 
 export const App = () => {
   useSocket()
+  useCursor()
   return  <React.StrictMode>
   <SWRConfig
     value={ {

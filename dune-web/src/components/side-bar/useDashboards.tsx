@@ -104,7 +104,14 @@ export const useDashboards = () => {
             gameStart && <> 
           <div className="is-flex">
             <div className="is-flex">
-              <SpriteImageWithEnlarge isViewAll  className="mr-2"  style={{borderRadius: '20px'}} name={role.srcName} sprite={role.sprite} width={40} height={40}/>
+              <SpriteImageWithEnlarge isViewAll 
+                className="mr-2"  
+                style={{borderRadius: '20px'}} 
+                name={role.srcName} 
+                sprite={role.sprite} 
+                width={40} height={40}
+                enlargeWith={1150/2} enlargeHeight={804 /2}
+              />
             </div>
             <div className="flex-center mr-4 dashboard-source">
               <ModImage name="point.jpg"  width={35} height={35}/> 
