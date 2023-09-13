@@ -1,7 +1,6 @@
 import { TCard } from "../../../../common/cards/cards"
-import { TLocationId } from "../../../../common/station/station"
+import { TLocationId, station } from "../../../../common/station/station"
 import { createSyncExternalAtom, useSyncExternalState } from "./useSyncStore"
-
 
 export const miBaoActionState = createSyncExternalAtom<{
   card: TCard | null
@@ -12,3 +11,8 @@ export const miBaoActionState = createSyncExternalAtom<{
 })
 
 export const useMiBaoAction = () => useSyncExternalState(miBaoActionState)
+
+export const useAvailableStation = () => {
+  const info = useMiBaoAction()
+  return station.filter(s => info.card?.icons?.includes(s.icon))
+}
