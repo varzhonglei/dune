@@ -24,9 +24,9 @@ const get = async (key: dbKey) => {
 
 const init = async () => {
   const userList = await get(dbKey.users)
-  setUserList(userList || [])
+  userList && setUserList(userList)
   const tables = await get(dbKey.tables)
-  setTableList(tables)
+  tables && setTableList(tables)
 }
 
 

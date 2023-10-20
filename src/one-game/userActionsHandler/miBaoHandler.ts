@@ -37,7 +37,7 @@ export const miBaoHandler = ({
 }: P) => {
   if (payload.miBaoAction) {
     const ap = payload.miBaoAction
-    table.store.setState(s => {
+    table.setState(s => {
       const dashboard = s.dashboards.find(d => d.user?.token === token)
       const location = s.station.find(s => s.id === ap?.locationId)
       const card = s.allCard.find(c => c.id === ap.cardId)
@@ -45,7 +45,7 @@ export const miBaoHandler = ({
         const mibao = dashboard.mibao.pop()
         mibao && location.miBao?.push(mibao)
         
-        dashboard.effects.push(...location.get)
+        dashboard.effects.push(...location.get, ...card.playEffect)
         dashboard.handCards = dashboard.handCards.filter(c => c.id !== card?.id)
         dashboard.playedCards.push(card)
       }

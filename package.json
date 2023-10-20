@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "cd dune-web && yarn dev",
     "build": "cd dune-web && yarn build",
+    
     "start": "npx ts-node src/main.ts",
     "test": "mocha",
     "compile": "npx tsc",
