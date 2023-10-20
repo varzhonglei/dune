@@ -66,7 +66,7 @@ const sendTableMessage = <T extends MessageType>(params: {
 }) => {
   const table = tableListStore.find(t => t.id === params.tableId)
   if (table) {
-    const game = table.store.getState()
+    const game = table.getState()
     game.dashboards.forEach(d => {
       if (d.user?.token) {
         sendMessage<T>({

@@ -14,7 +14,7 @@ export const someoneReady = (table: Table, token: string) => {
 }
 
 export const checkAllReady = (table: Table) => {
-  const ds = table.store.getState().dashboards
+  const ds = table.getState().dashboards
   return  ds.every(d => d.user?.readyStatus === 'ready')
 }
 
@@ -25,7 +25,10 @@ export const checkAllReadyAndSetup = (table: Table) => {
       tableId: table.id,
       body: {
         type: MessageType.data,
-        data: table.store.getState()
+        data: {
+          game: table.getState(),
+          storeIndex: table.getStoreIndex()
+        }
       }
     })
   }

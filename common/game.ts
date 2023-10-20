@@ -1,7 +1,7 @@
 import { TCard, basicCards, c1, fremenCards, spacingGuidCards, spiceMustFlowCards } from "./cards/cards"
 import { storeCards } from "./cards/cards-store"
 import { TStation, station } from "./station/station"
-import { uuid } from "../src/utils"
+import { numberId } from "../src/utils"
 import { TYinCard, yinCards } from "./yin-card/yin-card"
 import { Dashboard, MiBaoColor, Role, TMibao } from "./typing"
 
@@ -63,28 +63,28 @@ export const initialGame: Game = {
     ...initDashBoard,
     miBaoColor: MiBaoColor.blue,
     mibao: Array.from({length:2}).map(_ => ({
-      id: uuid('miBao'),
+      id: numberId('miBao'),
       color: MiBaoColor.blue
     }))
   }, {
     ...initDashBoard,
     miBaoColor: MiBaoColor.green,
     mibao: Array.from({length:2}).map(_ => ({
-      id: uuid('miBao'),
+      id: numberId('miBao'),
       color: MiBaoColor.green
     }))
   }, {
     ...initDashBoard,
     miBaoColor: MiBaoColor.red,
     mibao: Array.from({length:2}).map(_ => ({
-      id: uuid('miBao'),
+      id: numberId('miBao'),
       color: MiBaoColor.red
     }))
   }, {
     ...initDashBoard,
     miBaoColor: MiBaoColor.yellow,
     mibao: Array.from({length:2}).map(_ => ({
-      id: uuid('miBao'),
+      id: numberId('miBao'),
       color: MiBaoColor.yellow
     }))
   }],
@@ -98,7 +98,7 @@ export const initialGame: Game = {
   yinCardsPlayed: [],
 
   mentat: {
-    id: 'mibao-mentat',
+    id: -1,
     color: MiBaoColor.black,
     mentat: true
   },

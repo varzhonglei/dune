@@ -7,11 +7,11 @@ import { checkAllReadyAndSetup, someoneReady } from "../one-game/userActionsHand
 
 export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: Map<string, WebSocket>) => {
   const { type } = message
-  if (type === MessageType.token) {
-    const { data } = message as TMessage<MessageType.token>
-    const u = userList.find(u => u.token === data) 
+  if (type === MessageType.tokenBack) {
+    const { data } = message as TMessage<MessageType.tokenBack>
+    const u = userList.find(u => u.token === data.token) 
     if (u) {
-      clients.set(data, ws)
+      clients.set(data.token, ws)
     } else {
       ws.send(JSON.stringify({
         type: MessageType.unauthorized,
@@ -23,15 +23,18 @@ export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: M
     const table = tableListStore.find(t => t.id === data.tableId)
 
     if (table) {
-      const game = table.store.getState()
       sendMessage({
         token: data.token,
         body: {
           type: MessageType.data,
-          data: game
+          data: {
+            game: table.getState(),
+            storeIndex: table.getStoreIndex()
+          }
         }
       })
     }
+
   } else if (type === MessageType.iAmReady) {
     const { data } = message as TMessage<MessageType.iAmReady>
     const table = tableListStore.find(t => t.id === data.tableId)
@@ -42,7 +45,7 @@ export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: M
         body: {
           type: MessageType.someoneReady,
           data: {
-            user: table?.store?.getState().dashboards.find(d => d.user?.token === data?.token)?.user
+            user: table.getState().dashboards.find(d => d.user?.token === data?.token)?.user
           }
         }
       })

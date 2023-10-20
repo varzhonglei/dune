@@ -13,7 +13,7 @@ tableRouter.get('/list', async (req, res: TypedResponse, next) => {
   const tables = tableListStore.map(t => ({
     id: t.id,
     admin: t.admin,
-    userList: t.store.getState().dashboards?.map(d => d.user)
+    userList: t.getState().dashboards?.map(d => d.user)
   }))
 
   res.status(200).send({
@@ -50,7 +50,7 @@ tableRouter.delete('/:id', async (req, res: TypedResponse, next) => {
 
 // join  
 // move 
-// quit the table: join 现在的位置（ind）会自动退出该座位
+// quit the table
 const joinTable = (id: number, token: string, ind: number) => {
   const table = tableListStore.find(t => t.id === id)
   let res: string | RES_TYPE = RES_TYPE.success

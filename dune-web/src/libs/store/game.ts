@@ -32,7 +32,7 @@ export const useGameSubscribe = () => {
 
 addMessageHandler<MessageType.data>((message) => {
   if (message.type === MessageType.data && message.data) {
-    gameStore.setState(message?.data)
+    gameStore.setState(message?.data?.game)
   }
 })
 

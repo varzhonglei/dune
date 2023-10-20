@@ -8,7 +8,7 @@ export type TYinCardPart = {
   endEffect?: any[],
 }
 export type TYinCard = TYinCardPart & {
-  id: string
+  id: number
 }
 
 export const yinCards: TYinCard[] = []

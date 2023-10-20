@@ -5,17 +5,25 @@ import { isSupperAdmin } from '../../common/is-super-admin'
 const tableNumber = 3
 
 export interface Table {
-  id: number,
-  admin: string,
-  store: DataStore<Game>;
+  id: number
+  admin: string
+  store: DataStore<Game>
+  getState: () => Game
+  saveState: () => void
+  getStoreIndex: () => string
+  setState: (state: Game | ((prevState: Game) => any)) => void; 
 }
 
-const createTable = (id: number, admin?: string) => {
+const createTable = (id: number, admin?: string):Table => {
   const store = new DataStore<Game>(initialGame);
   return {
     id,
     admin: admin || 'unset',
     store: store,
+    setState: store.setState,
+    getState: store.getState,
+    saveState: store.saveState,
+    getStoreIndex: store.getCurrentIndex
   }
 }
 

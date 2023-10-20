@@ -9,7 +9,7 @@ export enum MessageType {
   'someoneReady' = 'someoneReady',
 
   //to server
-  'token' = 'token',
+  'tokenBack' = 'tokenBack',
   'reqData' = 'reqData',
   'iAmReady' = 'iAmReady',
 
@@ -19,7 +19,10 @@ export enum MessageType {
 export type TMessage<T extends MessageType>  = {
   type: MessageType
   data:  T extends MessageType.data
-  ? Game
+  ? {
+    game: Game
+    storeIndex: string
+  }
 
   : T extends MessageType.reqData
   ? { 
@@ -27,8 +30,10 @@ export type TMessage<T extends MessageType>  = {
     token:string,
   }
 
-  : T extends MessageType.token
-  ? string 
+  : T extends MessageType.tokenBack
+  ? {
+    token:string,
+  } 
 
   : T extends MessageType.tableChange
   ?  { 
@@ -43,7 +48,7 @@ export type TMessage<T extends MessageType>  = {
 
   : T extends MessageType.someoneReady
   ? { 
-    user: User | undefined
+    user: User | undefined 
   } 
   
   : undefined

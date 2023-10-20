@@ -27,7 +27,7 @@ export enum MiBaoColor {
 }
 
 export type TMibao = {
-  id: string,
+  id: number,
   color: MiBaoColor,
   mentat?: boolean
 }

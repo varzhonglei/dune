@@ -1,5 +1,4 @@
 import { map } from "lodash"
-import { v4 } from "uuid"
 import { TCardPart, TCard } from "../../common/cards/cards"
 import { TYinCard, TYinCardPart } from "../../common/yin-card/yin-card"
 
@@ -10,30 +9,23 @@ const ids = {
 }
 type IdNamespace = 'card' | 'yinCard' | 'miBao'
 
-export const uuid = (nameSpace?: IdNamespace) => {
-    let res = ''
-    if (nameSpace) {
-        res = ids[nameSpace].toString()
-        ids[nameSpace]++
-    } else {
-        res = v4()
-    }
-    return res
+export const numberId = (nameSpace: IdNamespace) => {
+    return ids[nameSpace]++
 }
 
 
 
-export const addId = <T>(obj: T, nameSpace?: IdNamespace)  => {
+export const addId = <T>(obj: T, nameSpace: IdNamespace)  => {
     return {
         ...obj,
-        id: uuid(nameSpace)
+        id: numberId(nameSpace)
     } 
 }
-export const addIds = <T>(arr: T[], nameSpace?: IdNamespace)  => {
+export const addIds = <T>(arr: T[], nameSpace: IdNamespace)  => {
     return arr.map(i => {
         return {
             ...i,
-            id: uuid(nameSpace)
+            id: numberId(nameSpace)
         }
     })
 }
