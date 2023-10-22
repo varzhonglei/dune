@@ -35,10 +35,11 @@ export const CanvasMask = (props: IProps) => {
   useEffect(() => {
     const canvas = document.getElementById(id) as HTMLCanvasElement | null;
 
-     const ctx = canvas && canvas.getContext('2d') as CanvasRenderingContext2D | null;
+    const ctx = canvas && canvas.getContext('2d') as CanvasRenderingContext2D | null;
     if (ctx) {
       // 绘制灰色背景
       ctx.fillStyle = 'rgba(128, 128, 128, 0.5)'
+      ctx.clearRect(0, 0, width, height);
       ctx.fillRect(0, 0, width, height);
 
       holes.forEach(h => {

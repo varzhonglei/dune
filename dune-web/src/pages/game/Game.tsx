@@ -13,6 +13,7 @@ export const Game = () => {
   useGameSubscribe()
 
   const availableStations = useAvailableStation()
+  console.log('availableStations', availableStations)
 
   return <Container>
     <div className="is-flex">
