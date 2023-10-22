@@ -3,10 +3,17 @@ import { useToken } from '../../libs/auth'
 import { useGame } from '../../libs/store/game'
 const Container = styled.div`
     min-height: 50px;
+    max-height: 120px;
     width: 100vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    border-bottom: 1px solid #bbb;
+    z-index: 3
 `
  
 

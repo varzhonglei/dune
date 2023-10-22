@@ -6,12 +6,12 @@ import {
 } from "react-router-dom";
 import { TablesPage } from './pages/tables'
 import { SWRConfig } from 'swr'
-import { WithSidebar } from './components/side-bar/SideBar'
 import { SimpleToast } from './components/alert'
 import { GamePage } from './pages/game'
 import { useSocket } from './libs/socket'
 import { GlobalViewer } from './components/global-viewer';
 import { useCursor } from './libs/hooks/useCursor'
+import { baseLayout } from './components/layout';
 
 export enum ROUTES {
   home = '/',
@@ -21,11 +21,11 @@ export enum ROUTES {
 const router = createBrowserRouter([
   {
     path: ROUTES.home,
-    element: WithSidebar(<TablesPage/>),
+    element: baseLayout(<TablesPage/>),
   },
   {
     path: ROUTES.table,
-    element: WithSidebar(<GamePage/>),
+    element: baseLayout(<GamePage/>),
   },
 ])
 

@@ -16,7 +16,7 @@ const add = (...args: TCardPart[]) => {
 }
 
 const c1 = {
-  name: '两面三刀',
+  name: '进进出出',
   price: 3,
   icons: [StationIcon.triangle, StationIcon.pentagon],
   playEffect: [{

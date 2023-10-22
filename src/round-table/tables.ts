@@ -20,10 +20,10 @@ const createTable = (id: number, admin?: string):Table => {
     id,
     admin: admin || 'unset',
     store: store,
-    setState: store.setState,
-    getState: store.getState,
-    saveState: store.saveState,
-    getStoreIndex: store.getCurrentIndex
+    setState: (params) => store.setState(params),
+    getState: () => store.getState(),
+    saveState: () => store.saveState(),
+    getStoreIndex: () => store.getCurrentIndex()
   }
 }
 

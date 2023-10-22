@@ -29,7 +29,7 @@ export type TCardPart = {
   }
 }
 export type TCard = TCardPart & {
-  id: string
+  id: number
 }
 
 export const c1: TCard = addCardId({
