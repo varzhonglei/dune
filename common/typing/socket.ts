@@ -2,13 +2,13 @@ import { Game } from "../game"
 import { User } from "./user"
 
 export enum MessageType {
-  //to client
+  //server post to user
   'data' = 'data',
   'tableChange' = 'tableChange',
   'unauthorized' = 'unauthorized',
   'someoneReady' = 'someoneReady',
 
-  //to server
+  //user post to server
   'tokenBack' = 'tokenBack',
   'reqData' = 'reqData',
   'iAmReady' = 'iAmReady',

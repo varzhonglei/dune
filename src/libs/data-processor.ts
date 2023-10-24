@@ -1,0 +1,5 @@
+
+
+export const clearSecretInfo = () => {
+  //todo
+}

@@ -1,6 +1,6 @@
 import express from "express"
 import jwt from "jsonwebtoken";
-import {  TypedRequestBody, TypedResponse } from "../typing/req"
+import { TypedRequestBody, TypedResponse } from "../typing/req"
 import { userList } from "../round-table/users"
 import { dbKey, jdb } from "../store/json-db"
 import { RES_TYPE } from "../../common/typing/rest-req";

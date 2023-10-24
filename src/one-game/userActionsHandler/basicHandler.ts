@@ -5,7 +5,7 @@ import { Dashboard } from "../../../common/typing"
 type TCreateHandler<T> = (dashboard:Dashboard, payload: T ) => void
 type Handler<T> = {
   table: Table
-  token: string,
+  name: string,
   payload: T
 }
 
@@ -14,16 +14,16 @@ type numberPayload = {
 }
 
 type idPayload = {
-  id: string
+  id: number
 }
 
 export const CreateHandler = <T>(fn: TCreateHandler<T>) => ({
     table,
-    token,
+    name,
     payload }: Handler<T>
   ) => {
-    table.store.setState(s => {
-      const dashboard = s.dashboards.find(d => d.user?.token === token)
+    table.setState(s => {
+      const dashboard = s.dashboards.find(d => d.user?.name === name)
       if (dashboard) {
         fn(dashboard, payload) 
       }

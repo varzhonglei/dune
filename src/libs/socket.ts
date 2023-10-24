@@ -51,10 +51,10 @@ const initWS  = () => {
 
 
 const sendMessage = <T extends MessageType>(params: {
-  token: string,
+  name: string,
   body: TMessage<T>
 }) => {
-  const s = clients.get(params.token)
+  const s = clients.get(params.name)
   if (s) {
     s.send(JSON.stringify(params.body));
   }
@@ -68,9 +68,9 @@ const sendTableMessage = <T extends MessageType>(params: {
   if (table) {
     const game = table.getState()
     game.dashboards.forEach(d => {
-      if (d.user?.token) {
+      if (d.user?.name) {
         sendMessage<T>({
-          token: d.user?.token,
+          name: d.user?.name,
           body: params.body
         })
       }
@@ -81,7 +81,7 @@ const sendTableMessage = <T extends MessageType>(params: {
 const sendMessage2All = <T extends MessageType>(body: TMessage<T>) => {
   for (const key of clients.keys()) {
     sendMessage<T>({
-      token: key,
+      name: key,
       body: body
     })
   }
