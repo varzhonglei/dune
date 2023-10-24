@@ -1,8 +1,9 @@
 import { ModImage } from "../../components/mod-image"
-import { useAvailableStation } from "../../libs/hooks/useAction"
+import { useAvailableStation, useMiBaoAction } from "../../libs/hooks/useAction"
 import { useGameSubscribe } from "../../libs/store/game"
 import styled from "@emotion/styled"
 import { BGMap } from "./bg-map"
+import { holes } from "./bg-map/holes"
 
 const Container = styled('div')`
   width: 100%;
@@ -12,14 +13,18 @@ const Container = styled('div')`
 export const Game = () => {
   useGameSubscribe()
 
+  const miBaoAction = useMiBaoAction()
   const availableStations = useAvailableStation()
-  console.log('availableStations', availableStations)
+  const bg4Stations = availableStations.filter(s => ['kejiSale', 'jian'].includes(s.id))
+  const bg1Stations = availableStations.filter(s => !['kejiSale', 'jian'].includes(s.id))
+  const holes4 = bg4Stations.map(s => holes[s.id])
+  const holes1 = bg1Stations.map(s => holes[s.id])
 
   return <Container>
     <div className="is-flex">
-      <BGMap style={{flex:3, width: '1px'}} modName={'bg2.jpg'}/>
-      <BGMap style={{flex:2, width: '1px'}} modName={'bg4.jpg'}/>
+      <BGMap style={{flex:3, width: '1px'}} showMask={false} modName={'bg2.jpg'}/>
+      <BGMap style={{flex:2, width: '1px'}} showMask={!!miBaoAction.card}  holes={holes4}   modName={'bg4.jpg'}/>
     </div>
-    <BGMap modName={'bg1.jpg'}/>
+    <BGMap showMask={!!miBaoAction.card} holes={holes1} modName={'bg1.jpg'}/>
   </Container>
 }

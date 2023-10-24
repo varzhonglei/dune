@@ -6,7 +6,8 @@ import styled from "@emotion/styled"
 type Props = {
    modName: string
    style?: React.CSSProperties
-	 holes?: THole[]
+   holes?: THole[]
+   showMask?: boolean
 }
 
 
@@ -28,8 +29,10 @@ export const BGMap = (props: Props) => {
 			style={{width: '100%', height: '100%'}}
 			src={src || ''} 
 		/>
-		<CanvasMask 
+		{
+			props.showMask && <CanvasMask 
 			id={props.modName} 
 			width={width} height={height} holes={props.holes || []} />
+		}
     </Container>
 }

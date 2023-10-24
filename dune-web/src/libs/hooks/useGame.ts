@@ -1,3 +1,4 @@
+import { useMyName } from "../auth"
 import { useGame } from "../store/game"
 
 
@@ -6,7 +7,8 @@ export const useIsStart = () => {
     return gameData.stage !== 0
 }
 
-export const useMeDashBoald = () => {
+export const useMyDashBoard = () => {
     const gameData = useGame()
-    // return gameData.dashboards?.filter(d => d.user?.token === )
+    const myName = useMyName()
+    return gameData.dashboards?.find(d => d.user?.name === myName)
 }

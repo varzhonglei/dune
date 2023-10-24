@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 const Left = styled.div`
   width: 100px;
   flex: 1;
+  margin-left: 8px;
 `
 
 

@@ -22,7 +22,7 @@ export type Location = {
   get: TEffect[],
   icon: StationIcon,
   combat?: boolean
-  require?: EConstraint[],
+  require?: TConstraint[],
   pay?: TConstraint[],
   miBao?: TMibao[]
 }
@@ -35,7 +35,7 @@ export const station: TStation = [ {
   {
     id: 'pao2',
     icon: StationIcon.triangle,
-    require: [EConstraint.union2],
+    require: [{ key:EConstraint.union, number:2 }],
     get: [{ key: EEffect.paoC, number: 2}]
   },
   {
@@ -80,7 +80,7 @@ export const station: TStation = [ {
     id: 'circleWater',
     icon: StationIcon.circle,
     combat: true,
-    require: [EConstraint.fremen2],
+    require: [{ key:EConstraint.fremen, number: 2 }],
     get: [{ key: EEffect.getWater }, { key: EEffect.getTroops } ]
   },
 
