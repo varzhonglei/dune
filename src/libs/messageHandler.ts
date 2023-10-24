@@ -5,6 +5,7 @@ import { sendMessage, sendTableMessage } from "./socket"
 import { userList } from "../round-table/users"
 import { checkAllReadyAndSetup, someoneReady } from "../one-game/userActionsHandler/gameSet"
 import { getUserNameFromToken } from "../utils/tools"
+import { clearSecretInfo } from "./data-processor"
 
 export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: Map<string, WebSocket>) => {
   const { type } = message
@@ -30,7 +31,7 @@ export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: M
         body: {
           type: MessageType.data,
           data: {
-            game: table.getState(),
+            game: clearSecretInfo(table.getState()),
             storeIndex: table.getStoreIndex()
           }
         }
