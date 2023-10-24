@@ -12,4 +12,7 @@ export interface Res {
     message: string
   }
 }
+
+export type TypedRequestAny = Request<any, any, any>
+
 export type TypedResponse = Response<Res, any>

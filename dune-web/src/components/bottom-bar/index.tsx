@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useToken } from '../../libs/auth'
+import { useMyName } from '../../libs/auth'
 import { useGame } from '../../libs/store/game'
 import { ModImageWithEnlarge } from '../mod-image'
 import { TCard } from '../../../../common/cards/cards'
@@ -18,25 +18,28 @@ const Container = styled.div`
 
 
 export const BottomBar = () => {
-  const token = useToken()
+  const myName = useMyName()
   const miBaoAction = useMiBaoAction()
   const gameData = useGame()
 
 
 
   const dashboardsData = gameData.dashboards
-  const myDashBoard = dashboardsData.find(d => d.user?.token === token)
+  const myDashBoard = dashboardsData.find(d => d.user?.name === myName)
   
   const handCards = myDashBoard?.handCards || []
   const yinCards = myDashBoard?.yinCards || []
-
 
   const isInturn =  myDashBoard?.turn === 'inturn'
 
   const handleChooseCard = (card: TCard) => ()  => {
     if (isInturn) {
       miBaoActionState.setStateImmer(draft => {
-        draft.card = card
+        if (draft.card?.id === card.id) {
+          draft.card = null
+        } else {
+          draft.card = card
+        }
       })
     }
   }

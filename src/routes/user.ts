@@ -4,9 +4,9 @@ import {  TypedRequestBody, TypedResponse } from "../typing/req"
 import { userList } from "../round-table/users"
 import { dbKey, jdb } from "../store/json-db"
 import { RES_TYPE } from "../../common/typing/rest-req";
+import { secret } from "./middleware/verify"
 
 const DuplicateName = 'username already exist'
-
 
 export const userRouter = express.Router()
 
@@ -25,7 +25,6 @@ userRouter.post('/create', async (req:TypedRequestBody<{ name: string }>, res: T
   const token = generateJwtToken(user)
   userList.push({
     name,
-    token
   })
   jdb.save(dbKey.users, userList)
   res.status(200).send({
@@ -39,7 +38,6 @@ userRouter.post('/create', async (req:TypedRequestBody<{ name: string }>, res: T
 function generateJwtToken(payload: {
   name: string
 }): string {
-  const secret = "mysecretkey-ben";
-  const expiresIn = "1000Y";
+  const expiresIn = "1D";
   return jwt.sign(payload, secret, { expiresIn });
 }

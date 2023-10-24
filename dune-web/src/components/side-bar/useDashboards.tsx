@@ -7,7 +7,7 @@ import { noop } from "lodash"
 import { useParams } from "react-router-dom"
 import { sendMessage } from "../../libs/socket"
 import { MessageType } from "../../../../common/typing/socket"
-import { useToken } from "../../libs/auth"
+import { useMyName, useToken } from "../../libs/auth"
 import { cls } from "../../libs/utils/class-names"
 import { Image } from "../image"
 import MoneyImg  from '../../assets/money.svg'
@@ -34,6 +34,7 @@ const Container = styled.div`
 export const useDashboards = () => {
 
   const token = useToken()
+  const myName = useMyName()
   const gameData = useGame()
   const gameStart = useIsStart()
 
@@ -63,7 +64,6 @@ export const useDashboards = () => {
         const user = d.user
         const ready = user?.readyStatus === 'ready'
         const role = getRoleByKey(d.role)
-        const isMe = d.user?.token === token
         return <Container
           key={d.miBaoColor}
         >
@@ -87,7 +87,7 @@ export const useDashboards = () => {
               gameStart &&  d.turn === 'inturn' && <Image title={'turn'} width={25} src={TurnImg}/>
             }
             {
-              user?.token === token && !gameStart ? <span 
+              user?.name === myName && !gameStart ? <span 
               onClick={handleReady}
               className={
                 cls('tag is-link is-light mb-0', {

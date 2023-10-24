@@ -1,4 +1,4 @@
-import { CanvasMask } from "../../../components/canvas-mask/canvas-mask"
+import { CanvasMask, THole } from "../../../components/canvas-mask/canvas-mask"
 import { useSrcByName } from "../../../components/mod-image"
 import { useResizeObserver } from "../../../libs/hooks/useResizeObserver"
 import styled from "@emotion/styled"
@@ -6,6 +6,7 @@ import styled from "@emotion/styled"
 type Props = {
    modName: string
    style?: React.CSSProperties
+	 holes?: THole[]
 }
 
 
@@ -29,11 +30,6 @@ export const BGMap = (props: Props) => {
 		/>
 		<CanvasMask 
 			id={props.modName} 
-			width={width} height={height} holes={[{
-				widthMultiple: 0.137,
-				heightMultiple: 0.09,
-				topMultiple: 0.112,
-				leftMultiple: 0.662,
-			}]} />
+			width={width} height={height} holes={props.holes || []} />
     </Container>
 }

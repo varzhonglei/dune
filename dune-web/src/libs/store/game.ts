@@ -50,7 +50,7 @@ addMessageHandler<MessageType.someoneReady>((message) => {
     const user = message.data?.user
     if (user) {
       gameStore.setStateImmer(old => {
-        const d = old.dashboards?.find(d => d.user?.token === user.token)
+        const d = old.dashboards?.find(d => d.user?.name === user.name)
         if (d) {
           d.user = user
         }
