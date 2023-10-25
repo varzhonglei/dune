@@ -10,15 +10,18 @@ const fakerCard: TCard = {
 }
 const fakerYin: TYinCard = {
   cardName: 'fakerYinCard',
-  id: -9999
+  id: -9999,
+  img: {name: '-'}
 }
 
-export const clearSecretInfo = (game: Game) => {
+export const clearSecretInfo = (game: Game, name: string) => {
   return produce(game, (draft) => {
     for(let i = 0; i < draft.dashboards.length; i++) {
       const ds = draft.dashboards[i]
       ds.moCards = ds.moCards.map(hc => (fakerCard))
-      ds.yinCards = ds.yinCards.map(y => (fakerYin))
+      if (ds.user?.name !== name) {
+        ds.yinCards = ds.yinCards.map(y => (fakerYin))
+      }
     }
     draft.yinCards = []
   })

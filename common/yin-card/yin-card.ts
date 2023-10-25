@@ -6,6 +6,9 @@ export type TYinCardPart = {
   playEffect?: any[],
   battleEffect?: any[],
   endEffect?: any[],
+  img: {
+    name: string
+  }
 }
 export type TYinCard = TYinCardPart & {
   id: number
@@ -28,7 +31,11 @@ const c1 = {
         options: [{ key: EEffect.drawCard }, 
           { key: EEffect.trashCard, card: { position: 'topOfDraw' } }]
       }]
-    }]
+    }],
+  img: {
+    name: 'y34.jpg',
+  }
+    
 }
 add(c1)
 
@@ -41,7 +48,10 @@ const c2 = {
       },{
         key: EEffect.drawCard,
       }]
-    }]
+    }],
+    img: {
+      name: 'y38.jpg',
+    }
 }
 add(c2)
 
@@ -56,7 +66,10 @@ const c3 = {
         options: [{ key: EEffect.passTurn }, 
           { key: EEffect.noop}]
       }]
-    }]
+    }],
+    img: {
+      name: 'y10.jpg',
+    }
 }
 add(c3)
 
@@ -65,7 +78,10 @@ const c4 = {
   battleEffect:[{
       key: EEffect.dao,
       number: 4
-    }]
+    }],
+    img: {
+      name: 'y44.jpg',
+    }
 }
 add(c4, c4)
 
@@ -77,7 +93,10 @@ const c5 = {
         { key: EEffect.dao, number: 3 }, 
         { key: EEffect.retreat, numbers: [0,1,2,3]}
       ]
-    }]
+    }],
+    img: {
+      name: 'y30.jpg',
+    }
 }
 add(c5, c5)
 
@@ -88,7 +107,10 @@ const c6 = {
     }],
   endEffect: [{
       key: EEffect.getSpice, number: 10
-    }]
+    }],
+    img: {
+      name: 'y35.jpg',
+    }
 }
 add(c6)
 
@@ -106,6 +128,9 @@ const c7 = {
           }]
         }
       ]
-    }]
+    }],
+    img: {
+      name: 'y14.jpg',
+    }
 }
 add(c7)

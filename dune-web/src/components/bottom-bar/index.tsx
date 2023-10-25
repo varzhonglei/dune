@@ -45,13 +45,13 @@ export const BottomBar = () => {
   return <Container>
     {handCards.map(c => {
       const isChoose = c.id === miBaoAction.card?.id
-      return <div className='mr-1 is-flex is-align-items-end'>
+      return <div key={c.id} className='mr-1 is-flex is-align-items-end'>
       <ModImageWithEnlarge 
         name={c.img?.name || ''}
         onClick={handleChooseCard(c)}
         width={isChoose ? 80 * 1.2 : 80} 
         height={isChoose ? 110 * 1.2 : 110}
-        enlargeWith={240}
+        enlargeWidth={240}
         enlargeHeight={330}
       />
   </div>

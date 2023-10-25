@@ -62,7 +62,7 @@ const c3 = {
     },],
   revealEffect: [{
       key: EEffect.constraint,
-      con: [{ key: EConstraint.fremen2}],
+      con: [{ key: EConstraint.fremen, number: 2}],
       conBonus: [{ key: EEffect.dao, number: 4 }]
     }, {
       key: EEffect.constraint,
@@ -111,7 +111,7 @@ const c6 = {
   icons: [StationIcon.circle, StationIcon.triangle],
   playEffect: [{
       key: EEffect.constraint,
-      con: [{ key: EConstraint.sister2 }],
+      con: [{ key: EConstraint.sister, number: 2 }],
       conBonus: [{
         key: EEffect.constraint,
         con: [{ key: EConstraint.dropCard }],
@@ -134,17 +134,17 @@ const c7 = {
   playEffect: [
       {
         key: EEffect.constraint,
-        con: [{ key: EConstraint.fremen2 }],
+        con: [{ key: EConstraint.fremen, number: 2 }],
         conBonus: [{ key: EEffect.getWater }]
       },
       {
         key: EEffect.constraint,
-        con: [{ key: EConstraint.union2 }],
+        con: [{ key: EConstraint.union, number: 2 }],
         conBonus: [{ key: EEffect.drawCard }]
       },
       {
         key: EEffect.constraint,
-        con: [{ key: EConstraint.empire2 }],
+        con: [{ key: EConstraint.empire, number: 2 }],
         conBonus: [{ key: EEffect.getMoney, number: 2 }]
       },
     ],
@@ -210,7 +210,7 @@ const c11 = {
   icons: [StationIcon.triangle],
   playEffect: [
       { key: EEffect.constraint,
-        con: [{ key: EConstraint.union2 }],
+        con: [{ key: EConstraint.union, number: 2 }],
         conBonus: [{ key: EEffect.drawCard, number: 2 }]
       }
     ],

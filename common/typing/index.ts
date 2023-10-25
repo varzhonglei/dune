@@ -1,4 +1,5 @@
 import { TCard } from "../cards/cards"
+import { TYinCard } from "../yin-card/yin-card"
 import { User } from "./user"
 
 export enum Role {
@@ -68,7 +69,7 @@ export type Dashboard = {
   moCards: TCard[]
   trashedCards: TCard[]
 
-  yinCards: any[]
+  yinCards: TYinCard[]
 
   role: Role
 }

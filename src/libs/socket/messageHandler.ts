@@ -41,7 +41,7 @@ export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: M
         body: {
           type: MessageType.data,
           data: {
-            game: clearSecretInfo(table.getState()),
+            game: clearSecretInfo(table.getState(), theUserName),
             storeIndex: table.getStoreIndex()
           }
         }
@@ -78,7 +78,7 @@ export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: M
         body: {
           type: MessageType.data,
           data: {
-            game: clearSecretInfo(table.getState()),
+            game: clearSecretInfo(table.getState(), theUserName),
             storeIndex: table.getStoreIndex()
           }
         }

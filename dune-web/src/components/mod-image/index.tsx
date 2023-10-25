@@ -44,18 +44,19 @@ export const ModImage = (props: {
   export const ModImageWithEnlarge = (props: {
     name: string
     title?: string
-    width?: number | string
-    height?: number | string
-    enlargeWith: number,
+    width: number | string
+    height: number | string
+    enlargeWidth: number,
     enlargeHeight: number,
     onClick?: () => void
     style?:  React.CSSProperties
     className?: string
 }) => {
     const src = useSrcByName(props.name) || ''
+
     const ref = useMouseHoverRef<HTMLImageElement>({
         name: props.name,
-        width: props.enlargeWith,
+        width: props.enlargeWidth,
         height:props.enlargeHeight,
     })
 
@@ -108,7 +109,7 @@ export const ModImage = (props: {
     isViewAll?: boolean
     width: number 
     height: number
-    enlargeWith: number,
+    enlargeWidth: number,
     enlargeHeight: number,
     style?: React.CSSProperties
     className?: string
@@ -117,7 +118,7 @@ export const ModImage = (props: {
     const { name, sprite, className, width, isViewAll } = props
     const ref = useMouseHoverRef<HTMLDivElement>({
         name,
-        width: props.enlargeWith,
+        width: props.enlargeWidth,
         height: props.enlargeHeight,
         content: isViewAll ? null : <SpriteImage {...props}
             style={{
