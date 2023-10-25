@@ -22,8 +22,6 @@ export const BottomBar = () => {
   const miBaoAction = useMiBaoAction()
   const gameData = useGame()
 
-
-
   const dashboardsData = gameData.dashboards
   const myDashBoard = dashboardsData.find(d => d.user?.name === myName)
   

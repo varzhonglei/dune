@@ -1,5 +1,5 @@
 import { Table } from "../../round-table/tables"
-import { TAction } from "../userActions"
+import { TAction } from "."
 
 
 type P = {

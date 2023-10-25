@@ -1,7 +1,7 @@
 import WebSocket from 'ws'
-import { socketProt } from './const'
-import { MessageType, TMessage } from '../../common/typing/socket'
-import { tableListStore } from '../round-table/tables'
+import { socketProt } from '../const'
+import { MessageType, TMessage } from '../../../common/typing/socket'
+import { tableListStore } from '../../round-table/tables'
 import { messageHandler } from './messageHandler'
 
 const wss = new WebSocket.Server({ port: socketProt })

@@ -1,5 +1,6 @@
 import { Game } from "../game"
 import { User } from "./user"
+import { EActionType, TAction } from "./user-action"
 
 export enum MessageType {
   //server post to user
@@ -12,6 +13,7 @@ export enum MessageType {
   'tokenBack' = 'tokenBack',
   'reqData' = 'reqData',
   'iAmReady' = 'iAmReady',
+  'userAction' = 'userAction'
 
   //common
 }
@@ -49,6 +51,16 @@ export type TMessage<T extends MessageType>  = {
   : T extends MessageType.someoneReady
   ? { 
     user: User | undefined 
+  } 
+
+  : T extends MessageType.userAction
+  ? { 
+    token:string,
+    tableId: number,
+    storeIndex: string,
+    name: string,
+    actionType: EActionType,
+    payload: TAction
   } 
   
   : undefined

@@ -1,5 +1,5 @@
 import { MessageType } from "../../../common/typing/socket"
-import { sendTableMessage } from "../../libs/socket"
+import { sendTableMessage } from "../../libs/socket/socket"
 import { Table } from "../../round-table/tables"
 import { setupDune } from "../setup"
 

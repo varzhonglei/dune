@@ -6,7 +6,7 @@ import { userRouter } from './routes/user'
 import { jdb } from './store/json-db'
 import { tableRouter } from './routes/tables/table'
 import { expressPort } from './libs/const'
-import { initWS } from './libs/socket'
+import { initWS } from './libs/socket/socket'
 const app = express();
 
 app.use(cors())

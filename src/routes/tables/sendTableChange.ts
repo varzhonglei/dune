@@ -1,5 +1,5 @@
 import { MessageType } from "../../../common/typing/socket"
-import { sendMessage2All } from "../../libs/socket"
+import { sendMessage2All } from "../../libs/socket/socket"
 
 
 export const sendTableChange = (tableId?: number) => {

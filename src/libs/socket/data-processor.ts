@@ -1,7 +1,7 @@
 import { produce } from "immer"
-import { Game } from "../../common/game"
-import { TCard } from "../../common/cards/cards"
-import { TYinCard } from "../../common/yin-card/yin-card"
+import { Game } from "../../../common/game"
+import { TCard } from "../../../common/cards/cards"
+import { TYinCard } from "../../../common/yin-card/yin-card"
 
 
 const fakerCard: TCard = {
@@ -20,7 +20,7 @@ export const clearSecretInfo = (game: Game) => {
       ds.moCards = ds.moCards.map(hc => (fakerCard))
       ds.yinCards = ds.yinCards.map(y => (fakerYin))
     }
-    draft.yinCards = draft.yinCards.map(y => (fakerYin))
+    draft.yinCards = []
   })
 }
 

@@ -40,3 +40,8 @@ export const useAvailableStation = () => {
       })
     })
 }
+
+export const useGetEffects = ()=> {
+  const dashboard = useMyDashBoard()
+  return dashboard?.effects
+}
