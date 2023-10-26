@@ -1,4 +1,4 @@
-import { TLocationId } from '../station/station'
+import { TLocationId } from '../locations/locations'
 
 export enum EActionType {
   'playYin' = 'playYin',

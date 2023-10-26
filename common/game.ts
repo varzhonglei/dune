@@ -1,6 +1,5 @@
 import { TCard, basicCards, c1, fremenCards, spacingGuidCards, spiceMustFlowCards } from "./cards/cards"
 import { storeCards } from "./cards/cards-store"
-import { TStation, station } from "./station/station"
 import { numberId } from "../src/utils"
 import { TYinCard, yinCards } from "./yin-card/yin-card"
 import { Dashboard, MiBaoColor, Role, TMibao } from "./typing"
@@ -13,11 +12,9 @@ export interface Game {
   spiceMustFlowCards: TCard[]
   fremenCards: TCard[]
   spacingGuidCards: TCard[]
-  allCard: TCard[]
   yinCards: TYinCard[]
   yinCardsPlayed: TYinCard[]
   mentat: TMibao
-  station: TStation
 }
 
 export const initDashBoard: Dashboard = {
@@ -92,7 +89,6 @@ export const initialGame: Game = {
   spiceMustFlowCards: spiceMustFlowCards,
   fremenCards: fremenCards,
   spacingGuidCards: spacingGuidCards,
-  allCard:[...storeCards, ...spiceMustFlowCards, ...fremenCards, ...spacingGuidCards, ...basicCards],
 
   yinCards: yinCards,
   yinCardsPlayed: [],
@@ -102,8 +98,6 @@ export const initialGame: Game = {
     color: MiBaoColor.black,
     mentat: true
   },
-  
-  station: station
 
 }
 

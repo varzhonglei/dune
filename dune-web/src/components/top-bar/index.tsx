@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { useMyName, useToken } from '../../libs/auth'
 import { useGame } from '../../libs/store/game'
-import { useAvailableStation, useGetEffects, useMiBaoAction } from '../../libs/hooks/useAction'
+import { useGetEffects } from '../../libs/hooks/useAction'
 import { ModImageWithEnlarge } from '../mod-image'
 const Container = styled.div`
     min-height: 50px;
@@ -38,26 +38,22 @@ export const TopBar = () => {
   const myName = useMyName()
   const gameData = useGame()
 
-
-  
   const myDashboard = gameData.dashboards.find(d => d.user?.name === myName)
 
   const yinCards = myDashboard?.yinCards || []
 
-  const miBaoAction = useMiBaoAction()
-  const availableStations = useAvailableStation()
+
   const myEffects = useGetEffects()
 
   const hasEffects = myEffects?.length !== 0
   const isInturn = myDashboard?.turn === 'inturn'
 
   return <Container>
-    <Top>
-      
-        {
-          isInturn ? <div className='has-text-danger-dark title is-4 mb-0'>轮到你了</div>
-          : <div className='title is-4 mb-0'>Dune</div>
-        }
+    <Top>      
+      {
+        isInturn ? <div className='has-text-danger-dark title is-4 mb-0'>轮到你了</div>
+        : <div className='title is-4 mb-0'>Dune</div>
+      }
      
       {
         isInturn && <div className='title is-5'>

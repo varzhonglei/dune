@@ -1,4 +1,4 @@
-import { TLocationId } from "../../../../../common/station/station";
+import { TLocationId } from "../../../../../common/locations/locations";
 import { THole } from "../../../components/canvas-mask/canvas-mask";
 
 

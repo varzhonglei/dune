@@ -2,7 +2,7 @@ import { TMibao } from "../typing"
 import { EConstraint, EEffect, TConstraint, TEffect } from "../typing/effect"
 
 
-export enum StationIcon {
+export enum LocationIcon {
   triangle = 'triangle',
   pentagon = 'pentagon',
   circle = 'circle',
@@ -19,66 +19,76 @@ export type TLocationId = 'pao1' | 'pao2' | 'spice1' | 'spice2' | 'spice3' | 'ci
 
 export type Location = {
   id: TLocationId,
+  name: string,
   get: TEffect[],
-  icon: StationIcon,
+  icon: LocationIcon,
   combat?: boolean
   require?: TConstraint[],
   pay?: TConstraint[],
   miBao?: TMibao[]
 }
-export type TStation = Location[]
-export const station: TStation = [ {
+export type TLocations = Location[]
+export const locations: TLocations = [ {
     id: 'pao1',
-    icon: StationIcon.triangle,
+    name: '跑单船',
+    icon: LocationIcon.triangle,
     get: [{ key: EEffect.getMoney }, { key: EEffect.paoC }]
   },
   {
     id: 'pao2',
-    icon: StationIcon.triangle,
+    name: '双跑',
+    icon: LocationIcon.triangle,
     require: [{ key:EConstraint.union, number:2 }],
     get: [{ key: EEffect.paoC, number: 2}]
   },
   {
     id: 'spice1',
-    icon: StationIcon.triangle,
+    name: '帝国盆地',
+    icon: LocationIcon.triangle,
     combat: true,
     get: [{ key: EEffect.collectSpice1 }]
   },
   {
     id: 'spice2',
-    icon: StationIcon.triangle,
+    name: '1水采香料',
+    icon: LocationIcon.triangle,
     combat: true,
     get: [{ key: EEffect.collectSpice2 }]
   },
   {
     id: 'spice3',
-    icon: StationIcon.triangle,
+    name: '2水采香料',
+    icon: LocationIcon.triangle,
     combat: true,
     get: [{ key: EEffect.collectSpice3 }]
   },
   //圆点
   {
     id: 'circleDraw1',
-    icon: StationIcon.circle,
+    name: '厄拉其恩',
+    icon: LocationIcon.circle,
     combat: true,
     get: [{ key: EEffect.drawCard }, { key: EEffect.getTroops } ]
   },
    {
     id: 'circleYin',
-    icon: StationIcon.circle,
+    name: '迦太格',
+    icon: LocationIcon.circle,
     combat: true,
     get: [{ key: EEffect.drawYin }, { key: EEffect.getTroops } ]
   },
   {
     id: 'circleDraw2',
-    icon: StationIcon.circle,
+    name: '花水湾',
+    icon: LocationIcon.circle,
     combat: true,
     pay: [{ key: EConstraint.payWater, number: 2 }],
     get: [{ key: EEffect.drawCard, number: 2 }, { key: EEffect.research }]
   },
    {
     id: 'circleWater',
-    icon: StationIcon.circle,
+    name: '得水得兵',
+    icon: LocationIcon.circle,
     combat: true,
     require: [{ key:EConstraint.fremen, number: 2 }],
     get: [{ key: EEffect.getWater }, { key: EEffect.getTroops } ]
@@ -86,25 +96,29 @@ export const station: TStation = [ {
 
    {
     id: 'fremenGetWater',
-    icon: StationIcon.fremen,
+    name: '弗里曼拿水',
+    icon: LocationIcon.fremen,
     combat: true,
     get: [{ key: EEffect.getWater }]
   },
    {
     id: 'fremenUseWater',
-    icon: StationIcon.fremen,
+    name: '弗里曼AllIn',
+    icon: LocationIcon.fremen,
     combat: true,
     pay: [{ key: EConstraint.payWater }],
     get: [{ key: EEffect.getTroops, number: 2 }]
   },
   {
     id: 'sisterYin',
-    icon: StationIcon.sister,
+    name: '姐妹会抽阴间牌',
+    icon: LocationIcon.sister,
     get: [{ key: EEffect.drawYin }]
   },
   {
     id: 'sisterDraw',
-    icon: StationIcon.sister,
+    name: '四一摩尔',
+    icon: LocationIcon.sister,
     pay: [{ key: EConstraint.paySpice, number: 2 }],
     get: [{
       key: EEffect.constraint,
@@ -115,51 +129,59 @@ export const station: TStation = [ {
 
    {
     id: 'unionGuild',
-    icon: StationIcon.union,
+    name: '传送门',
+    icon: LocationIcon.union,
     get: [{ key: EEffect.acquireSpacingGuid }]
   },
    {
     id: 'unionAllIn',
-    icon: StationIcon.union,
+    name: '远航机',
+    icon: LocationIcon.union,
     combat: true,
     pay: [{ key: EConstraint.paySpice, number: 6 }],
     get: [{ key: EEffect.getTroops, number: 5 }, { key: EEffect.getWater, number: 2 }]
   },
    {
     id: 'empireMoney',
-    icon: StationIcon.empire,
+    name: '拿 2 元',
+    icon: LocationIcon.empire,
     get: [{ key: EEffect.getMoney, number: 2 }]
   },
    {
     id: 'empireMai',
-    icon: StationIcon.empire,
+    name: '买香料',
+    icon: LocationIcon.empire,
     pay: [{ key: EConstraint.paySpice, number: 4 }],
     get: [{ key: EEffect.getTroops, number: 2 }, { key: EEffect.getMoney, number: 5 }, { key: EEffect.drawYin }]
   },
 
    {
     id: 'hei',
-    icon: StationIcon.pentagon,
+    name: '黑子',
+    icon: LocationIcon.pentagon,
     pay: [{ key: EConstraint.payMoney, number: 2 }],
     get: [{ key: EEffect.getHei }, { key: EEffect.drawCard }]
   },
 
    {
     id: 'high',
-    icon: StationIcon.pentagon,
+    name: '高等议会',
+    icon: LocationIcon.pentagon,
     pay: [{ key: EConstraint.payMoney, number: 5 }],
     get: [{ key: EEffect.height }]
   },
 
   {
     id: 'unlock',
-    icon: StationIcon.pentagon,
+    name: '解锁',
+    icon: LocationIcon.pentagon,
     pay: [{ key: EConstraint.payMoney, number: 8 }],
     get: [{ key: EEffect.unlock }]
   },
    {
     id: 'kejiSale',
-    icon: StationIcon.pentagon,
+    name: '买科技',
+    icon: LocationIcon.pentagon,
     get: [{ key: EEffect.cardBuy }, 
       { key: EEffect.or, 
         options: [{ key: EEffect.saveTechBuy }, 
@@ -167,7 +189,8 @@ export const station: TStation = [ {
   },
  {
     id: 'jian',
-    icon: StationIcon.pentagon,
+    name: '开舰',
+    icon: LocationIcon.pentagon,
     pay: [{ key: EConstraint.payMoney, number: 3 }],
     get: [{ key: EEffect.byTech }, { key: EEffect.getJian }]
   }

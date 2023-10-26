@@ -1,25 +1,25 @@
 import { TCard } from "../../../../common/cards/cards"
-import { TLocationId, station } from "../../../../common/station/station"
+import { TLocationId, locations } from "../../../../common/locations/locations"
 import { EConstraint } from "../../../../common/typing/effect"
 import { useMyDashBoard } from "./useGame"
 import { createSyncExternalAtom, useSyncExternalState } from "./useSyncStore"
 
 export const miBaoActionState = createSyncExternalAtom<{
   card: TCard | null
-  location: TLocationId | null
+  locationId: TLocationId | null
 }>({
   card: null,
-  location: null
+  locationId: null
 })
 
 export const useMiBaoAction = () => useSyncExternalState(miBaoActionState)
 
-export const useAvailableStation = () => {
+export const useAvailableLocations = () => {
   const info = useMiBaoAction()
   const myDashBoard = useMyDashBoard()
   if (!myDashBoard) return []
 
-  return station
+  return locations
     .filter(s => info.card?.icons?.includes(s.icon))
     .filter(s => {
       return (s.require || []).concat(s.pay || []).every(require => {

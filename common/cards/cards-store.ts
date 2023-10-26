@@ -1,8 +1,7 @@
 import { TCard, TCardPart } from "./cards"
 import { EConstraint, EEffect } from "../typing/effect"
-import { StationIcon } from "../station/station"
+import { LocationIcon } from "../locations/locations"
 import { addCardIds } from "../../src/utils"
-import { TSprite } from '../typing/ui'
 
 enum ECardCamp {
   'fremen' = 'fremen',
@@ -18,7 +17,7 @@ const add = (...args: TCardPart[]) => {
 const c1 = {
   name: '进进出出',
   price: 3,
-  icons: [StationIcon.triangle, StationIcon.pentagon],
+  icons: [LocationIcon.triangle, LocationIcon.pentagon],
   playEffect: [{
       key: EEffect.constraint,
       con: [{ key: EConstraint.paySpice, number: 2 }],
@@ -38,7 +37,7 @@ add(c1)
 const c2 = {
   name: '金牙匕',
   camp: [ECardCamp.fremen],
-  icons: [StationIcon.triangle, StationIcon.fremen],
+  icons: [LocationIcon.triangle, LocationIcon.fremen],
   playEffect: [{
       key: EEffect.getMoney,
     }],
@@ -56,7 +55,7 @@ add(c2)
 const c3 = {
   name: '6沙虫',
   camp: [ECardCamp.fremen],
-  icons: [StationIcon.triangle, StationIcon.circle],
+  icons: [LocationIcon.triangle, LocationIcon.circle],
   playEffect: [{
       key: EEffect.getSpice, number: 2
     },],
@@ -78,7 +77,7 @@ add(c3, c3)
 const c4 = {
   name: '弗里曼营地',
   camp: [ECardCamp.fremen],
-  icons: [StationIcon.triangle],
+  icons: [LocationIcon.triangle],
   playEffect: [{
       key: EEffect.constraint,
       con: [{ key: EConstraint.paySpice, number: 2}],
@@ -95,7 +94,7 @@ add(c4,c4)
 const c5 = {
   name: '列特凯恩斯',
   camp: [ECardCamp.fremen],
-  icons: [StationIcon.circle, StationIcon.fremen],
+  icons: [LocationIcon.circle, LocationIcon.fremen],
   buyEffect: [{key: EEffect.infEmpire}],
   revealEffect: [{key: EEffect.liete,}, 
     { key: EEffect.cardBuy, number: 2},],
@@ -108,7 +107,7 @@ add(c5)
 const c6 = {
   name: '阴影之中',
   camp: [ECardCamp.sister],
-  icons: [StationIcon.circle, StationIcon.triangle],
+  icons: [LocationIcon.circle, LocationIcon.triangle],
   playEffect: [{
       key: EEffect.constraint,
       con: [{ key: EConstraint.sister, number: 2 }],
@@ -130,7 +129,7 @@ const c7 = {
   name: '权利之网',
   camp: [ECardCamp.sister],
   qianRu: true,
-  icons: [StationIcon.sister],
+  icons: [LocationIcon.sister],
   playEffect: [
       {
         key: EEffect.constraint,
@@ -158,7 +157,7 @@ add(c7)
 const c8 = {
   name: '其他记忆',
   camp: [ECardCamp.sister],
-  icons: [StationIcon.circle, StationIcon.triangle],
+  icons: [LocationIcon.circle, LocationIcon.triangle],
   playEffect: [
       {
         key: EEffect.or,
@@ -176,7 +175,7 @@ add(c8)
 const c9 = {
   name: '姐妹会新人',
   camp: [ECardCamp.sister],
-  icons: [StationIcon.circle, StationIcon.triangle, StationIcon.pentagon],
+  icons: [LocationIcon.circle, LocationIcon.triangle, LocationIcon.pentagon],
   playEffect: [
       { key: EEffect.drawCard }
     ],
@@ -191,7 +190,7 @@ const c10 = {
   name: '姐妹会大哥',
   camp: [ECardCamp.sister],
   qianRu: true,
-  icons: [StationIcon.pentagon],
+  icons: [LocationIcon.pentagon],
   playEffect: [
       { key: EEffect.constraint,
         con: [{ key: EConstraint.sisterInPlay }],
@@ -207,7 +206,7 @@ add(c10)
 
 const c11 = {
   name: '普翼机 抽牌',
-  icons: [StationIcon.triangle],
+  icons: [LocationIcon.triangle],
   playEffect: [
       { key: EEffect.constraint,
         con: [{ key: EConstraint.union, number: 2 }],
@@ -223,7 +222,7 @@ add(c11, c11)
 
 const c12 = {
   name: '普翼机 上兵',
-  icons: [StationIcon.triangle, StationIcon.circle],
+  icons: [LocationIcon.triangle, LocationIcon.circle],
   playEffect: [
       { key: EEffect.killTroopCamp}
     ],
@@ -236,7 +235,7 @@ add(c12, c12)
 
 const c13 = {
   name: 'power play',
-  icons: [StationIcon.fremen, StationIcon.sister, StationIcon.union, StationIcon.empire],
+  icons: [LocationIcon.fremen, LocationIcon.sister, LocationIcon.union, LocationIcon.empire],
   playEffect: [
       { key: EEffect.powerPlay}
     ],

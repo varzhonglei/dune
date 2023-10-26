@@ -1,6 +1,8 @@
 import { Table } from "../../round-table/tables"
 import { Dashboard } from "../../../common/typing"
 import { TAction } from "../../../common/typing/user-action"
+import { locations } from "../../../common/locations/locations"
+import { allCards } from "../../../common/cards"
 
 
 type TCreateHandler<T> = (dashboard:Dashboard, payload: T ) => void
@@ -40,8 +42,8 @@ export const miBaoHandler = ({
     const ap = payload.miBaoAction
     table.setState(s => {
       const dashboard = s.dashboards.find(d => d.user?.name === name)
-      const location = s.station.find(s => s.id === ap?.locationId)
-      const card = s.allCard.find(c => c.id === ap.cardId)
+      const location = locations.find(s => s.id === ap?.locationId)
+      const card = allCards.find(c => c.id === ap.cardId)
       if (dashboard && location && card) {
 
         if (dashboard.effects.length > 0) {

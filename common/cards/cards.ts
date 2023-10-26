@@ -1,28 +1,13 @@
 import { EConstraint, EEffect } from "../typing/effect"
-import { StationIcon } from "../station/station"
+import { LocationIcon } from "../locations/locations"
 import { TSprite } from '../typing/ui'
 import { addCardId, addCardIds } from "../../src/utils"
-
-const Sprite = (x: number,y:number) => ({
-  position: {
-      x,
-      y,
-  }, 
-  size: {
-      width: 1730,
-      height: 1210
-  },
-  clip: {
-    width: 700,
-    height: 700
-  }
-})
 
 export type TCardPart = {
   name: string
   playEffect?: any
   revealEffect?: any
-  icons?: StationIcon[]
+  icons?: LocationIcon[]
   img?: {
     name: string,
     sprite?: TSprite,
@@ -34,7 +19,7 @@ export type TCard = TCardPart & {
 
 export const c1: TCard = addCardId({
   name: '香料控制',
-  icons: [StationIcon.triangle],
+  icons: [LocationIcon.triangle],
   playEffect:  [{
       key: EEffect.constraint,
       con: [{ key: EConstraint.paySpice }],
@@ -48,7 +33,7 @@ export const c1: TCard = addCardId({
 
 const c2:TCardPart = {
   name: '外交',
-  icons: [StationIcon.fremen, StationIcon.sister, StationIcon.union, StationIcon.empire],
+  icons: [LocationIcon.fremen, LocationIcon.sister, LocationIcon.union, LocationIcon.empire],
   revealEffect:  [{ key: EEffect.cardBuy }],
   img: {
     name: 'c61.jpg'
@@ -57,7 +42,7 @@ const c2:TCardPart = {
 
 const c3:TCardPart = {
   name: '寻求盟友',
-  icons: [StationIcon.fremen, StationIcon.sister, StationIcon.union, StationIcon.empire],
+  icons: [LocationIcon.fremen, LocationIcon.sister, LocationIcon.union, LocationIcon.empire],
   playEffect:[{ key: EEffect.trashCardSelf }],
   revealEffect:  [{ key: EEffect.cardBuy }],
   img: {
@@ -67,7 +52,7 @@ const c3:TCardPart = {
 
 const c4:TCardPart = {
   name: '研究 三角',
-  icons: [StationIcon.triangle],
+  icons: [LocationIcon.triangle],
   playEffect: [{ key: EEffect.research }],
   revealEffect:  [{ key: EEffect.cardBuy }, { key: EEffect.TLLBuy }],
   img: {
@@ -77,7 +62,7 @@ const c4:TCardPart = {
 
 const c5:TCardPart = {
   name: '土地测量',
-  icons: [StationIcon.circle],
+  icons: [LocationIcon.circle],
   revealEffect:  [{ key: EEffect.cardBuy }],
   img: {
     name: 'c42.jpg'
@@ -95,7 +80,7 @@ const c6:TCardPart = {
 
 const c7:TCardPart = {
   name: '匕首',
-  icons: [StationIcon.pentagon],
+  icons: [LocationIcon.pentagon],
   revealEffect:  [{ key: EEffect.dao }],
   img: {
     name: 'c60.jpg'
@@ -104,7 +89,7 @@ const c7:TCardPart = {
 
 const c8:TCardPart = {
   name: '印章戒指',
-  icons: [StationIcon.pentagon, StationIcon.triangle, StationIcon.circle],
+  icons: [LocationIcon.pentagon, LocationIcon.triangle, LocationIcon.circle],
   playEffect:[{ key: EEffect.roleSkill }],
   revealEffect:  [{ key: EEffect.cardBuy }],
   img: {
@@ -129,7 +114,7 @@ export const spiceMustFlowCards: TCard[] = addCardIds(Array.from({length: 10}).m
 const fremen = {
   name: 'fremen bro',
   price: 2,
-  icons: [StationIcon.pentagon, StationIcon.circle],
+  icons: [LocationIcon.pentagon, LocationIcon.circle],
   revealEffect:  [{ key: EEffect.getSpice }],
   img: {
     name: 'c51.jpg'
@@ -140,7 +125,7 @@ export const fremenCards: TCard[] = addCardIds(Array.from({length: 9}).map(_ => 
 
 const spacingGuid = {
   name: 'Spacing Guid',
-  icons: Object.values(StationIcon),
+  icons: Object.values(LocationIcon),
   playEffect:  [{ key: EEffect.drawCard }],
   img: {
     name: 'c76.jpg'

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { useEffect } from "react"
-import { TLocationId } from "../../../../common/station/station"
+import { TLocationId } from "../../../../common/locations/locations"
 
 
 const C1 = styled('div')`

@@ -3,7 +3,6 @@ import { clearToken, getToken, useToken } from "../auth"
 import { socket_URL } from "../const";
 import { MessageType, TMessage } from '../../../../common/typing/socket'
 import { addToast } from "../../components/alert";
-import { createMsg } from "./createMsg"
 
 export let socket: WebSocket | undefined
 type TMessageHandle<T extends MessageType> = (message: TMessage<T>) => void
@@ -64,16 +63,12 @@ function connectWebSocket() {
 
 // 发送token给服务端
 function sendToken() {
-  if (socket && socket.readyState === WebSocket.OPEN) {
-    socket.send(
-      createMsg({
-        type: MessageType.tokenBack,
-        data: {
-          token: getToken()
-        }
-      })
-    );
-  }
+  sendMessage({
+    type: MessageType.tokenBack,
+    data: {
+      token: getToken()
+    }
+  })
 }
 
 export const sendMessage = <T extends MessageType>(body: TMessage<T>) => {

@@ -1,5 +1,5 @@
 import { ModImage } from "../../components/mod-image"
-import { useAvailableStation, useMiBaoAction } from "../../libs/hooks/useAction"
+import { useAvailableLocations, useMiBaoAction } from "../../libs/hooks/useAction"
 import { useGameSubscribe } from "../../libs/store/game"
 import styled from "@emotion/styled"
 import { BGMap } from "./bg-map"
@@ -14,9 +14,9 @@ export const Game = () => {
   useGameSubscribe()
 
   const miBaoAction = useMiBaoAction()
-  const availableStations = useAvailableStation()
-  const bg4Stations = availableStations.filter(s => ['kejiSale', 'jian'].includes(s.id))
-  const bg1Stations = availableStations.filter(s => !['kejiSale', 'jian'].includes(s.id))
+  const availableLocations = useAvailableLocations()
+  const bg4Stations = availableLocations.filter(s => ['kejiSale', 'jian'].includes(s.id))
+  const bg1Stations = availableLocations.filter(s => !['kejiSale', 'jian'].includes(s.id))
   const holes4 = bg4Stations.map(s => holes[s.id])
   const holes1 = bg1Stations.map(s => holes[s.id])
 
