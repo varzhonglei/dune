@@ -19,6 +19,18 @@ export const clearToken = () => {
 
 export const useToken = () =>  useSyncExternalState(tokenState)
 
+
+export const getMyName = () => {
+  let name = ''
+  try {
+    const decoded = jwt_decode(getToken()) as any
+    name = decoded.name
+  } catch(e) {
+    // skip
+  } 
+  return name
+}
+
 export const useMyName = () => {
   const token =  useSyncExternalState(tokenState)
   let name = ''

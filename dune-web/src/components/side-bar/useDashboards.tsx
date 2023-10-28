@@ -7,7 +7,7 @@ import { noop } from "lodash"
 import { useParams } from "react-router-dom"
 import { sendMessage } from "../../libs/socket"
 import { MessageType } from "../../../../common/typing/socket"
-import { useMyName, useToken } from "../../libs/auth"
+import { useMyName } from "../../libs/auth"
 import { cls } from "../../libs/utils/class-names"
 import { Image } from "../image"
 import MoneyImg  from '../../assets/money.svg'
@@ -33,7 +33,6 @@ const Container = styled.div`
 
 export const useDashboards = () => {
 
-  const token = useToken()
   const myName = useMyName()
   const gameData = useGame()
   const gameStart = useIsStart()
@@ -51,7 +50,6 @@ export const useDashboards = () => {
       type: MessageType.iAmReady,
       data: {
         tableId: Number(tableId),
-        token,
       }
     })
   }
@@ -110,7 +108,7 @@ export const useDashboards = () => {
                 name={role.srcName} 
                 sprite={role.sprite} 
                 width={40} height={40}
-                enlargeWith={1150/2} enlargeHeight={804 /2}
+                enlargeWidth={1150/2} enlargeHeight={804 /2}
               />
             </div>
             <div className="flex-center mr-4 dashboard-source">

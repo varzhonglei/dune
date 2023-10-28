@@ -3,6 +3,7 @@ import { useMyName, useToken } from '../../libs/auth'
 import { useGame } from '../../libs/store/game'
 import { useGetEffects } from '../../libs/hooks/useAction'
 import { ModImageWithEnlarge } from '../mod-image'
+import { MiBao } from './Mibao'
 const Container = styled.div`
     min-height: 50px;
     max-height: 120px;
@@ -37,7 +38,6 @@ const Bottom = styled.div`
 export const TopBar = () => {
   const myName = useMyName()
   const gameData = useGame()
-
   const myDashboard = gameData.dashboards.find(d => d.user?.name === myName)
 
   const yinCards = myDashboard?.yinCards || []
@@ -63,14 +63,22 @@ export const TopBar = () => {
     </Top>
 
     <Bottom>
-      { hasEffects && <></>  }
-      { !hasEffects && <div className="columns w100">
-        <div className="column-n-pd is-two-thirds">
-          <div className="flex-center">
+      <div className="columns w100">
 
+        { hasEffects && <div className="column-n-pd is-two-thirds">
+            <div className="flex-center">
+                {myEffects?.map(e => e.toString())}
+            </div>
+          </div> }
+        {
+          !hasEffects &&  <div className="column-n-pd is-two-thirds">
+            <div className="flex-center">
+              <MiBao/>
+            </div>
           </div>
-        </div>
-        <div className="column-n-pd flex-center">
+        }
+      </div> 
+      <div className="column-n-pd flex-center">
           <div  className="flex-center">
             <div className="mr-1">密谋牌：</div>
             {
@@ -86,8 +94,6 @@ export const TopBar = () => {
             }
           </div>
         </div>
-      </div>  }
-      {/* <button className="button is-info is-light is-small">Info</button> */}
     </Bottom>
   </Container>
 }

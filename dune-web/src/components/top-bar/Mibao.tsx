@@ -1,27 +1,34 @@
-import { locations } from '../../../../common/locations/locations'
-import { MessageType } from '../../../../common/typing/socket'
+import { useParams } from 'react-router-dom'
+import { TLocationId, locations } from '../../../../common/locations/locations'
 import { miBaoActionState, useAvailableLocations, useMiBaoAction } from '../../libs/hooks/useAction'
-import { sendMessage } from '../../libs/socket'
+import { userActionMessage } from '../../libs/socket'
+import { EActionType } from '../../../../common/typing/user-action'
+import { useMyDashBoard } from '../../libs/hooks/useGame'
 
 export const MiBao = ()=> {
 
+  
   const { card, locationId } = useMiBaoAction()
   const location = locations.find(s => s.id === locationId)
   const availableLocations = useAvailableLocations()
+  const { id: tableId } = useParams()
+  const myDs = useMyDashBoard()
+  const miBao = myDs?.mibao?.[0]
 
   const handleSendMiBaoAction = () => {
-    sendMessage({
-      type: MessageType.userAction,
-      data: {
-        // token:string,
-        // tableId: number,
-        // storeIndex: string,
-        // name: string,
-        // actionType: EActionType,
-        // payload: TAction
+    userActionMessage( {
+      tableId: Number(tableId),
+      actionType: EActionType.miBao,
+      payload: {
+        miBaoAction: {
+          cardId: Number(card?.id),
+          miBaoId: Number(miBao?.id),
+          locationId: location?.id as TLocationId,
+        }
       }
     })
   }
+
 
   return <div className="flex-center">
     {

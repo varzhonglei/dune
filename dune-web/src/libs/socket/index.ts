@@ -1,8 +1,9 @@
 import { useEffect } from "react"
-import { clearToken, getToken, useToken } from "../auth"
+import { clearToken, getMyName, getToken, useToken } from "../auth"
 import { socket_URL } from "../const";
-import { MessageType, TMessage } from '../../../../common/typing/socket'
+import { MessageType, TMessage, TMessageData } from '../../../../common/typing/socket'
 import { addToast } from "../../components/alert";
+import { getStoreIndex } from "../store/game";
 
 export let socket: WebSocket | undefined
 type TMessageHandle<T extends MessageType> = (message: TMessage<T>) => void
@@ -66,14 +67,34 @@ function sendToken() {
   sendMessage({
     type: MessageType.tokenBack,
     data: {
-      token: getToken()
+      token: getToken(),
     }
   })
 }
 
 export const sendMessage = <T extends MessageType>(body: TMessage<T>) => {
   if (socket && socket.readyState === WebSocket.OPEN) {
-    socket.send(JSON.stringify(body));
+    socket.send(JSON.stringify({
+      ...body,
+      token: getToken(),
+    }));
+  }
+}
+
+
+
+export const userActionMessage =(data: Omit<TMessageData<MessageType.userAction>, 'token' | 'storeIndex' | 'name'>) => {
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(
+      {
+        type: MessageType.tokenBack,
+        data: {
+          ...data,
+          token: getToken(),
+          storeIndex: getStoreIndex(),
+          name: getMyName()
+        }
+      }));
   }
 }
 

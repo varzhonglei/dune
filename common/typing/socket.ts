@@ -19,8 +19,12 @@ export enum MessageType {
 }
 
 export type TMessage<T extends MessageType>  = {
-  type: MessageType
-  data:  T extends MessageType.data
+  type: T
+  data:  TMessageData<T>
+}
+
+export type TMessageData<T extends MessageType> = 
+  T extends MessageType.data
   ? {
     game: Game
     storeIndex: string
@@ -64,4 +68,3 @@ export type TMessage<T extends MessageType>  = {
   } 
   
   : undefined
-}

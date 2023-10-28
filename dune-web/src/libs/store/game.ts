@@ -4,15 +4,17 @@ import { MessageType } from '../../../../common/typing/socket'
 import { createSyncExternalAtom, useSyncExternalState } from '../hooks/useSyncStore'
 import { addMessageHandler, sendMessage } from '../socket'
 import { useParams } from 'react-router-dom'
-import { getToken } from '../auth'
 import { getTableIdFromUrl } from '../utils/common'
 
 export const gameStore = createSyncExternalAtom(initialGame)
 export const useGame = () => useSyncExternalState(gameStore)
 
+let storeIndex = '-'
 
-export const gameStoreKey = createSyncExternalAtom(1)
-export const useQueryKey = () => useSyncExternalState(gameStoreKey)
+export const getStoreIndex = () => storeIndex
+
+export const queryKeyStore = createSyncExternalAtom(1)
+export const useQueryKey = () => useSyncExternalState(queryKeyStore)
 export const useGameSubscribe = () => {
   const { id: tableId } = useParams()
   const queryKey = useQueryKey()
@@ -22,7 +24,6 @@ export const useGameSubscribe = () => {
         type: MessageType.reqData,
         data: {
           tableId: Number(tableId),
-          token: getToken()
         }
       })
     }
@@ -33,6 +34,7 @@ export const useGameSubscribe = () => {
 addMessageHandler<MessageType.data>((message) => {
   if (message.type === MessageType.data && message.data) {
     gameStore.setState(message?.data?.game)
+    storeIndex = message.data.storeIndex
   }
 })
 
@@ -40,7 +42,7 @@ addMessageHandler<MessageType.tableChange>((message) => {
   if (message.type === MessageType.tableChange) {
     const currentTableId = Number(getTableIdFromUrl(location.href))
     if (currentTableId === message.data?.tableId) {
-      gameStoreKey.setState(old => old + 1)
+      queryKeyStore.setState(old => old + 1)
     } 
   }
 })
