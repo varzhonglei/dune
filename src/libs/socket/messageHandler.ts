@@ -8,7 +8,7 @@ import { getUserNameFromToken } from "../../utils/tools"
 import { clearSecretInfo } from "./data-processor"
 import { userActionsHandler } from "../../one-game/userActionsHandler"
 
-const getTableById = (id: number) => tableListStore.find(t => t.id === id)
+const getTableById = (id: number) => tableListStore.find(t => t.id.toString() === id.toString())
 
 export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: Map<string, WebSocket>) => {
   const { type } = message

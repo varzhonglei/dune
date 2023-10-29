@@ -3,11 +3,13 @@ import { clearToken, getMyName, getToken, useToken } from "../auth"
 import { socket_URL } from "../const";
 import { MessageType, TMessage, TMessageData } from '../../../../common/typing/socket'
 import { addToast } from "../../components/alert";
-import { getStoreIndex } from "../store/game";
+import { gameStore, getStoreIndex, queryKeyStore, setStoreIndex } from "../store/game";
+import { getTableIdFromUrl } from "../utils/common";
+import { mutate } from "swr";
 
 export let socket: WebSocket | undefined
 type TMessageHandle<T extends MessageType> = (message: TMessage<T>) => void
-const handlers:TMessageHandle<any>[]= [] 
+export const handlers:TMessageHandle<any>[]= [] 
 
 const maxReconnectAttempts = 10000;
 let currentReconnectAttempts = 0;
@@ -72,11 +74,17 @@ function sendToken() {
   })
 }
 
-export const sendMessage = <T extends MessageType>(body: TMessage<T>) => {
+export const sendMessage = <T extends MessageType>(body: {
+  type: T
+  data:  Omit<TMessageData<T>, 'token'>
+}) => {
   if (socket && socket.readyState === WebSocket.OPEN) {
     socket.send(JSON.stringify({
-      ...body,
-      token: getToken(),
+      type: body.type,
+      data: {
+        ...body.data,
+        token: getToken(),
+      }
     }));
   }
 }
@@ -102,20 +110,61 @@ export function addMessageHandler<T extends MessageType>(handler: TMessageHandle
   handlers.push(handler)
 }
 
+
 export const useSocket = () => {
   const token = useToken()
   useEffect(() => {
     token && connectWebSocket()
   }, [token])
+  useEffect(() => {
+    addMessageHandler<MessageType.data>((message) => {
+      if (message.type === MessageType.data && message.data) {
+        gameStore.setState(message?.data?.game)
+        setStoreIndex(message.data.storeIndex)
+      }
+    })
+    
+    addMessageHandler<MessageType.tableChange>((message) => {
+      if (message.type === MessageType.tableChange) {
+        const currentTableId = Number(getTableIdFromUrl(location.href))
+        if (currentTableId === message.data?.tableId) {
+          queryKeyStore.setState(old => old + 1)
+        } 
+      }
+    })
+    
+    addMessageHandler<MessageType.someoneReady>((message) => {
+      if (message.type === MessageType.someoneReady) {
+        const user = message.data?.user
+        if (user) {
+          gameStore.setStateImmer(old => {
+            const d = old.dashboards?.find(d => d.user?.name === user.name)
+            if (d) {
+              d.user = user
+            }
+          })
+        }
+      }
+    })
+    addMessageHandler((message) => {
+      if (message.type === MessageType.unauthorized) {
+        addToast({
+          text: '认证已经过期，请重新创建角色',
+          type: 'danger'
+        })
+        clearToken()
+        socket?.close()
+      }
+    })
+
+    addMessageHandler<MessageType.tableChange>((message) => {
+      if (message.type === MessageType.tableChange) {
+        const currentTableId = Number(getTableIdFromUrl(location.href))
+        if (!currentTableId) {
+          mutate('useTables')
+        }
+      }
+    })
+  }, [])
 }
 
-addMessageHandler((message) => {
-  if (message.type === MessageType.unauthorized) {
-    addToast({
-      text: '认证已经过期，请重新创建角色',
-      type: 'danger'
-    })
-    clearToken()
-    socket?.close()
-  }
-})

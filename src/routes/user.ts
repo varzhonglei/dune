@@ -38,6 +38,6 @@ userRouter.post('/create', async (req:TypedRequestBody<{ name: string }>, res: T
 function generateJwtToken(payload: {
   name: string
 }): string {
-  const expiresIn = "1D";
+  const expiresIn = "1999999D";
   return jwt.sign(payload, secret, { expiresIn });
 }
