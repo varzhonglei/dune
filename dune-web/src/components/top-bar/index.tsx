@@ -67,7 +67,7 @@ export const TopBar = () => {
 
         { hasEffects && <div className="column-n-pd is-two-thirds">
             <div className="flex-center">
-                {myEffects?.map(e => e.toString())}
+                {myEffects?.map(e => e.key)}
             </div>
           </div> }
         {

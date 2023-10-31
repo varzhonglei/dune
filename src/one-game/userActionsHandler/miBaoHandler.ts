@@ -1,7 +1,7 @@
 import { Table } from "../../round-table/tables"
 import { Dashboard } from "../../../common/typing"
 import { TAction } from "../../../common/typing/user-action"
-import { locations } from "../../../common/locations/locations"
+import { LocationIcon, locations } from "../../../common/locations/locations"
 import { allCards } from "../../../common/cards"
 
 
@@ -32,6 +32,10 @@ export const CreateLocationHandler = <T>(fn: TCreateHandler<T>) => ({
 }
 
 
+
+const baifoDi = [LocationIcon.fremen, LocationIcon.empire, LocationIcon.sister, LocationIcon.union]
+type TBaifoDi = LocationIcon.fremen | LocationIcon.empire | LocationIcon.sister | LocationIcon.union
+
 export const miBaoHandler = ({
   table,
   name,
@@ -57,8 +61,17 @@ export const miBaoHandler = ({
 
         const mibao = dashboard.mibao.pop()
         mibao && location.miBao?.push(mibao)
+
+        if (baifoDi.includes(location.icon)) {
+          dashboard[location.icon as TBaifoDi] = Math.max(dashboard[location.icon as TBaifoDi] + 1, 5)
+        }
+        if (location.require) {
+          location.require.forEach(c => {
+            // dashboard
+          })
+        }
         
-        dashboard.effects.push(...location.get, ...card.playEffect)
+        dashboard.effects.push(...(location.get|| []), ...(card.playEffect || []))
         dashboard.handCards = dashboard.handCards.filter(c => c.id !== card?.id)
         dashboard.playedCards.push(card)
       }

@@ -70,9 +70,8 @@ export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: M
   } else if (type === MessageType.userAction) {
     const { data } = message as TMessage<MessageType.userAction>
     const table =  getTableById(data.tableId)
-    
     if (table && data.storeIndex !== table.getStoreIndex()) {
-      // the user client is not up to date
+      // the user data is not up to date
       sendMessage({
         name: theUserName,
         body: {
@@ -91,6 +90,17 @@ export const messageHandler = (message: TMessage<any>, ws: WebSocket, clients: M
         name: theUserName,
         actionType: data.actionType,
         payload: data.payload,
+      })
+
+      sendTableMessage({
+        tableId: table.id,
+        body: {
+          type: MessageType.data,
+          data: {
+            game: clearSecretInfo(table.getState(), theUserName),
+            storeIndex: table.getStoreIndex()
+          }
+        }
       })
     }
   }

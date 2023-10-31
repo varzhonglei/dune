@@ -1,5 +1,6 @@
 import { TCard } from "../cards/cards"
 import { TYinCard } from "../yin-card/yin-card"
+import { TEffect } from "./effect"
 import { User } from "./user"
 
 export enum Role {
@@ -36,7 +37,7 @@ export type TTurn = 'inturn' | 'pass' | 'wait'
 
 export type Dashboard = {
   turn: TTurn
-  effects: any[]
+  effects: TEffect[]
   user?: User
   miBaoColor?: MiBaoColor
   point: number

@@ -95,7 +95,7 @@ export const userActionMessage =(data: Omit<TMessageData<MessageType.userAction>
   if (socket && socket.readyState === WebSocket.OPEN) {
     socket.send(JSON.stringify(
       {
-        type: MessageType.tokenBack,
+        type: MessageType.userAction,
         data: {
           ...data,
           token: getToken(),
