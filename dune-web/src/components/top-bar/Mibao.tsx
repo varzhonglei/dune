@@ -16,6 +16,10 @@ export const MiBao = ()=> {
   const miBao = myDs?.mibao?.[0]
 
   const handleSendMiBaoAction = () => {
+    miBaoActionState.setState({
+      card: null,
+      locationId: null,
+    })
     userActionMessage( {
       tableId: Number(tableId),
       actionType: EActionType.miBao,

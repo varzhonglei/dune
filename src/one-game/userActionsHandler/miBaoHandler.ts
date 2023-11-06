@@ -3,6 +3,7 @@ import { Dashboard } from "../../../common/typing"
 import { TAction } from "../../../common/typing/user-action"
 import { LocationIcon, locations } from "../../../common/locations/locations"
 import { allCards } from "../../../common/cards"
+import { BasicHandler } from "./basicHandler"
 
 
 type TCreateHandler<T> = (dashboard:Dashboard, payload: T ) => void
@@ -66,10 +67,17 @@ export const miBaoHandler = ({
           dashboard[location.icon as TBaifoDi] = Math.max(dashboard[location.icon as TBaifoDi] + 1, 5)
         }
         if (location.require) {
-          location.require.forEach(c => {
-            // dashboard
+          // do some check
+        }
+
+        if (location.pay) {
+          location.pay.forEach(pay => {
+            BasicHandler(dashboard, pay.key, {
+              number: pay.number
+            })
           })
         }
+        
         
         dashboard.effects.push(...(location.get|| []), ...(card.playEffect || []))
         dashboard.handCards = dashboard.handCards.filter(c => c.id !== card?.id)

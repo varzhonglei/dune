@@ -1,17 +1,14 @@
 import { TCard } from "../../../common/cards/cards"
-import { Table } from "../../round-table/tables"
 import { Dashboard } from "../../../common/typing"
 import { EConstraint, EEffect } from "../../../common/typing/effect"
 
-// type TCreateHandler<T> = (dashboard:Dashboard, payload: T ) => void
-// type Handler<T> = {
-//   table: Table
-//   name: string,
-//   payload: T
-// }
 
 type TNumberPayload = {
   number: number
+}
+
+type TIdPayload = {
+  id: number
 }
 
 type PartialKey<T, K extends keyof T> = {
@@ -27,92 +24,70 @@ type THandlers = PartialKey<{
 
 
 const handlers: THandlers = {
+  trashCard: (dashboard, payload:TIdPayload) => {
+    let trashedCard:TCard[] = []
+
+    const ind1 = dashboard.qiCards.findIndex(c => c.id === payload.id)
+    if (ind1 !== -1) trashedCard = dashboard.qiCards.splice(ind1,1)
+
+    const ind2 = dashboard.playedCards.findIndex(c => c.id === payload.id)
+    if (ind2 !== -1) trashedCard = dashboard.playedCards.splice(ind1,1)
+
+    const ind3 = dashboard.handCards.findIndex(c => c.id === payload.id)
+    if (ind3 !== -1) trashedCard = dashboard.handCards.splice(ind1,1)
+
+    trashedCard[0] && dashboard.trashedCards.push(trashedCard[0])
+  },
+  getTroops: (dashboard, payload:TNumberPayload) => {
+    for(let i = 0; i < payload.number; i++) {
+      let bin = dashboard.troops.troopsSupply.pop()
+      if (!bin) bin = dashboard.troops.troopsTLL.pop()
+      bin && dashboard.troops.troopsCamp.push(bin)
+    }
+  },
   getSpice: (dashboard, payload:TNumberPayload) => {
     dashboard.spice = dashboard.spice + payload.number
   },
   paySpice: (dashboard, payload:TNumberPayload) => {
     dashboard.spice = Math.max(dashboard.spice - payload.number, 0)
   },
+  getMoney:  (dashboard, payload:TNumberPayload) => {
+    dashboard.money = dashboard.money + payload.number
+  },
+  payMoney: (dashboard, payload:TNumberPayload) => {
+    dashboard.money = Math.max(dashboard.money - payload.number, 0)
+  },
 
+  getWater: (dashboard, payload:TNumberPayload) => {
+    dashboard.water = dashboard.water + payload.number
+  },
+  payWater: (dashboard, payload:TNumberPayload) => {
+    dashboard.water = Math.max(dashboard.water - payload.number, 0)
+  },
+
+  cardBuy: (dashboard, payload:TNumberPayload) => {
+    dashboard.cardBuy = dashboard.cardBuy + payload.number
+  },
+  TLLBuy: (dashboard, payload:TNumberPayload) => {
+    for(let i = 0; i < payload.number; i++) {
+      const bin = dashboard.troops.troopsSupply.pop()
+      bin && dashboard.troops.troopsCamp.push(bin)
+    }
+  },
+  dao: (dashboard, payload:TNumberPayload) => {
+    dashboard.revealDao = dashboard.revealDao + payload.number
+  },
 }
 
 
 export const BasicHandler = (dashboard: Dashboard, type: EConstraint | EEffect, payload: any) => {
-  const hand = handlers[type]
-  if (hand) {
-    hand(dashboard, {
-      number: payload.number
+  const handler = handlers[type]
+  if (handler) {
+    handler(dashboard, {
+      number: payload.number ?? 1
     })
   }
 }
-
-
-// export const CreateHandler = <T>(fn: TCreateHandler<T>) => ({
-//     table,
-//     name,
-//     payload }: Handler<T>
-//   ) => {
-//     table.setState(s => {
-//       const dashboard = s.dashboards.find(d => d.user?.name === name)
-//       if (dashboard) {
-//         fn(dashboard, payload) 
-//       }
-//   }) 
-// }
-
-// export const trashCard = CreateHandler<idPayload>((dashboard, payload) => {
-//     let trashedCard:TCard[] = []
-
-//     const ind1 = dashboard.qiCards.findIndex(c => c.id === payload.id)
-//     if (ind1 !== -1) trashedCard = dashboard.qiCards.splice(ind1,1)
-
-//     const ind2 = dashboard.playedCards.findIndex(c => c.id === payload.id)
-//     if (ind2 !== -1) trashedCard = dashboard.playedCards.splice(ind1,1)
-
-//     const ind3 = dashboard.playedCards.findIndex(c => c.id === payload.id)
-//     if (ind3 !== -1) trashedCard = dashboard.playedCards.splice(ind1,1)
-
-//     trashedCard[0] && dashboard.trashedCards.push(trashedCard[0])
-
-//   })
-
-
-// export const getTroops = CreateHandler<numberPayload>((dashboard, payload) => {
-//   for(let i = 0; i < payload.number; i++) {
-//     let bin = dashboard.troops.troopsSupply.pop()
-//     if (!bin) bin = dashboard.troops.troopsTLL.pop()
-//     bin && dashboard.troops.troopsCamp.push(bin)
-//   }
-// })
-
-
-// export const getMoney = CreateHandler<numberPayload>((dashboard, payload) => {
-//     dashboard.money = dashboard.money + payload.number
-// })
-
-
-// export const getWater = CreateHandler<numberPayload>((dashboard, payload) => {
-//   dashboard.water = dashboard.water + payload.number
-// })
-
-// export const getSpice = CreateHandler<numberPayload>((dashboard, payload) => {
-//   dashboard.spice = dashboard.spice + payload.number
-// })
-
-// export const cardBuy = CreateHandler<numberPayload>((dashboard, payload) => {
-//   dashboard.cardBuy = dashboard.cardBuy + payload.number
-// })
-
-// export const TLLBuy = CreateHandler<numberPayload>((dashboard, payload) => {
-//   for(let i = 0; i < payload.number; i++) {
-//     const bin = dashboard.troops.troopsSupply.pop()
-//     bin && dashboard.troops.troopsCamp.push(bin)
-//   }
-// })
-
-// export const dao = CreateHandler<numberPayload>((dashboard, payload) => {
-//   dashboard.revealDao = dashboard.revealDao + payload.number
-// })
 
 // //todo
 // export const trashCardSelf = trashCard

@@ -53,6 +53,7 @@ export const locations: TLocations = [ {
     name: '1水采香料',
     icon: LocationIcon.triangle,
     combat: true,
+    pay: [{ key: EConstraint.payWater, number: 1 }],
     get: [{ key: EEffect.collectSpice2 }]
   },
   {
@@ -60,6 +61,7 @@ export const locations: TLocations = [ {
     name: '2水采香料',
     icon: LocationIcon.triangle,
     combat: true,
+    pay: [{ key: EConstraint.payWater, number: 2 }],
     get: [{ key: EEffect.collectSpice3 }]
   },
   //圆点
