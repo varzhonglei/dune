@@ -1,6 +1,7 @@
 import { Table, tableListStore } from "../../round-table/tables"
 import { miBaoHandler } from "./miBaoHandler"
 import { EActionType, TAction } from '../../../common/typing/user-action'
+import { BasicHandler } from "./basicHandler"
 
 type P = {
   table: Table
@@ -25,5 +26,12 @@ export const userActionsHandler = ({
         payload
       })
     }
-
+    if (actionType === EActionType.todoEffect) {
+      table.setState(s => {
+        const dashboard = s.dashboards.find(d => d.user?.name === name)
+        if (dashboard && payload.todoEffect?.key) {
+          BasicHandler(dashboard, payload.todoEffect?.key, payload.todoEffect)
+        }
+      })
+    }
 }

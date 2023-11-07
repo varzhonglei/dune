@@ -4,6 +4,8 @@ import { TAction } from "../../../common/typing/user-action"
 import { LocationIcon, locations } from "../../../common/locations/locations"
 import { allCards } from "../../../common/cards"
 import { BasicHandler } from "./basicHandler"
+import { GetEffect } from "../../../common/typing/get-effect"
+import { EEffect } from "../../../common/typing/effect"
 
 
 type TCreateHandler<T> = (dashboard:Dashboard, payload: T ) => void
@@ -34,8 +36,16 @@ export const CreateLocationHandler = <T>(fn: TCreateHandler<T>) => ({
 
 
 
-const baifoDi = [LocationIcon.fremen, LocationIcon.empire, LocationIcon.sister, LocationIcon.union]
-type TBaifoDi = LocationIcon.fremen | LocationIcon.empire | LocationIcon.sister | LocationIcon.union
+const baiFoDi = [LocationIcon.fremen, LocationIcon.empire, LocationIcon.sister, LocationIcon.union]
+const baiFoBonus: {
+  [key in TBaiFoDi]: GetEffect
+} = {
+  [LocationIcon.fremen]: { key: EEffect.getWater },
+  [LocationIcon.sister]: { key: EEffect.drawYin },
+  [LocationIcon.union]: { key: EEffect.getMoney, number: 3 },
+  [LocationIcon.empire]: { key: EEffect.getTroops, number: 2 },
+}
+type TBaiFoDi = LocationIcon.fremen | LocationIcon.empire | LocationIcon.sister | LocationIcon.union
 
 export const miBaoHandler = ({
   table,
@@ -60,14 +70,23 @@ export const miBaoHandler = ({
           return
         }
 
+        if (location.require) {
+          //todo: some check & skip
+        }
+
+
         const mibao = dashboard.mibao.pop()
         mibao && location.miBao?.push(mibao)
 
-        if (baifoDi.includes(location.icon)) {
-          dashboard[location.icon as TBaifoDi] = Math.max(dashboard[location.icon as TBaifoDi] + 1, 5)
-        }
-        if (location.require) {
-          // do some check
+        const theBaio = location.icon as TBaiFoDi
+        if (baiFoDi.includes(theBaio)) {
+          const old = dashboard[theBaio] 
+          dashboard[theBaio] = Math.max(dashboard[location.icon as TBaiFoDi] + 1, 5)
+          if (dashboard[theBaio] === 4 && old === 3) {
+            BasicHandler(dashboard, baiFoBonus[theBaio].key, {
+              number: baiFoBonus[theBaio].number
+            })
+          }
         }
 
         if (location.pay) {

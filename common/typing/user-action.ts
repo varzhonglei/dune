@@ -1,10 +1,11 @@
 import { TLocationId } from '../locations/locations'
+import { GetEffect } from './get-effect'
 
 export enum EActionType {
   'playYin' = 'playYin',
   'miBao' = 'miBao',
   'endTurn' = 'endTurn',
-  'effect' = 'effect',
+  'todoEffect' = 'todoEffect',
   'deploy' = 'deploy',
 }
 
@@ -15,10 +16,7 @@ export type TAction = {
     locationId: TLocationId
   } 
   yinCard?: any
-  todoEffects?: {
-    index: number
-    result: any
-  }
+  todoEffect?: GetEffect
   deploy?: {
     troops: number,
     jian: number
