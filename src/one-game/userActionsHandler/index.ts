@@ -2,6 +2,7 @@ import { Table, tableListStore } from "../../round-table/tables"
 import { miBaoHandler } from "./miBaoHandler"
 import { EActionType, TAction } from '../../../common/typing/user-action'
 import { BasicHandler } from "./basicHandler"
+import { jdb } from "../../store/json-db"
 
 type P = {
   table: Table
@@ -29,9 +30,14 @@ export const userActionsHandler = ({
     if (actionType === EActionType.todoEffect) {
       table.setState(s => {
         const dashboard = s.dashboards.find(d => d.user?.name === name)
-        if (dashboard && payload.todoEffect?.key) {
-          BasicHandler(dashboard, payload.todoEffect?.key, payload.todoEffect)
+        const theKey = payload.todoEffect?.key
+        if (dashboard && theKey) {
+          const theEInd = dashboard?.effects.findIndex(e => e.key === theKey)
+          dashboard?.effects.splice(theEInd, 1)
+          BasicHandler(dashboard, theKey, payload.todoEffect)
         }
       })
     }
+    //saveGame
+    jdb.saveGame(table.id, table.getState())
 }

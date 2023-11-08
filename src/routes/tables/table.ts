@@ -12,7 +12,6 @@ export const tableRouter = express.Router()
 tableRouter.get('/list', async (req: TypedRequestAny, res: TypedResponse) => {
   const tables = tableListStore.map(t => ({
     id: t.id,
-    admin: t.admin,
     userList: t.getState().dashboards?.map(d => d.user)
   }))
 

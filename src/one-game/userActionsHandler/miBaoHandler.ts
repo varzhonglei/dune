@@ -80,7 +80,7 @@ export const miBaoHandler = ({
         const theBaio = location.icon as TBaiFoDi
         if (baiFoDi.includes(theBaio)) {
           const old = dashboard[theBaio] 
-          dashboard[theBaio] = Math.max(dashboard[location.icon as TBaiFoDi] + 1, 5)
+          dashboard[theBaio] = Math.min(dashboard[location.icon as TBaiFoDi] + 1, 5)
           if (dashboard[theBaio] === 4 && old === 3) {
             BasicHandler(dashboard, baiFoBonus[theBaio].key, {
               number: baiFoBonus[theBaio].number

@@ -9,7 +9,6 @@ export const getTables = async () => {
   const res = await axios.get<{
     data: {
       id: number
-      admin: string
       userList: User[]
     }[],
     type: RES_TYPE,

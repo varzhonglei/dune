@@ -6,7 +6,6 @@ const tableNumber = 3
 
 export interface Table {
   id: number
-  admin: string
   store: DataStore<Game>
   getState: () => Game
   saveState: () => void
@@ -14,11 +13,10 @@ export interface Table {
   setState: (state: Game | ((prevState: Game) => any)) => void; 
 }
 
-const createTable = (id: number, admin?: string):Table => {
-  const store = new DataStore<Game>(initialGame);
+const createTable = (id: number, data?: Game):Table => {
+  const store = new DataStore<Game>(data || initialGame);
   return {
     id,
-    admin: admin || 'unset',
     store: store,
     setState: (params) => store.setState(params),
     getState: () => store.getState(),
@@ -28,25 +26,33 @@ const createTable = (id: number, admin?: string):Table => {
 }
 
 export let tableListStore: Table[] = Array.from({length: tableNumber}).map((i, ind) => createTable(ind + 1))
-export const setTableList = (t: Table[]) => {
-  if (t && Array.isArray(t)) {
-    tableListStore = t
-  }
+
+export const restoreTables = (args: {
+  id: number,
+  data: Game
+}[]) => {
+  args.forEach(d => {
+    const ind = tableListStore.findIndex(t => t.id === d.id)
+    if (ind !== -1) {
+      tableListStore.splice(ind, 1, createTable(d.id, d.data))
+    } else {
+      tableListStore.push(createTable(d.id, d.data))
+    }
+  })
 }
+
 export const addTable = (name: string) => {
   const lastId = tableListStore[tableListStore.length - 1]?.id || 0
-  tableListStore.push(createTable(lastId + 1, name))
+  tableListStore.push(createTable(lastId + 1))
 }
 
 export const deleteTable = (name: string, tId: number) => {
   let ind: number
   if (isSupperAdmin(name)) {
     ind = tableListStore.findIndex(t => t.id === tId)
-  } else {
-    ind = tableListStore.findIndex(t => t.id === tId && t.admin === name)
-  }
-  if (ind !== -1) {
-    tableListStore.splice(ind, 1)
+    if (ind !== -1) {
+      tableListStore.splice(ind, 1)
+    }
   }
 }
   

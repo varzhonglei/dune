@@ -86,7 +86,7 @@ export const TablesPage = () => {
     {
       tables.map((t, ind) => {
         const u = t.userList
-        const showDeleteBtn = ind > 2 && (isAdmin || t.admin === myName)
+        const showDeleteBtn = ind > 2 && (isAdmin)
         return  <div className='hover-f' key={t.id} >
           <div className='is-flex'>
             <TableHeader>桌号：{t.id}</TableHeader>
