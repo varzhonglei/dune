@@ -56,17 +56,21 @@ export const BottomBar = () => {
       />
   </div>
     })}
-  {/* {yinCards.map(y => {
-      return <div className='mr-1 is-flex is-align-items-end'>
-      <ModImageWithEnlarge 
-        name={y.img?.name || ''}
-        onClick={handleChooseCard(c)}
-        width={isChoose ? 80 * 1.2 : 80} 
-        height={isChoose ? 110 * 1.2 : 110}
-        enlargeWith={240}
-        enlargeHeight={330}
-      />
-  </div>
-    })} */}
+    <div className="column-n-pd flex-center">
+      <div  className="flex-center">
+        <div className="mr-1">密谋牌：</div>
+        {
+          yinCards.map(yc => <ModImageWithEnlarge 
+            key={yc.id}
+            name={yc?.img?.name}
+            // 687/1039
+            width={ 65 * 687/1039}
+            height={65}
+            enlargeWidth={240 * 687/1039}
+            enlargeHeight={240}
+          />)
+        }
+      </div>
+    </div>
   </Container>
 }

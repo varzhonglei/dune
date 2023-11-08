@@ -1,11 +1,10 @@
 import { Table } from "../../round-table/tables"
 import { Dashboard } from "../../../common/typing"
 import { TAction } from "../../../common/typing/user-action"
-import { LocationIcon, locations } from "../../../common/locations/locations"
+import { LocationIcon } from "../../../common/locations/locations"
 import { allCards } from "../../../common/cards"
 import { BasicHandler } from "./basicHandler"
-import { GetEffect } from "../../../common/typing/get-effect"
-import { EEffect } from "../../../common/typing/effect"
+import { EEffect, TEffect } from "../../../common/typing/effect"
 
 
 type TCreateHandler<T> = (dashboard:Dashboard, payload: T ) => void
@@ -38,7 +37,7 @@ export const CreateLocationHandler = <T>(fn: TCreateHandler<T>) => ({
 
 const baiFoDi = [LocationIcon.fremen, LocationIcon.empire, LocationIcon.sister, LocationIcon.union]
 const baiFoBonus: {
-  [key in TBaiFoDi]: GetEffect
+  [key in TBaiFoDi]: TEffect
 } = {
   [LocationIcon.fremen]: { key: EEffect.getWater },
   [LocationIcon.sister]: { key: EEffect.drawYin },
@@ -57,7 +56,7 @@ export const miBaoHandler = ({
     const ap = payload.miBaoAction
     table.setState(s => {
       const dashboard = s.dashboards.find(d => d.user?.name === name)
-      const location = locations.find(s => s.id === ap?.locationId)
+      const location = s.locations.find(s => s.id === ap?.locationId)
       const card = allCards.find(c => c.id === ap.cardId)
       if (dashboard && location && card) {
 
@@ -97,7 +96,7 @@ export const miBaoHandler = ({
           })
         }
         
-        
+        dashboard.mibaoActioned = true
         dashboard.effects.push(...(location.get|| []), ...(card.playEffect || []))
         dashboard.handCards = dashboard.handCards.filter(c => c.id !== card?.id)
         dashboard.playedCards.push(card)

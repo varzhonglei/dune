@@ -3,6 +3,7 @@ import { storeCards } from "./cards/cards-store"
 import { numberId } from "../src/utils"
 import { TYinCard, yinCards } from "./yin-card/yin-card"
 import { Dashboard, MiBaoColor, Role, TMibao } from "./typing"
+import { TLocations, locations } from "./locations/locations"
 
 export interface Game {
   firstPlayer: number
@@ -15,10 +16,13 @@ export interface Game {
   yinCards: TYinCard[]
   yinCardsPlayed: TYinCard[]
   mentat: TMibao
+  locations: TLocations
 }
 
 export const initDashBoard: Dashboard = {
-  turn: 'wait',
+  turn: 'pass',
+  exTurn: 'pass',
+  mibaoActioned: false,
   effects: [],
   point: 0,
   money: 0,
@@ -89,6 +93,7 @@ export const initialGame: Game = {
   spiceMustFlowCards: spiceMustFlowCards,
   fremenCards: fremenCards,
   spacingGuidCards: spacingGuidCards,
+  locations: locations,
 
   yinCards: yinCards,
   yinCardsPlayed: [],

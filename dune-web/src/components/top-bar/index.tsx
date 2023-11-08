@@ -1,9 +1,11 @@
 import styled from '@emotion/styled'
-import { useMyName, useToken } from '../../libs/auth'
+import { useMyName } from '../../libs/auth'
 import { useGame } from '../../libs/store/game'
 import { useGetEffects } from '../../libs/hooks/useAction'
-import { ModImageWithEnlarge } from '../mod-image'
 import { MiBao } from './Mibao'
+import { userActionMessage } from '../../libs/socket'
+import { useParams } from 'react-router-dom'
+import { EActionType } from '../../../../common/typing/user-action'
 const Container = styled.div`
     min-height: 50px;
     max-height: 120px;
@@ -39,9 +41,7 @@ export const TopBar = () => {
   const myName = useMyName()
   const gameData = useGame()
   const myDashboard = gameData.dashboards.find(d => d.user?.name === myName)
-
-  const yinCards = myDashboard?.yinCards || []
-
+  const { id: tableId } = useParams()
 
   const myEffects = useGetEffects()
 
@@ -64,10 +64,21 @@ export const TopBar = () => {
 
     <Bottom>
       <div className="columns w100">
-
         { hasEffects && <div className="column-n-pd is-two-thirds">
             <div className="flex-center">
-                {myEffects?.map(e => e.key)}
+                {myEffects?.map(e => <button 
+                  onClick={() => { 
+                    userActionMessage( {
+                      tableId: Number(tableId),
+                      actionType: EActionType.todoEffect,
+                      payload: {
+                        todoEffect: e
+                      }
+                    })
+                   }}
+                  className="button is-info is-light mr-1 ml-1">{
+                  e.key
+                }</button>)}
             </div>
           </div> }
         {
@@ -77,23 +88,23 @@ export const TopBar = () => {
             </div>
           </div>
         }
-      </div> 
-      <div className="column-n-pd flex-center">
-          <div  className="flex-center">
-            <div className="mr-1">密谋牌：</div>
-            {
-              yinCards.map(yc => <ModImageWithEnlarge 
-                key={yc.id}
-                name={yc?.img?.name}
-                // 687/1039
-                width={ 65 * 687/1039}
-                height={65}
-                enlargeWidth={240 * 687/1039}
-                enlargeHeight={240}
-              />)
-            }
-          </div>
+        <div className="column column-n-pd">
+        <button 
+          onClick={() => {
+            //
+          }}
+          className="button is-info is-light mr-1 ml-1">
+            结束轮次
+        </button>
+        <button 
+          onClick={() => {
+            //
+          }}
+          className="button is-info is-light mr-1 ml-1">
+            展示
+        </button>
         </div>
+      </div> 
     </Bottom>
   </Container>
 }
