@@ -80,8 +80,8 @@ const handlers: THandlers = {
 }
 
 
-export const BasicHandler = (dashboard: Dashboard, type: EConstraint | EEffect, payload: any) => {
-  const handler = handlers[type]
+export const BasicHandler = (dashboard: Dashboard, typeKey: EConstraint | EEffect, payload: any) => {
+  const handler = handlers[typeKey]
   if (handler) {
     handler(dashboard, {
       number: payload.number ?? 1
