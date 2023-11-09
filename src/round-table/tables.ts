@@ -25,7 +25,7 @@ const createTable = (id: number, data?: Game):Table => {
   }
 }
 
-export let tableListStore: Table[] = Array.from({length: tableNumber}).map((i, ind) => createTable(ind + 1))
+export const tableListStore: Table[] = Array.from({length: tableNumber}).map((i, ind) => createTable(ind + 1))
 
 export const restoreTables = (args: {
   id: number,
