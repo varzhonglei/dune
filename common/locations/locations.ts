@@ -25,7 +25,8 @@ export type Location = {
   combat?: boolean
   require?: TConstraint[],
   pay?: TConstraint[],
-  miBao?: TMibao[]
+  miBao?: TMibao[],
+  spice?: number
 }
 export type TLocations = Location[]
 export const locations: TLocations = [ {
@@ -46,7 +47,8 @@ export const locations: TLocations = [ {
     name: '帝国盆地',
     icon: LocationIcon.triangle,
     combat: true,
-    get: [{ key: EEffect.collectSpice1 }]
+    get: [{ key: EEffect.collectSpice1 }],
+    spice: 0,
   },
   {
     id: 'spice2',
@@ -54,7 +56,8 @@ export const locations: TLocations = [ {
     icon: LocationIcon.triangle,
     combat: true,
     pay: [{ key: EConstraint.payWater, number: 1 }],
-    get: [{ key: EEffect.collectSpice2 }]
+    get: [{ key: EEffect.collectSpice2 }],
+    spice: 0,
   },
   {
     id: 'spice3',
@@ -62,7 +65,8 @@ export const locations: TLocations = [ {
     icon: LocationIcon.triangle,
     combat: true,
     pay: [{ key: EConstraint.payWater, number: 2 }],
-    get: [{ key: EEffect.collectSpice3 }]
+    get: [{ key: EEffect.collectSpice3 }],
+    spice: 0,
   },
   //圆点
   {

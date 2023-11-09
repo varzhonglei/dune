@@ -34,7 +34,6 @@ export const CreateLocationHandler = <T>(fn: TCreateHandler<T>) => ({
 }
 
 
-
 const baiFoDi = [LocationIcon.fremen, LocationIcon.empire, LocationIcon.sister, LocationIcon.union]
 const baiFoBonus: {
   [key in TBaiFoDi]: TEffect
@@ -82,18 +81,28 @@ export const miBaoHandler = ({
           const old = dashboard[theBaio] 
           dashboard[theBaio] = Math.min(dashboard[location.icon as TBaiFoDi] + 1, 5)
           if (dashboard[theBaio] === 4 && old === 3) {
-            BasicHandler(dashboard, baiFoBonus[theBaio].key, {
-              number: baiFoBonus[theBaio].number
-            })
+            BasicHandler(
+              {
+                dashboard,
+                typeKey: baiFoBonus[theBaio].key,
+                payload: {
+                  number: baiFoBonus[theBaio].number
+                }
+              }            
+            )
           }
         }
 
         if (location.pay) {
           location.pay.forEach(pay => {
-            BasicHandler(dashboard, pay.key, {
-              number: pay.number
+            BasicHandler({
+              dashboard,
+              typeKey: pay.key,
+              payload: {
+                number: pay.number
+              }
             })
-          })
+         })
         }
         
         dashboard.mibaoActioned = true

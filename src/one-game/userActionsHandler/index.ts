@@ -34,7 +34,13 @@ export const userActionsHandler = ({
         if (dashboard && theKey) {
           const theEInd = dashboard?.effects.findIndex(e => e.key === theKey)
           dashboard?.effects.splice(theEInd, 1)
-          BasicHandler(dashboard, theKey, payload.todoEffect)
+          BasicHandler(
+            {
+              dashboard,
+              typeKey:  theKey,
+              payload: payload.todoEffect
+            }  
+          )
         }
       })
     }
