@@ -87,7 +87,8 @@ export const miBaoHandler = ({
                 typeKey: baiFoBonus[theBaio].key,
                 payload: {
                   number: baiFoBonus[theBaio].number
-                }
+                },
+                game: s,
               }            
             )
           }
@@ -100,7 +101,8 @@ export const miBaoHandler = ({
               typeKey: pay.key,
               payload: {
                 number: pay.number
-              }
+              },
+              game: s
             })
          })
         }

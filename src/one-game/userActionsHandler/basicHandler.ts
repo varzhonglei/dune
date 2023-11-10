@@ -1,8 +1,8 @@
 import { shuffle } from "lodash"
 import { TCard } from "../../../common/cards/cards"
-import { TLocations } from "../../../common/locations/locations"
 import { Dashboard } from "../../../common/typing"
 import { EConstraint, EEffect } from "../../../common/typing/effect"
+import { Game } from "../../../common/game"
 
 
 type TNumberPayload = {
@@ -20,7 +20,7 @@ type PartialKey<T, K extends keyof T> = {
 type Handler<T> = (
   dashboard:Dashboard, 
   payload: T, 
-  locations?: TLocations) => void
+  game: Game) => void
 
 type THandlers = PartialKey<{
   [key in EConstraint | EEffect]: Handler<any>
@@ -71,8 +71,18 @@ const handlers: THandlers = {
   payWater: (dashboard, payload:TNumberPayload) => {
     dashboard.water = Math.max(dashboard.water - payload.number, 0)
   },
-  // 'drawCard' = 'drawCard',
-  // 'drawYin' = 'drawYin',
+  drawYin: (dashboard, payload:TNumberPayload, game) => {
+    const theYin = game.yinCards.shift()
+    if (theYin) {
+      dashboard.yinCards.push(theYin)
+    }
+  },
+  acquireSpacingGuid: (dashboard, payload:TNumberPayload, game) => {
+    const theC = game.spacingGuidCards.shift()
+    if (theC) {
+      dashboard.qiCards.push(theC)
+    }
+  },
   drawCard: (dashboard, payload:TNumberPayload) => {
     const number = payload.number
     if (dashboard.moCards.length >= number) {
@@ -87,7 +97,6 @@ const handlers: THandlers = {
       dashboard.handCards.push(...cards)
     }
   },
-
   cardBuy: (dashboard, payload:TNumberPayload) => {
     dashboard.cardBuy = dashboard.cardBuy + payload.number
   },
@@ -100,22 +109,22 @@ const handlers: THandlers = {
   dao: (dashboard, payload:TNumberPayload) => {
     dashboard.revealDao = dashboard.revealDao + payload.number
   },
-  collectSpice1: (dashboard, payload:TNumberPayload, locations) => {
-    const location = locations?.find(l => l.id === 'spice1')
+  collectSpice1: (dashboard, payload:TNumberPayload, game) => {
+    const location = game.locations?.find(l => l.id === 'spice1')
     if (location) {
       dashboard.spice = dashboard.spice + 1 + (location?.spice || 0)
       location.spice = 0
     }
   },
-  collectSpice2: (dashboard, payload:TNumberPayload, locations) => {
-    const location = locations?.find(l => l.id === 'spice2')
+  collectSpice2: (dashboard, payload:TNumberPayload, game) => {
+    const location = game.locations?.find(l => l.id === 'spice2')
     if (location) {
       dashboard.spice = dashboard.spice + 2 + (location?.spice || 0)
       location.spice = 0
     }
   },
-  collectSpice3: (dashboard, payload:TNumberPayload, locations) => {
-    const location = locations?.find(l => l.id === 'spice3')
+  collectSpice3: (dashboard, payload:TNumberPayload, game) => {
+    const location = game.locations?.find(l => l.id === 'spice3')
     if (location) {
       dashboard.spice = dashboard.spice + 3 + (location?.spice || 0)
       location.spice = 0
@@ -124,18 +133,18 @@ const handlers: THandlers = {
 }
 
 
-export const BasicHandler = ({ dashboard, typeKey, payload, locations }: {
+export const BasicHandler = ({ dashboard, typeKey, payload, game }: {
   dashboard: Dashboard, 
   typeKey: EConstraint | EEffect, 
   payload: any
-  locations?: TLocations
+  game: Game
 }) => {
   const handler = handlers[typeKey]
   if (handler) {
     handler(dashboard, {
       number: payload.number ?? 1,
       id: payload.id ?? -1
-    }, locations)
+    }, game)
   }
 }
 
@@ -146,7 +155,6 @@ export const BasicHandler = ({ dashboard, typeKey, payload, locations }: {
   // 'research' = 'research',
   // 'paoC' = 'paoC',
 
-  // 'acquireSpacingGuid' = 'acquireSpacingGuid',
   // 'constraint' = 'constraint',
   // 'getHei' = 'getHei',
   // 'height' = 'height',

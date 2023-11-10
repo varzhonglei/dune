@@ -1,4 +1,4 @@
-import { Table, tableListStore } from "../../round-table/tables"
+import { Table } from "../../round-table/tables"
 import { miBaoHandler } from "./miBaoHandler"
 import { EActionType, TAction } from '../../../common/typing/user-action'
 import { BasicHandler } from "./basicHandler"
@@ -38,8 +38,9 @@ export const userActionsHandler = ({
             {
               dashboard,
               typeKey:  theKey,
-              payload: payload.todoEffect
-            }  
+              payload: payload.todoEffect,
+              game: s
+            } 
           )
         }
       })
