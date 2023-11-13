@@ -76,6 +76,8 @@ export const miBaoHandler = ({
         const mibao = dashboard.mibao.pop()
         mibao && location.miBao?.push(mibao)
 
+
+        // 拜佛
         const theBaio = location.icon as TBaiFoDi
         if (baiFoDi.includes(theBaio)) {
           const old = dashboard[theBaio] 

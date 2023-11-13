@@ -44,9 +44,9 @@ export enum EEffect {
   'height' = 'height',
   'unlock' = 'unlock',
   'or' = 'or',
-  'saveTechBuy' = 'saveTechBuy',
-  'byTechLess1' = 'byTechLess1',
-  'byTech' = 'byTech',
+  'buyTechSave' = 'buyTechSave',
+  'buyTech' = 'buyTech',
+  'buyTechCut' = 'buyTechCut',
   'getJian' = 'getJian',
   'inf' = 'inf',
   'inf2' = 'inf2',
@@ -66,6 +66,7 @@ export enum EEffect {
   'passTurn' = 'passTurn',
   'noop' = 'noop',
   'retreat' = 'retreat',
+  'acquireLess3' = 'acquireLess3'
 }
 
 export type TConstraint = {

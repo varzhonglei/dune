@@ -1,6 +1,6 @@
 import { shuffle } from "lodash"
 import { TCard } from "../../../common/cards/cards"
-import { Dashboard } from "../../../common/typing"
+import { Dashboard, Role } from "../../../common/typing"
 import { EConstraint, EEffect } from "../../../common/typing/effect"
 import { Game } from "../../../common/game"
 
@@ -12,6 +12,7 @@ type TNumberPayload = {
 type TIdPayload = {
   id: number
 }
+
 
 type PartialKey<T, K extends keyof T> = {
   [key in K]?: T[key]
@@ -130,6 +131,32 @@ const handlers: THandlers = {
       location.spice = 0
     }
   },
+  roleSkill: (dashboard, payload: any, game) => {
+    const role = dashboard.role
+    if (role === Role.polo) {
+      handlers.drawCard && handlers.drawCard(dashboard, {
+        number: 1,
+      }, game)
+    }
+    if (role === Role.dagong) {
+      dashboard.currentEffect = { key: EEffect.acquireLess3 } 
+    }
+    if (role === Role.longbo) {
+      dashboard.currentEffect = { 
+        key: EEffect.or,
+        options: [{
+          key: EEffect.buyTechSave,
+        }, {
+          key: EEffect.buyTech,
+        }]
+      } 
+    }
+    // if (role === Role.fanshu2) {
+      
+    // }
+
+  },
+
 }
 
 

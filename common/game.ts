@@ -24,6 +24,7 @@ export const initDashBoard: Dashboard = {
   exTurn: 'pass',
   mibaoActioned: false,
   effects: [],
+  currentEffect: null,
   point: 0,
   money: 0,
   water: 1,

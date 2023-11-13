@@ -41,6 +41,7 @@ export type Dashboard = {
   exTurn: TTurn
   
   effects: TEffect[]
+  currentEffect: TEffect | null
   user?: User
   miBaoColor?: MiBaoColor
   point: number

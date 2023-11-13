@@ -190,14 +190,14 @@ export const locations: TLocations = [ {
     icon: LocationIcon.pentagon,
     get: [{ key: EEffect.cardBuy }, 
       { key: EEffect.or, 
-        options: [{ key: EEffect.saveTechBuy }, 
-                  { key: EEffect.byTechLess1 }] }]
+        options: [{ key: EEffect.buyTechSave }, 
+                  { key: EEffect.buyTechCut }] }]
   },
  {
     id: 'jian',
     name: '开舰',
     icon: LocationIcon.pentagon,
     pay: [{ key: EConstraint.payMoney, number: 3 }],
-    get: [{ key: EEffect.byTech }, { key: EEffect.getJian }]
+    get: [{ key: EEffect.buyTech }, { key: EEffect.getJian }]
   }
 ]
