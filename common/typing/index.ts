@@ -54,6 +54,10 @@ export type Dashboard = {
   sister: number
   union: number
   empire: number
+  fremenAlliance: boolean
+  sisterAlliance: boolean
+  unionAlliance: boolean
+  empireAlliance: boolean
   //
 
   troops: {

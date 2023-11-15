@@ -29,10 +29,16 @@ export const initDashBoard: Dashboard = {
   money: 0,
   water: 1,
   spice: 0,
+
   fremen: 0,
   sister: 0,
   union: 0,
   empire: 0,
+  fremenAlliance: false,
+  sisterAlliance: false,
+  unionAlliance: false,
+  empireAlliance: false,
+
   role: Role.polo,
   
   troops: {
