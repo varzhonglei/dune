@@ -131,6 +131,18 @@ const handlers: THandlers = {
       location.spice = 0
     }
   },
+  infFremen: (dashboard, payload: TNumberPayload, game) => {
+    dashboard.fremen = Math.min(dashboard.fremen + payload.number, 5)
+    if (payload.number < 0 && dashboard.fremenAlliance) {
+      const theDs = game.dashboards.find(d => d.user?.name !== dashboard.user?.name 
+        && d.fremen > dashboard.fremen)
+      if (theDs) {
+        // todo: 如果有过个 玩家持平，那么由退下去的玩家选择给谁 token
+        dashboard.fremenAlliance = false
+        theDs.fremenAlliance = true
+      }
+    }
+  },
   roleSkill: (dashboard, payload: any, game) => {
     const role = dashboard.role
     if (role === Role.polo) {
