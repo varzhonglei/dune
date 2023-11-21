@@ -55,7 +55,6 @@ export enum EEffect {
   'infUnion' = 'infUnion',
   'infEmpire' = 'infEmpire',
   'liete' = 'liete',
-  'infExSister' = 'infExSister',
   'findSister' = 'findSister',
   'killTroopCamp' = 'killTroopCamp',
   'deployTroop' = 'deployTroop',

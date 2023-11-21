@@ -14,7 +14,7 @@ const add = (...args: TCardPart[]) => {
   storeCards.push(...addCardIds(args))
 }
 
-const c1 = {
+const c1: TCardPart = {
   name: '进进出出',
   price: 3,
   icons: [LocationIcon.triangle, LocationIcon.pentagon],
@@ -34,9 +34,10 @@ const c1 = {
 }
 add(c1)
 
-const c2 = {
+const c2: TCardPart = {
   name: '金牙匕',
-  camp: [ECardCamp.fremen],
+  // todo fix me
+  // camp: [ECardCamp.fremen],
   icons: [LocationIcon.triangle, LocationIcon.fremen],
   playEffect: [{
       key: EEffect.getMoney,
@@ -114,7 +115,12 @@ const c6 = {
       conBonus: [{
         key: EEffect.constraint,
         con: [{ key: EConstraint.dropCard }],
-        conBonus: [{ key: EEffect.infExSister }]
+        conBonus: [
+          {
+            key: EEffect.or,
+            options: [{ key: EEffect.infFremen }, { key: EEffect.infEmpire }, { key: EEffect.infUnion }]
+          }
+        ]
       }]
     }],
   revealEffect: [{key: EEffect.infSister,}],

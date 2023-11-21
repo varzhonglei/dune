@@ -4,6 +4,7 @@ import { TSprite } from '../typing/ui'
 import { addCardId, addCardIds } from "../../src/utils"
 
 export type TCardPart = {
+  price?: number
   name: string
   playEffect?: any
   revealEffect?: any

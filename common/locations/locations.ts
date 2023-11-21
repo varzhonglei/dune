@@ -201,3 +201,14 @@ export const locations: TLocations = [ {
     get: [{ key: EEffect.buyTech }, { key: EEffect.getJian }]
   }
 ]
+
+export const baiFoDi = [LocationIcon.fremen, LocationIcon.empire, LocationIcon.sister, LocationIcon.union]
+export const baiFoBonus: {
+  [key in TBaiFoDi]: TEffect
+} = {
+  [LocationIcon.fremen]: { key: EEffect.getWater },
+  [LocationIcon.sister]: { key: EEffect.drawYin },
+  [LocationIcon.union]: { key: EEffect.getMoney, number: 3 },
+  [LocationIcon.empire]: { key: EEffect.getTroops, number: 2 },
+}
+export type TBaiFoDi = LocationIcon.fremen | LocationIcon.empire | LocationIcon.sister | LocationIcon.union

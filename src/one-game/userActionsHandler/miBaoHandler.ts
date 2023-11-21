@@ -80,20 +80,20 @@ export const miBaoHandler = ({
         // 拜佛
         const theBaio = location.icon as TBaiFoDi
         if (baiFoDi.includes(theBaio)) {
-          const old = dashboard[theBaio] 
-          dashboard[theBaio] = Math.min(dashboard[location.icon as TBaiFoDi] + 1, 5)
-          if (dashboard[theBaio] === 4 && old === 3) {
-            BasicHandler(
-              {
-                dashboard,
-                typeKey: baiFoBonus[theBaio].key,
-                payload: {
-                  number: baiFoBonus[theBaio].number
-                },
-                game: s,
-              }            
-            )
-          }
+          // const old = dashboard[theBaio] 
+          // dashboard[theBaio] = Math.min(dashboard[location.icon as TBaiFoDi] + 1, 5)
+          // if (dashboard[theBaio] === 4 && old === 3) {
+          //   BasicHandler(
+          //     {
+          //       dashboard,
+          //       typeKey: baiFoBonus[theBaio].key,
+          //       payload: {
+          //         number: baiFoBonus[theBaio].number
+          //       },
+          //       game: s,
+          //     }            
+          //   )
+          // }
         }
 
         if (location.pay) {

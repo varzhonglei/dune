@@ -3,6 +3,7 @@ import { TCard } from "../../../common/cards/cards"
 import { Dashboard, Role } from "../../../common/typing"
 import { EConstraint, EEffect } from "../../../common/typing/effect"
 import { Game } from "../../../common/game"
+import { LocationIcon, TBaiFoDi, baiFoBonus } from "../../../common/locations/locations"
 
 
 type TNumberPayload = {
@@ -132,15 +133,66 @@ const handlers: THandlers = {
     }
   },
   infFremen: (dashboard, payload: TNumberPayload, game) => {
-    dashboard.fremen = Math.min(dashboard.fremen + payload.number, 5)
-    if (payload.number < 0 && dashboard.fremenAlliance) {
-      const theDs = game.dashboards.find(d => d.user?.name !== dashboard.user?.name 
-        && d.fremen > dashboard.fremen)
+    handlers.inf && handlers.inf(dashboard, {
+      ...payload,
+      theBaifo: LocationIcon.fremen,
+    }, game,
+    )
+  },
+  infSister: (dashboard, payload: TNumberPayload, game) => {
+    handlers.inf && handlers.inf(dashboard, {
+      ...payload,
+      theBaifo: LocationIcon.sister,
+    }, game)
+  },
+  infUnion: (dashboard, payload: TNumberPayload, game) => {
+    handlers.inf && handlers.inf(dashboard, {
+      ...payload,
+      theBaifo: LocationIcon.union,
+    }, game)
+  },
+  infEmpire: (dashboard, payload: TNumberPayload, game) => {
+    handlers.inf && handlers.inf(dashboard, {
+      ...payload,
+      theBaifo: LocationIcon.union,
+    }, game)
+  },
+  inf: (dashboard, payload: {
+    number: number,
+    theBaifo: TBaiFoDi
+  }, game) => {
+    const theBaifo = payload.theBaifo
+    const theAlliance = `${theBaifo}Alliance` as 'fremenAlliance'
+    const myName = dashboard.user?.name 
+
+    const old = dashboard[theBaifo] 
+
+    dashboard[theBaifo] = Math.min(dashboard[theBaifo] + payload.number, 5)
+
+    // 同盟
+    if (payload.number < 0 && dashboard[theAlliance]) {
+      const theDs = game.dashboards.find(d => d.user?.name !== myName 
+        && d[theBaifo] > dashboard[theBaifo])
       if (theDs) {
         // todo: 如果有过个 玩家持平，那么由退下去的玩家选择给谁 token
-        dashboard.fremenAlliance = false
-        theDs.fremenAlliance = true
+        theDs[theAlliance] = true
+        dashboard[theAlliance] = false
+      } else if (dashboard[theBaifo] < 3) {
+        dashboard[theAlliance] = false
       }
+    }
+
+    if (dashboard[theBaifo] >= 3) {
+      const theDs = game.dashboards.find(d => d.user?.name !== myName 
+        && d[theBaifo] >= dashboard[theBaifo])
+      if (!theDs) {
+        dashboard[theAlliance] = true
+      }
+    }
+
+    //奖励
+    if (dashboard[theBaifo] === 4 && old === 3) {
+      dashboard.effects.push(baiFoBonus[theBaifo])
     }
   },
   roleSkill: (dashboard, payload: any, game) => {
