@@ -167,6 +167,7 @@ const handlers: THandlers = {
 
     const old = dashboard[theBaifo] 
 
+    // todo, 如果玩家选择 退一， 那么要防止他的影响扣为-1
     dashboard[theBaifo] = Math.min(dashboard[theBaifo] + payload.number, 5)
 
     // 同盟

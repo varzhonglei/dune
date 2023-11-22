@@ -36,8 +36,7 @@ add(c1)
 
 const c2: TCardPart = {
   name: '金牙匕',
-  // todo fix me
-  // camp: [ECardCamp.fremen],
+  camp: [ECardCamp.fremen],
   icons: [LocationIcon.triangle, LocationIcon.fremen],
   playEffect: [{
       key: EEffect.getMoney,
@@ -53,7 +52,7 @@ const c2: TCardPart = {
 }
 add(c2)
 
-const c3 = {
+const c3: TCardPart = {
   name: '6沙虫',
   camp: [ECardCamp.fremen],
   icons: [LocationIcon.triangle, LocationIcon.circle],
@@ -75,7 +74,7 @@ const c3 = {
 }
 add(c3, c3)
 
-const c4 = {
+const c4: TCardPart = {
   name: '弗里曼营地',
   camp: [ECardCamp.fremen],
   icons: [LocationIcon.triangle],
@@ -92,7 +91,7 @@ const c4 = {
 }
 add(c4,c4)
 
-const c5 = {
+const c5: TCardPart = {
   name: '列特凯恩斯',
   camp: [ECardCamp.fremen],
   icons: [LocationIcon.circle, LocationIcon.fremen],
@@ -105,7 +104,7 @@ const c5 = {
 }
 add(c5)
 
-const c6 = {
+const c6: TCardPart = {
   name: '阴影之中',
   camp: [ECardCamp.sister],
   icons: [LocationIcon.circle, LocationIcon.triangle],
@@ -131,10 +130,10 @@ const c6 = {
 }
 add(c6, c6)
 
-const c7 = {
+const c7: TCardPart = {
   name: '权利之网',
   camp: [ECardCamp.sister],
-  qianRu: true,
+  qianRu: [LocationIcon.sister],
   icons: [LocationIcon.sister],
   playEffect: [
       {
@@ -160,7 +159,7 @@ const c7 = {
 }
 add(c7)
 
-const c8 = {
+const c8: TCardPart = {
   name: '其他记忆',
   camp: [ECardCamp.sister],
   icons: [LocationIcon.circle, LocationIcon.triangle],
@@ -178,7 +177,7 @@ const c8 = {
 }
 add(c8)
 
-const c9 = {
+const c9: TCardPart = {
   name: '姐妹会新人',
   camp: [ECardCamp.sister],
   icons: [LocationIcon.circle, LocationIcon.triangle, LocationIcon.pentagon],
@@ -192,10 +191,10 @@ const c9 = {
 }
 add(c9)
 
-const c10 = {
+const c10: TCardPart = {
   name: '姐妹会大哥',
   camp: [ECardCamp.sister],
-  qianRu: true,
+  qianRu: [LocationIcon.pentagon],
   icons: [LocationIcon.pentagon],
   playEffect: [
       { key: EEffect.constraint,
@@ -210,7 +209,7 @@ const c10 = {
 }
 add(c10)
 
-const c11 = {
+const c11: TCardPart = {
   name: '普翼机 抽牌',
   icons: [LocationIcon.triangle],
   playEffect: [
@@ -226,7 +225,7 @@ const c11 = {
 }
 add(c11, c11)
 
-const c12 = {
+const c12: TCardPart = {
   name: '普翼机 上兵',
   icons: [LocationIcon.triangle, LocationIcon.circle],
   playEffect: [
@@ -239,7 +238,7 @@ const c12 = {
 }
 add(c12, c12)
 
-const c13 = {
+const c13: TCardPart = {
   name: 'power play',
   icons: [LocationIcon.fremen, LocationIcon.sister, LocationIcon.union, LocationIcon.empire],
   playEffect: [

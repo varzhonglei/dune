@@ -1,19 +1,30 @@
-import { EConstraint, EEffect } from "../typing/effect"
+import { EConstraint, EEffect, TEffect } from "../typing/effect"
 import { LocationIcon } from "../locations/locations"
 import { TSprite } from '../typing/ui'
 import { addCardId, addCardIds } from "../../src/utils"
 
 export type TCardPart = {
   price?: number
+  camp?: ECardCamp[]
   name: string
-  playEffect?: any
-  revealEffect?: any
+  playEffect?: TEffect[]
+  revealEffect?: TEffect[]
   icons?: LocationIcon[]
+  buyEffect?: TEffect[]
+  dropEffect?: TEffect[]
+  qianRu?: LocationIcon[]
   img?: {
     name: string,
     sprite?: TSprite,
   }
 }
+export enum ECardCamp {
+  'fremen' = 'fremen',
+  'sister' = 'sister',
+  'union' = 'union',
+  'empire' = 'empire',
+}
+
 export type TCard = TCardPart & {
   id: number
 }
