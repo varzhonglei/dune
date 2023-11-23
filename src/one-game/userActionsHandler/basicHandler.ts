@@ -196,6 +196,7 @@ const handlers: THandlers = {
       dashboard.effects.push(baiFoBonus[theBaifo])
     }
   },
+  // 戒指效果
   roleSkill: (dashboard, payload: any, game) => {
     const role = dashboard.role
     if (role === Role.polo) {
@@ -216,10 +217,18 @@ const handlers: THandlers = {
         }]
       } 
     }
-    // if (role === Role.fanshu2) {
-      
-    // }
-
+    if (role === Role.fanshu2) {
+      const hasA = dashboard.fremenAlliance || dashboard.sisterAlliance || dashboard.unionAlliance || dashboard.empireAlliance
+      handlers.getTroops && handlers.getTroops(dashboard, {
+        number: hasA ? 2 : 1
+      }, game)
+    }
+    if (role === Role.hailena) {
+      // const hasA = dashboard.fremenAlliance || dashboard.sisterAlliance || dashboard.unionAlliance || dashboard.empireAlliance
+      // handlers.getTroops && handlers.getTroops(dashboard, {
+      //   number: hasA ? 2 : 1
+      // }, game)
+    }
   },
 
 }

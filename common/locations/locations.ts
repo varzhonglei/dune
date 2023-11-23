@@ -211,4 +211,12 @@ export const baiFoBonus: {
   [LocationIcon.union]: { key: EEffect.getMoney, number: 3 },
   [LocationIcon.empire]: { key: EEffect.getTroops, number: 2 },
 }
+export const baiFoBasicInf: {
+  [key in TBaiFoDi]: TEffect
+} = {
+  [LocationIcon.fremen]: { key: EEffect.infFremen },
+  [LocationIcon.sister]: { key: EEffect.infSister },
+  [LocationIcon.union]: { key: EEffect.infUnion },
+  [LocationIcon.empire]: { key: EEffect.infEmpire },
+}
 export type TBaiFoDi = LocationIcon.fremen | LocationIcon.empire | LocationIcon.sister | LocationIcon.union

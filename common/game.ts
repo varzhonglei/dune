@@ -20,10 +20,14 @@ export interface Game {
 }
 
 export const initDashBoard: Dashboard = {
+  // 轮次
   turn: 'pass',
+  // 不在轮次，但是有一些选择要做
   exTurn: 'pass',
+  // 特使是否行动
   mibaoActioned: false,
   effects: [],
+  // 当前正要结算的行动
   currentEffect: null,
   point: 0,
   money: 0,
