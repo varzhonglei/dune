@@ -4,6 +4,9 @@ export enum EConstraint {
   'paySpice' = 'paySpice',
   'payWater' = 'payWater',
   'payMoney' = 'payMoney',
+  'payTLL' = 'payTLL',
+  'loseTroops' = 'loseTroops',
+  'ifGrafted' = 'ifGrafted',
 
   'trashCard' = 'trashCard',
   'loseInf' = 'loseInf',
@@ -18,6 +21,8 @@ export enum EConstraint {
   'empire' = 'empire',
   'empireAlliance' = 'empireAlliance',
   'dropCard' = 'dropCard',
+  'gene1' = 'gene1',
+  'gene2' = 'gene2',
 }
 
 export enum EEffect {
@@ -65,7 +70,11 @@ export enum EEffect {
   'passTurn' = 'passTurn',
   'noop' = 'noop',
   'retreat' = 'retreat',
-  'acquireLess3' = 'acquireLess3'
+  'acquireLess3' = 'acquireLess3',
+  'acquireLess5' = 'acquireLess5',
+  'goldBug'= 'goldBug',
+  'opponentsLoseBTroops' = 'opponentsLoseBTroops',
+  'anotherTurn' = 'anotherTurn'
 }
 
 export type TConstraint = {
@@ -73,7 +82,10 @@ export type TConstraint = {
 }
 
 export type TEffect = {
-  key: EEffect, number?: number
+  key: EEffect, 
+  mayAbandon?: boolean
+  number?: number
+  maxNumber?: number
   con?: TConstraint[]
   conBonus?: TEffect[]
   options?: TEffect[]

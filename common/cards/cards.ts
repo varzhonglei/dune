@@ -5,6 +5,7 @@ import { addCardId, addCardIds } from "../../src/utils"
 
 export type TCardPart = {
   price?: number
+  TTLPrice?: number
   camp?: ECardCamp[]
   name: string
   playEffect?: TEffect[]
@@ -12,6 +13,7 @@ export type TCardPart = {
   icons?: LocationIcon[]
   buyEffect?: TEffect[]
   dropEffect?: TEffect[]
+  trashEffect?: TEffect[]
   qianRu?: LocationIcon[]
   img?: {
     name: string,
