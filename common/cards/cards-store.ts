@@ -639,6 +639,267 @@ export const c30:TCardPart = {
   }
 }
 
+export const c31:TCardPart = {
+  name: '背叛',
+  icons: [LocationIcon.empire, LocationIcon.union, LocationIcon.fremen, LocationIcon.sister],
+  price: 6,
+  playEffect: [
+    {
+      key: EEffect.infMoreOne,
+    },
+    {
+      key: EEffect.trashCardSelf
+    }
+  ],
+  revealEffect: [
+    {
+      key: EEffect.getTroopsAndDeployThem,
+      number: 2
+    }],
+    trashEffect: [{
+      key: EEffect.getTroopsAndDeployThem,
+      number: 2
+    }],
+    dropEffect: [
+    {
+      key: EEffect.getTroopsAndDeployThem,
+      number: 2
+    }],
+  img: {
+    name: 'c31.jpg'
+  }
+}
+
+export const c32:TCardPart = {
+  name: '全面进攻',
+  icons: [LocationIcon.empire, LocationIcon.circle],
+  camp: [ECardCamp.empire],
+  price: 8,
+  playEffect: [
+    {
+      key: EEffect.getTroops,
+      number: 2,
+    }],
+  revealEffect: [
+    {
+      key: EEffect.cardBuy,
+      number: 2
+    },
+    {
+      key: EEffect.jian3,
+    },
+  ],
+  buyEffect: [{
+    key: EEffect.getJian
+  }],
+  img: {
+    name: 'c32.jpg'
+  }
+}
+
+
+export const c33:TCardPart = {
+  name: '沙虫骑士',
+  icons: [LocationIcon.triangle, LocationIcon.circle],
+  camp: [ECardCamp.fremen],
+  price: 6,
+  playEffect: [
+    {
+      key: EEffect.getSpice,
+      number: 2,
+    }],
+  revealEffect: [
+    {
+      key: EEffect.constraint,
+      con: [ {key: EConstraint.fremen, number: 2} ],
+      conBonus: [ {key: EEffect.dao, number: 4} ]
+    },
+    {
+      key: EEffect.constraint,
+      con: [ {key: EConstraint.fremenAlliance} ],
+      conBonus: [ {key: EEffect.dao, number: 2} ]
+    },
+  ],
+  img: {
+    name: 'c33.jpg'
+  }
+}
+
+export const c34:TCardPart = {
+  name: '萨多卡军团',
+  icons: [LocationIcon.pentagon, LocationIcon.empire],
+  camp: [ECardCamp.empire],
+  price: 5,
+  playEffect: [
+    {
+      key: EEffect.getTroops,
+      number: 2,
+    }],
+  revealEffect: [
+    {
+      key: EEffect.cardBuy
+    },
+    {
+      key: EEffect.deployTroop,
+      maxNumber: 3,
+    },
+  ],
+  img: {
+    name: 'c34.jpg'
+  }
+}
+
+export const c35:TCardPart = {
+  name: '大权在握',
+  icons: [LocationIcon.pentagon, LocationIcon.empire],
+  camp: [ECardCamp.empire],
+  price: 4,
+  playEffect: [
+    {
+      key: EEffect.constraint,
+      con: [{key:EConstraint.payMoney, number:2}],
+      conBonus: [{ key:EEffect.or,
+        options: [{key: EEffect.infFremen},{key: EEffect.infSister}, {key: EEffect.infUnion} ]
+      }]
+    }],
+  revealEffect: [
+    {
+      key: EEffect.constraint,
+      con: [{key:EConstraint.empireAlliance}],
+      conBonus: [{ 
+        key:EEffect.cardBuy,
+        number: 4
+      }]
+    }
+  ],
+  img: {
+    name: 'c35.jpg'
+  }
+}
+
+export const c36:TCardPart = {
+  name: '香料猎人',
+  icons: [LocationIcon.fremen, LocationIcon.triangle],
+  camp: [ECardCamp.fremen],
+  price: 2,
+  revealEffect: [
+    {
+      key: EEffect.constraint,
+      con: [{key:EConstraint.fremenBound}],
+      conBonus: [{ 
+        key:EEffect.getSpice,
+      }]
+    },
+    { 
+      key:EEffect.cardBuy,
+    },
+    { 
+      key:EEffect.dao,
+    }
+  ],
+  img: {
+    name: 'c36.jpg'
+  }
+}
+
+export const c37:TCardPart = {
+  name: '帝国间谍',
+  icons: [LocationIcon.empire],
+  camp: [ECardCamp.empire],
+  price: 2,
+  playEffect: [{
+    key: EEffect.constraint,
+    con: [{ key: EConstraint.trashSelf }],
+    conBonus: [{ key: EEffect.drawYin }]
+  }],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    },
+    { 
+      key:EEffect.dao,
+    }
+  ],
+  img: {
+    name: 'c37.jpg'
+  }
+}
+
+export const c38:TCardPart = {
+  name: '邓肯-忠诚之刃',
+  icons: [LocationIcon.fremen, LocationIcon.circle],
+  price: 5,
+  playEffect: [{
+    key: EEffect.getTroops,
+  }],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    },
+    { 
+      key:EEffect.dao,
+      number: 2,
+    },
+    {
+      key: EEffect.constraint,
+      con: [{ key: EConstraint.trashSelf }],
+      conBonus: [{
+        key: EEffect.or,
+        options: [{ 
+            key: EEffect.deployTroop,
+            maxNumber: 24
+          },
+          { 
+            key: EEffect.retreat,
+            maxNumber: 24
+          }
+        ]
+      }]
+    }
+  ],
+  img: {
+    name: 'c38.jpg'
+  }
+}
+
+export const c39:TCardPart = {
+  name: '刺杀任务',
+  price: 1,
+  revealEffect: [
+    { 
+      key:EEffect.getMoney,
+    },
+    { 
+      key:EEffect.dao,
+    },
+  ],
+  trashEffect: [{
+    key: EEffect.getMoney,
+    number: 4
+  }],
+  img: {
+    name: 'c39.jpg'
+  }
+}
+
+export const c40:TCardPart = {
+  name: '萨多卡部队',
+  price: 1,
+  camp: [ECardCamp.empire],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    },
+    { 
+      key:EEffect.dao,
+      number: 2,
+    },
+  ],
+  img: {
+    name: 'c40.jpg'
+  }
+}
+
 
 
 // const c1: TCardPart = {

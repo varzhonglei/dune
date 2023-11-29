@@ -9,6 +9,7 @@ export enum EConstraint {
   'ifGrafted' = 'ifGrafted',
 
   'trashCard' = 'trashCard',
+  'trashSelf' = 'trashSelf',
   'loseInf' = 'loseInf',
   'fremenBound' = 'fremenBound',
   'fremen' = 'fremen',
@@ -28,6 +29,7 @@ export enum EConstraint {
 export enum EEffect {
   'trashCard' = 'trashCard',
   'getTroops' = 'getTroops',
+  'getTroopsAndDeployThem' = 'getTroopsAndDeployThem',
   'getMoney' = 'getMoney',
   'getWater' = 'getWater',
   'getSpice' = 'getSpice',
@@ -59,6 +61,7 @@ export enum EEffect {
   'infSister' = 'infSister',
   'infUnion' = 'infUnion',
   'infEmpire' = 'infEmpire',
+  'infMoreOne' = 'infMoreOne',
   'liete' = 'liete',
   'findSister' = 'findSister',
   'killTroopCamp' = 'killTroopCamp',
@@ -76,7 +79,8 @@ export enum EEffect {
   'opponentsLoseBTroops' = 'opponentsLoseBTroops',
   'anotherTurn' = 'anotherTurn',
   'wawaji' = 'wawaji',
-  'spiceMustFlowCost3' = 'spiceMustFlowCost3'
+  'spiceMustFlowCost3' = 'spiceMustFlowCost3',
+  'jian3'= 'jian3',
 }
 
 export type TConstraint = {
