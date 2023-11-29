@@ -515,10 +515,127 @@ export const c26:TCardPart = {
   },
   {
     key: EEffect.dao,
-    number: 1
   }],
   img: {
     name: 'c26.jpg'
+  }
+}
+
+
+export const c27:TCardPart = {
+  name: '埃斯马•图克',
+  icons: [LocationIcon.triangle, LocationIcon.circle],
+  camp: [ECardCamp.union],
+  price: 5,
+  playEffect: [{
+    key:EEffect.constraint,
+    con: [ {key: EConstraint.paySpice} ],
+    conBonus: [{
+      key: EEffect.getSpice,
+      number: 2
+    }]
+  }],
+  revealEffect: [{
+    key: EEffect.getSpice,
+    number: 2
+  },
+  {
+    key: EEffect.getMoney,
+    number: 2
+  }],
+  trashEffect: [{
+    key: EEffect.getSpice,
+    number: 2
+  },
+  {
+    key: EEffect.getMoney,
+    number: 2
+  }],
+  dropEffect: [{
+    key: EEffect.getSpice,
+    number: 2
+  },
+  {
+    key: EEffect.getMoney,
+    number: 2
+  }],
+  img: {
+    name: 'c27.jpg'
+  }
+}
+
+export const c28:TCardPart = {
+  name: '宇联商会代表',
+  icons: [LocationIcon.triangle],
+  qianRu: [LocationIcon.triangle],
+  price: 1,
+  revealEffect: [
+  {
+    key: EEffect.getMoney,
+    number: 3
+  }],
+  trashEffect: [{
+    key: EEffect.getMoney,
+    number: 3
+  }],
+  dropEffect: [
+  {
+    key: EEffect.getMoney,
+    number: 3
+  }],
+  img: {
+    name: 'c28.jpg'
+  }
+}
+export const c29:TCardPart = {
+  name: '本地贩子',
+  icons: [LocationIcon.circle],
+  price: 1,
+  playEffect: [
+    {
+      key: EEffect.or,
+      options: [{key: EEffect.constraint,
+        con: [{key: EConstraint.paySpice, number:2}],
+        conBonus: [{key: EEffect.getMoney, number: 5}]
+      }, {key: EEffect.constraint,
+        con: [{key: EConstraint.payMoney, number:5}],
+        conBonus: [{key: EEffect.getSpice, number: 4}]
+      }]
+    }],
+  revealEffect: [
+  {
+    key: EEffect.cardBuy,
+    number: 2
+  }],
+  img: {
+    name: 'c29.jpg'
+  }
+}
+
+export const c30:TCardPart = {
+  name: '杰西卡夫人',
+  icons: [LocationIcon.circle, LocationIcon.pentagon, LocationIcon.triangle, LocationIcon.sister],
+  camp: [ECardCamp.sister],
+  price: 7,
+  buyEffect: [{
+    key: EEffect.inf
+  }],
+  playEffect: [
+    {
+      key: EEffect.drawCard,
+      number: 2,
+    }],
+  revealEffect: [
+    {
+      key: EEffect.cardBuy,
+      number: 3
+    },
+    {
+      key: EEffect.dao,
+    }
+  ],
+  img: {
+    name: 'c30.jpg'
   }
 }
 
