@@ -395,6 +395,133 @@ export const c20:TCardPart = {
   }
 }
 
+export const c21:TCardPart = {
+  name: '太空旅行',
+  icons: [LocationIcon.union],
+  camp: [ECardCamp.union],
+  price: 3,
+  playEffect: [{
+    key: EEffect.drawCard,
+  }],
+  revealEffect: [
+    {
+      key: EEffect.cardBuy,
+      number: 2
+    }
+  ],
+  img: {
+    name: 'c21.jpg'
+  }
+}
+
+export const c22:TCardPart = {
+  name: '搬运机',
+  icons: [LocationIcon.triangle],
+  price: 5,
+  playEffect: [{
+    key: EEffect.wawaji,
+  }],
+  revealEffect: [
+    {
+      key: EEffect.cardBuy,
+    },
+    {
+      key: EEffect.getSpice,
+    }
+  ],
+  img: {
+    name: 'c22.jpg'
+  }
+}
+
+export const c23:TCardPart = {
+  name: '公会银行家',
+  icons: [LocationIcon.empire, LocationIcon.union, LocationIcon.pentagon],
+  price: 5,
+  revealEffect: [
+    {
+      key: EEffect.spiceMustFlowCost3,
+    },
+  ],
+  img: {
+    name: 'c23.jpg'
+  }
+}
+
+export const c24:TCardPart = {
+  name: '彼得•德伏来',
+  icons: [LocationIcon.pentagon, LocationIcon.circle],
+  price: 5,
+  playEffect: [{
+    key: EEffect.drawYin
+  }],
+  revealEffect: [
+    {
+      key: EEffect.cardBuy,
+      number: 3
+    },
+    {
+      key: EEffect.dao
+    }
+  ],
+  img: {
+    name: 'c24.jpg'
+  }
+}
+
+export const c25:TCardPart = {
+  name: '贝尼•杰瑟里特姐妹',
+  icons: [LocationIcon.pentagon, LocationIcon.sister],
+  camp: [ECardCamp.sister],
+  price: 3,
+  revealEffect: [
+   {
+    key: EEffect.or,
+    options: [ {
+      key: EEffect.cardBuy,
+      number: 2
+    },
+    {
+      key: EEffect.dao,
+      number: 2
+    }]
+   }
+  ],
+  img: {
+    name: 'c25.jpg'
+  }
+}
+
+export const c26:TCardPart = {
+  name: '香料商人',
+  icons: [LocationIcon.triangle, LocationIcon.circle],
+  camp: [ECardCamp.fremen],
+  price: 4,
+  playEffect: [{
+    key: EEffect.constraint,
+    con: [{ key: EConstraint.fremen, number: 2 }],
+    conBonus: [{
+      key:EEffect.constraint,
+      con: [ {key: EConstraint.dropCard} ],
+      conBonus: [{
+        key: EEffect.getSpice,
+        number: 2
+      }]
+    }]
+  }],
+  revealEffect: [{
+    key: EEffect.cardBuy,
+    number: 2
+  },
+  {
+    key: EEffect.dao,
+    number: 1
+  }],
+  img: {
+    name: 'c26.jpg'
+  }
+}
+
 
 
 // const c1: TCardPart = {

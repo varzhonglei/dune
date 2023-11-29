@@ -74,7 +74,9 @@ export enum EEffect {
   'acquireLess5' = 'acquireLess5',
   'goldBug'= 'goldBug',
   'opponentsLoseBTroops' = 'opponentsLoseBTroops',
-  'anotherTurn' = 'anotherTurn'
+  'anotherTurn' = 'anotherTurn',
+  'wawaji' = 'wawaji',
+  'spiceMustFlowCost3' = 'spiceMustFlowCost3'
 }
 
 export type TConstraint = {
