@@ -6,6 +6,7 @@ export enum EConstraint {
   'payMoney' = 'payMoney',
   'payTLL' = 'payTLL',
   'loseTroops' = 'loseTroops',
+  'retreatTroops' = 'retreatTroops',
   'ifGrafted' = 'ifGrafted',
 
   'trashCard' = 'trashCard',
@@ -24,11 +25,13 @@ export enum EConstraint {
   'dropCard' = 'dropCard',
   'gene1' = 'gene1',
   'gene2' = 'gene2',
+  'techNumber' = 'techNumber',
 }
 
 export enum EEffect {
   'trashCard' = 'trashCard',
   'getTroops' = 'getTroops',
+  'getVP' = 'getVP',
   'getTroopsAndDeployThem' = 'getTroopsAndDeployThem',
   'getMoney' = 'getMoney',
   'getWater' = 'getWater',
@@ -81,6 +84,7 @@ export enum EEffect {
   'wawaji' = 'wawaji',
   'spiceMustFlowCost3' = 'spiceMustFlowCost3',
   'jian3'= 'jian3',
+  'shaMoTuXi' = 'shaMoTuXi',
 }
 
 export type TConstraint = {

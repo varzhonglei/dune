@@ -15,6 +15,7 @@ export type TCardPart = {
   dropEffect?: TEffect[]
   trashEffect?: TEffect[]
   qianRu?: LocationIcon[]
+  graft?: boolean
   img?: {
     name: string,
     sprite?: TSprite,

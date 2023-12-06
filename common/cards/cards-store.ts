@@ -90,6 +90,7 @@ export const c6:TCardPart = {
   price: 3,
   playEffect: [{ 
     key: EEffect.constraint,
+    mayAbandon: true,
     con: [{ key: EConstraint.payTLL, number: 2 }],
     conBonus: [{ key: EEffect.goldBug, number: 2 }]
   }],
@@ -98,6 +99,7 @@ export const c6:TCardPart = {
     number: 2,
   }, {
     key: EEffect.constraint,
+    mayAbandon: true,
     con: [{ key: EConstraint.loseTroops, number: 2 }],
     conBonus: [{ key: EEffect.TLLBuy, number: 2 }]
   }],
@@ -178,6 +180,7 @@ export const c11:TCardPart = {
   price: 4,
   playEffect: [{
     key: EEffect.constraint,
+    mayAbandon: true,
     con: [{ key: EConstraint.paySpice, number: 2 }],
     conBonus: [{ key: EEffect.getTroops, number: 3 }]
   }],
@@ -221,6 +224,7 @@ export const c13:TCardPart = {
   price: 5,
   playEffect: [{
     key: EEffect.constraint,
+    mayAbandon: true,
     con: [{key: EConstraint.dropCard}],
     conBonus: [{key: EEffect.getSpice}, { key: EEffect.getWater }]
   }],
@@ -291,6 +295,7 @@ export const c16:TCardPart = {
   price: 3,
   playEffect: [{
     key: EEffect.constraint,
+    mayAbandon: true,
     con: [{key: EConstraint.dropCard, number: 2}],
     conBonus: [{key: EEffect.getJian}]
   }],
@@ -361,6 +366,7 @@ export const c19:TCardPart = {
   price: 2,
   playEffect: [{
     key: EEffect.constraint,
+    mayAbandon: true,
     con: [{key: EConstraint.paySpice, number: 2}],
     conBonus: [{key: EEffect.getMoney, number: 3}, { key: EEffect.infUnion }]
   }],
@@ -502,6 +508,7 @@ export const c26:TCardPart = {
     con: [{ key: EConstraint.fremen, number: 2 }],
     conBonus: [{
       key:EEffect.constraint,
+      mayAbandon: true,
       con: [ {key: EConstraint.dropCard} ],
       conBonus: [{
         key: EEffect.getSpice,
@@ -529,6 +536,7 @@ export const c27:TCardPart = {
   price: 5,
   playEffect: [{
     key:EEffect.constraint,
+    mayAbandon: true,
     con: [ {key: EConstraint.paySpice} ],
     conBonus: [{
       key: EEffect.getSpice,
@@ -595,9 +603,11 @@ export const c29:TCardPart = {
     {
       key: EEffect.or,
       options: [{key: EEffect.constraint,
+        mayAbandon: true,
         con: [{key: EConstraint.paySpice, number:2}],
         conBonus: [{key: EEffect.getMoney, number: 5}]
       }, {key: EEffect.constraint,
+        mayAbandon: true,
         con: [{key: EConstraint.payMoney, number:5}],
         conBonus: [{key: EEffect.getSpice, number: 4}]
       }]
@@ -757,6 +767,7 @@ export const c35:TCardPart = {
   playEffect: [
     {
       key: EEffect.constraint,
+      mayAbandon: true,
       con: [{key:EConstraint.payMoney, number:2}],
       conBonus: [{ key:EEffect.or,
         options: [{key: EEffect.infFremen},{key: EEffect.infSister}, {key: EEffect.infUnion} ]
@@ -809,6 +820,7 @@ export const c37:TCardPart = {
   price: 2,
   playEffect: [{
     key: EEffect.constraint,
+    mayAbandon: true,
     con: [{ key: EConstraint.trashSelf }],
     conBonus: [{ key: EEffect.drawYin }]
   }],
@@ -842,6 +854,7 @@ export const c38:TCardPart = {
     },
     {
       key: EEffect.constraint,
+      mayAbandon: true,
       con: [{ key: EConstraint.trashSelf }],
       conBonus: [{
         key: EEffect.or,
@@ -899,6 +912,326 @@ export const c40:TCardPart = {
     name: 'c40.jpg'
   }
 }
+
+export const c41:TCardPart = {
+  name: '印章戒指',
+  icons: [LocationIcon.pentagon, LocationIcon.circle, LocationIcon.triangle],
+  playEffect: [{
+    key: EEffect.roleSkill
+  }],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    },
+  ],
+  img: {
+    name: 'c41.jpg'
+  }
+}
+
+export const c42:TCardPart = {
+  name: '土地测量',
+  icons: [LocationIcon.circle],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    },
+  ],
+  img: {
+    name: 'c42.jpg'
+  }
+}
+
+export const c43:TCardPart = {
+  name: '沙漠突袭',
+  price: 3,
+  camp: [ECardCamp.fremen],
+  icons: [LocationIcon.triangle],
+  playEffect: [
+    {
+      key: EEffect.shaMoTuXi
+    }
+  ],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    },
+    {
+      key: EEffect.dao
+    }
+  ],
+  img: {
+    name: 'c43.jpg'
+  }
+}
+
+export const c44:TCardPart = {
+  name: '协议撤退',
+  price: 4,
+  buyEffect: [{
+    key: EEffect.getTroops
+  }],
+  icons: [LocationIcon.triangle],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+      number: 2,
+    },
+    {
+      key: EEffect.constraint,
+      mayAbandon: true,
+      con: [{ key:EConstraint.retreatTroops, number: 3 }],
+      conBonus: [{ key: EEffect.inf }]
+    }
+  ],
+  img: {
+    name: 'c44.jpg'
+  }
+}
+
+export const c45:TCardPart = {
+  name: '沙道特•普菜斯',
+  price: 2,
+  camp: [ECardCamp.fremen],
+  icons: [LocationIcon.triangle, LocationIcon.fremen],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    },
+    {
+      key: EEffect.or,
+      options: [{ key:EEffect.deployTroop }, { key:EEffect.retreat }],
+    }, 
+    {
+      key:EEffect.dao,
+    }    
+  ],
+  img: {
+    name: 'c45.jpg'
+  }
+}
+
+export const c46:TCardPart = {
+  name: '计划中的伴侣',
+  price: 3,
+  camp: [ECardCamp.sister],
+  icons: [LocationIcon.sister],
+  playEffect: [{ key: EEffect.drawCard }],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    }, 
+  ],
+  graft: true,
+  img: {
+    name: 'c46.jpg'
+  }
+}
+
+export const c47:TCardPart = {
+  name: '腐败的走私者',
+  price: 3,
+  camp: [ECardCamp.union, ECardCamp.fremen],
+  icons: [LocationIcon.union, LocationIcon.triangle],
+  playEffect: [{ key: EEffect.constraint,
+    con: [{ key: EConstraint.ifGrafted }],
+    conBonus: [{ key: EEffect.getSpice, number: 2 }]
+  }],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    }, 
+    { 
+      key:EEffect.dao,
+    }, 
+  ],
+  img: {
+    name: 'c47.jpg'
+  }
+}
+
+export const c48:TCardPart = {
+  name: '器官商人',
+  price: 3,
+  icons: [LocationIcon.circle, LocationIcon.triangle],
+  playEffect: [
+    { key: EEffect.constraint,
+      mayAbandon: true,
+      con: [{ key: EConstraint.payTLL }],
+      conBonus: [{ key: EEffect.getMoney, number: 4 }]
+  }],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    }, 
+    { 
+      key:EEffect.getMoney,
+    }, 
+  ],
+  img: {
+    name: 'c48.jpg'
+  }
+}
+
+export const c49:TCardPart = {
+  name: '秘密会议',
+  price: 4,
+  camp: [ECardCamp.sister],
+  playEffect: [
+    { key: EEffect.infSister,},
+    { key: EEffect.drawYin,}
+  ],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+      number: 2,
+    }, 
+  ],
+  img: {
+    name: 'c49.jpg'
+  }
+}
+
+export const c50:TCardPart = {
+  name: '贝尼特菜拉研究员',
+  price: 4,
+  playEffect: [
+    { key: EEffect.research},
+  ],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+      number: 1,
+    }, 
+    {
+      key: EEffect.constraint,
+      con: [{ key: EConstraint.gene1 }],
+      conBonus: [{ key: EEffect.cardBuy }],
+    },
+    {
+      key: EEffect.constraint,
+      con: [{ key: EConstraint.gene2 }],
+      conBonus: [{ key: EEffect.cardBuy }],
+    }
+  ],
+  img: {
+    name: 'c50.jpg'
+  }
+}
+
+export const c51:TCardPart = {
+  name: '厄拉科斯联络官',
+  price: 2,
+  camp: [ECardCamp.fremen],
+  icons: [LocationIcon.pentagon, LocationIcon.circle],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+      number: 2,
+    }, 
+  ],
+  img: {
+    name: 'c51.jpg'
+  }
+}
+
+export const c52:TCardPart = {
+  name: '沙丘,沙漠行星',
+  icons: [LocationIcon.triangle],
+  revealEffect: [
+    { 
+      key:EEffect.cardBuy,
+    }, 
+  ],
+  img: {
+    name: 'c52.jpg'
+  }
+}
+
+export const c53:TCardPart = {
+  name: '伊克斯人工程师',
+  price: 5,
+  icons: [LocationIcon.triangle],
+  playEffect: [
+    { key: EEffect.buyTech }
+  ],
+  revealEffect: [
+    { 
+      key:EEffect.constraint,
+      con: [{ key: EConstraint.techNumber, number: 3 }],
+      conBonus: [{
+        key:EEffect.constraint,
+        mayAbandon: true,
+        con: [{ key: EConstraint.trashSelf }],
+        conBonus: [{ key: EEffect.getVP }]
+      }]
+    }, 
+  ],
+  img: {
+    name: 'c53.jpg'
+  }
+}
+
+export const c54:TCardPart = {
+  name: '哥尼•哈菜克',
+  price: 6,
+  icons: [LocationIcon.circle],
+  playEffect: [
+    { key: EEffect.getTroops, number: 2 },
+    { key: EEffect.drawCard },
+  ],
+  revealEffect: [
+    { 
+      key:EEffect.constraint,
+      mayAbandon: true,
+      con: [{ key: EConstraint.payMoney, number: 3 }],
+      conBonus: [{ 
+        key: EEffect.getTroops, number: 2,
+      }, 
+      { 
+        mayAbandon: true,
+        key: EEffect.deployTroop, number: 2,
+      }
+    ]
+    }, 
+  ],
+  img: {
+    name: 'c54.jpg'
+  }
+}
+
+export const c55:TCardPart = {
+  name: '香料永流传',
+  price: 9,
+  buyEffect: [{ key: EEffect.getVP }],
+  revealEffect: [
+    { 
+      key: EEffect.getSpice,
+    }, 
+  ],
+  img: {
+    name: 'c55.jpg'
+  }
+}
+
+export const c56:TCardPart = {
+  name: '亮剑 ！',
+  price: 3,
+  camp: [ECardCamp.fremen, ECardCamp.empire],
+  revealEffect: [
+    { 
+      key: EEffect.cardBuy,
+    }, 
+    { 
+      key: EEffect.dao,
+      number: 2
+    }, 
+  ],
+  img: {
+    name: 'c56.jpg'
+  }
+}
+
 
 
 
