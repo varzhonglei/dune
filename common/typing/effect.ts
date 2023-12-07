@@ -1,3 +1,4 @@
+import { ECardCamp } from "../cards/cards"
 
 
 export enum EConstraint {
@@ -26,9 +27,11 @@ export enum EConstraint {
   'gene1' = 'gene1',
   'gene2' = 'gene2',
   'techNumber' = 'techNumber',
+  'mostTroops' = 'mostTroops',
 }
 
 export enum EEffect {
+  'combatIcon' = 'combatIcon',
   'trashCard' = 'trashCard',
   'getTroops' = 'getTroops',
   'getVP' = 'getVP',
@@ -84,11 +87,16 @@ export enum EEffect {
   'wawaji' = 'wawaji',
   'spiceMustFlowCost3' = 'spiceMustFlowCost3',
   'jian3'= 'jian3',
+  'getGoldBug' = 'getGoldBug',
   'shaMoTuXi' = 'shaMoTuXi',
+  'huoPaoCard' = "huoPaoCard",
+  'otherKillDTroopsOrDiscardCard' = 'otherKillDTroopsOrDiscardCard'
 }
 
+
+
 export type TConstraint = {
-  key: EConstraint, number?: number
+  key: EConstraint, number?: number, target?: ECardCamp[]
 }
 
 export type TEffect = {
