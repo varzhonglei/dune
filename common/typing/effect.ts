@@ -28,6 +28,7 @@ export enum EConstraint {
   'gene2' = 'gene2',
   'techNumber' = 'techNumber',
   'mostTroops' = 'mostTroops',
+  'agentOnEmpire' = 'agentOnEmpire'
 }
 
 export enum EEffect {
@@ -59,6 +60,7 @@ export enum EEffect {
   'or' = 'or',
   'buyTechSave' = 'buyTechSave',
   'buyTech' = 'buyTech',
+  'buyTechMayUseSola' = 'buyTechMayUseSola',
   'buyTechCut' = 'buyTechCut',
   'getJian' = 'getJian',
   'inf' = 'inf',
@@ -82,7 +84,6 @@ export enum EEffect {
   'acquireLess3' = 'acquireLess3',
   'acquireLess5' = 'acquireLess5',
   'goldBug'= 'goldBug',
-  'opponentsLoseBTroops' = 'opponentsLoseBTroops',
   'anotherTurn' = 'anotherTurn',
   'wawaji' = 'wawaji',
   'spiceMustFlowCost3' = 'spiceMustFlowCost3',
@@ -90,7 +91,10 @@ export enum EEffect {
   'getGoldBug' = 'getGoldBug',
   'shaMoTuXi' = 'shaMoTuXi',
   'huoPaoCard' = "huoPaoCard",
-  'otherKillDTroopsOrDiscardCard' = 'otherKillDTroopsOrDiscardCard'
+  'opponentsLoseBTroops' = 'opponentsLoseBTroops',
+  'opponentsDiscardCard' = 'opponentsDiscardCard',
+  'otherKillDTroopsOrDiscardCard' = 'otherKillDTroopsOrDiscardCard',
+  'allInSpiceLess2' = 'allInSpiceLess2',
 }
 
 
