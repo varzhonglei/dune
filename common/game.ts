@@ -1,5 +1,4 @@
-import { TCard, basicCards, c1, fremenCards, spacingGuidCards, spiceMustFlowCards } from "./cards/cards"
-import { storeCards } from "./cards/cards-store"
+import { TCard, basicCards, fremenCards, spacingGuidCards, spiceMustFlowCards } from "./cards/cards"
 import { numberId } from "../src/utils"
 import { TYinCard, yinCards } from "./yin-card/yin-card"
 import { Dashboard, MiBaoColor, Role, TMibao } from "./typing"
@@ -59,7 +58,8 @@ export const initDashBoard: Dashboard = {
   mibao: [],
 
   playedCards: [],
-  qiCards: [c1],
+  // todo: add 史诗三角
+  qiCards: [],
   handCards: [],
   moCards: [...basicCards],
   trashedCards: [],
@@ -100,7 +100,7 @@ export const initialGame: Game = {
       color: MiBaoColor.yellow
     }))
   }],
-  storeCards: storeCards,
+  storeCards: [],
   spiceMustFlowCards: spiceMustFlowCards,
   fremenCards: fremenCards,
   spacingGuidCards: spacingGuidCards,

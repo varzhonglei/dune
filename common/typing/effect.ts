@@ -28,7 +28,9 @@ export enum EConstraint {
   'gene2' = 'gene2',
   'techNumber' = 'techNumber',
   'mostTroops' = 'mostTroops',
-  'agentOnEmpire' = 'agentOnEmpire'
+  'agentOnEmpire' = 'agentOnEmpire',
+  //贴贴
+  'tieTie' = 'tieTie',
 }
 
 export enum EEffect {
@@ -42,6 +44,7 @@ export enum EEffect {
   'getSpice' = 'getSpice',
   'cardBuy' = 'cardBuy',
   'TLLBuy' = 'TLLBuy',
+  // 刀
   'dao' = 'dao', 
   'trashCardSelf' = 'trashCardSelf',
   'roleSkill' = "roleSkill",
@@ -62,6 +65,7 @@ export enum EEffect {
   'buyTech' = 'buyTech',
   'buyTechMayUseSola' = 'buyTechMayUseSola',
   'buyTechCut' = 'buyTechCut',
+  //舰
   'getJian' = 'getJian',
   'inf' = 'inf',
   'inf2' = 'inf2',
@@ -85,9 +89,11 @@ export enum EEffect {
   'acquireLess5' = 'acquireLess5',
   'goldBug'= 'goldBug',
   'anotherTurn' = 'anotherTurn',
+  //挖挖机
   'wawaji' = 'wawaji',
   'spiceMustFlowCost3' = 'spiceMustFlowCost3',
-  'jian3'= 'jian3',
+
+  'jian3dao'= 'jian3dao',
   'getGoldBug' = 'getGoldBug',
   'shaMoTuXi' = 'shaMoTuXi',
   'huoPaoCard' = "huoPaoCard",
@@ -95,6 +101,8 @@ export enum EEffect {
   'opponentsDiscardCard' = 'opponentsDiscardCard',
   'otherKillDTroopsOrDiscardCard' = 'otherKillDTroopsOrDiscardCard',
   'allInSpiceLess2' = 'allInSpiceLess2',
+  'secretChangeYin' = 'secretChangeYin',
+  'yinYan' = 'yinYan',
 }
 
 

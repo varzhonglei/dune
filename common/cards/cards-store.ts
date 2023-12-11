@@ -1,14 +1,6 @@
-import { ECardCamp, TCard, TCardPart } from "./cards"
+import { ECardCamp, TCardPart } from "./cards"
 import { EConstraint, EEffect } from "../typing/effect"
 import { LocationIcon } from "../locations/locations"
-import { addCardIds } from "../../src/utils"
-
-export const storeCards: TCard[] = []
-const add = (...args: TCardPart[]) => {
-  storeCards.push(...addCardIds(args))
-}
-
-
 
 export const c1: TCardPart = {
   name: '王权政治',
@@ -696,7 +688,7 @@ export const c32:TCardPart = {
       number: 2
     },
     {
-      key: EEffect.jian3,
+      key: EEffect.jian3dao,
     },
   ],
   buyEffect: [{
@@ -1832,35 +1824,255 @@ export const c89: TCardPart = {
   }
 }
 
+export const c90: TCardPart = {
+  name: '公会大使',
+  price: 4,
+  camp: [ECardCamp.union],
+  icons: [LocationIcon.pentagon],
+  playEffect: [
+    { key: EEffect.or,
+      options: [{ key: EEffect.infUnion }, { key: EEffect.getSpice, number: 2 }]
+    }
+  ],
+  revealEffect: [
+    {
+      key: EEffect.constraint,
+      con: [{ key: EConstraint.unionAlliance }],
+      conBonus: [{ 
+        key: EEffect.constraint,
+        mayAbandon: true,
+        con: [{ key: EConstraint.paySpice, number: 3 }],
+        conBonus: [{ key: EEffect.getVP }]
+      }]
+    }
+  ],
+  img: {
+    name: 'c90.jpg'
+  }
+}
 
-// const c8: TCardPart = {
-//   name: '其他记忆',
-//   camp: [ECardCamp.sister],
+export const c91: TCardPart = {
+  name: '邓肯•艾达荷',
+  price: 4,
+  icons: [LocationIcon.circle],
+  playEffect: [
+    { 
+      key: EEffect.constraint,
+      mayAbandon: true,
+      con: [{key: EConstraint.payWater}],
+      conBonus: [{key: EEffect.getTroops}, {key:EEffect.drawCard}]
+    }
+  ],
+  revealEffect: [
+    {
+      key: EEffect.getWater,
+    },
+    {
+      key: EEffect.dao,
+    }
+  ],
+  img: {
+    name: 'c91.jpg'
+  }
+}
+
+// export const c92: TCardPart = {
+//   name: '敢死队队员',
+//   price: 3,
+//   camp: [ECardCamp.fremen],
 //   icons: [LocationIcon.circle, LocationIcon.triangle],
 //   playEffect: [
-//       {
-//         key: EEffect.or,
-//         options: [{ key: EEffect.drawCard }, 
-//           { key: EEffect.findSister }] 
-//       },
-//     ],
-//   revealEffect: [{key: EEffect.cardBuy, number: 2}],
+//     { 
+//       key: EEffect.trashCard
+//     }
+//   ],
+//   revealEffect: [
+//     {
+//       key: EEffect.cardBuy,
+//     },
+//     {
+//       key: EEffect.constraint,
+//       con: [ {key: EConstraint.fremenBound}],
+//       conBonus: [{ key: EEffect.dao }]
+//     }
+//   ],
 //   img: {
-//     name: 'c94.jpg'
+//     name: 'c92.jpg'
 //   }
 // }
-// add(c8)
 
-// const c9: TCardPart = {
-//   name: '姐妹会新人',
-//   camp: [ECardCamp.sister],
-//   icons: [LocationIcon.circle, LocationIcon.triangle, LocationIcon.pentagon],
-//   playEffect: [
-//       { key: EEffect.drawCard }
-//     ],
-//   revealEffect: [{key: EEffect.cardBuy }],
-//   img: {
-//     name: 'c93.jpg'
-//   }
-// }
-// add(c9)
+export const c93: TCardPart = {
+  name: '贝尼•杰瑟里特新人',
+  price: 3,
+  camp: [ECardCamp.sister],
+  icons: [LocationIcon.circle, LocationIcon.triangle, LocationIcon.pentagon],
+  playEffect: [
+      { key: EEffect.drawCard }
+    ],
+  revealEffect: [{key: EEffect.cardBuy }],
+  img: {
+    name: 'c93.jpg'
+  }
+}
+
+export const c94: TCardPart = {
+  name: '其他的记忆',
+  price: 4,
+  camp: [ECardCamp.sister],
+  icons: [LocationIcon.circle, LocationIcon.triangle],
+  playEffect: [
+      {
+        key: EEffect.or,
+        options: [{ key: EEffect.drawCard }, 
+          { key: EEffect.findSister }] 
+      },
+    ],
+  revealEffect: [{key: EEffect.cardBuy, number: 2}],
+  img: {
+    name: 'c94.jpg'
+  }
+}
+
+export const c95: TCardPart = {
+  name: '契尼',
+  price: 5,
+  camp: [ECardCamp.fremen],
+  icons: [LocationIcon.circle, LocationIcon.triangle, LocationIcon.fremen],
+  buyEffect: [{ key:EEffect.getWater }],
+  revealEffect: [{key: EEffect.cardBuy, number: 2}, {
+    key: EEffect.retreat,
+    maxNumber: 24,
+  }],
+  img: {
+    name: 'c95.jpg'
+  }
+}
+
+export const c96: TCardPart = {
+  name: '着陆权',
+  price: 4,
+  camp: [ECardCamp.union],
+  icons: [LocationIcon.circle],
+  playEffect: [{
+    key: EEffect.paoC
+  }],
+  revealEffect: [{key: EEffect.cardBuy, number: 2}],
+  img: {
+    name: 'c96.jpg'
+  }
+}
+
+export const c97: TCardPart = {
+  name: '朝中密事',
+  price: 2,
+  camp: [ECardCamp.empire],
+  icons: [LocationIcon.empire],
+  qianRu: [LocationIcon.empire],
+  playEffect: [{
+    key: EEffect.secretChangeYin,
+  }],
+  revealEffect: [{key: EEffect.cardBuy}, { key: EEffect.dao }],
+  img: {
+    name: 'c97.jpg'
+  }
+}
+
+export const c98: TCardPart = {
+  name: '公会行政长官',
+  price: 2,
+  camp: [ECardCamp.union],
+  icons: [LocationIcon.triangle, LocationIcon.union],
+  playEffect: [{
+    key: EEffect.trashCard,
+  }],
+  revealEffect: [{key: EEffect.cardBuy}],
+  img: {
+    name: 'c98.jpg'
+  }
+}
+
+
+export const c99: TCardPart = {
+  name: '赏金猎人',
+  price: 1,
+  icons: [LocationIcon.circle],
+  qianRu: [LocationIcon.circle],
+  playEffect: [{
+    key: EEffect.constraint,
+    con: [{key: EConstraint.tieTie}],
+    conBonus: [ { key: EEffect.getMoney, number: 2 } ]
+  }],
+  revealEffect: [{key: EEffect.cardBuy}, { key:EEffect.dao }],
+  img: {
+    name: 'c99.jpg'
+  }
+}
+
+export const c100: TCardPart = {
+  name: '魁萨茨•哈德拉克',
+  price: 8,
+  playEffect: [{
+    key: EEffect.drawCard,
+  }],
+  img: {
+    name: 'c100.jpg'
+  }
+}
+
+export const c101: TCardPart = {
+  name: '走私扑翼机',
+  price: 4,
+  camp: [ECardCamp.union],
+  playEffect: [{
+    key: EEffect.constraint,
+    con: [{ key: EConstraint.union, number: 2 }],
+    conBonus: [ { key: EEffect.drawCard, number: 2 } ]
+  }],
+  revealEffect: [{
+    key: EEffect.cardBuy,
+  }, { key: EEffect.getSpice }],
+  img: {
+    name: 'c101.jpg'
+  }
+}
+
+export const c102: TCardPart = {
+  name: '运输飞船大队',
+  price: 2,
+  revealEffect: [{
+    key: EEffect.paoC,
+  }],
+  trashEffect: [{
+    key: EEffect.paoC,
+  }],
+  dropEffect: [{
+    key: EEffect.paoC,
+  }],
+  img: {
+    name: 'c102.jpg'
+  }
+}
+
+export const c103: TCardPart = {
+  name: '说服',
+  revealEffect: [{
+    key: EEffect.cardBuy, number: 2
+  }],
+  img: {
+    name: 'c103.jpg'
+  }
+}
+
+export const c104: TCardPart = {
+  name: '音言',
+  camp: [ECardCamp.sister],
+  playEffect: [{ key: EEffect.yinYan }],
+  revealEffect: [{
+    key: EEffect.cardBuy, number: 2
+  }],
+  img: {
+    name: 'c104.jpg'
+  }
+}
+
+
