@@ -89,20 +89,24 @@ export const TopBar = () => {
           </div>
         }
         <div className="column column-n-pd">
-        <button 
-          onClick={() => {
-            //
-          }}
-          className="button is-info is-light mr-1 ml-1">
-            结束轮次
-        </button>
-        <button 
-          onClick={() => {
-            //
-          }}
-          className="button is-info is-light mr-1 ml-1">
-            展示
-        </button>
+        {
+          isInturn && <>
+           <button 
+            onClick={() => {
+              //
+            }}
+            className="button is-info is-light mr-1 ml-1">
+              结束轮次
+          </button>
+          <button 
+            onClick={() => {
+              //
+            }}
+            className="button is-info is-light mr-1 ml-1">
+              展示
+          </button>
+          </>
+        }
         </div>
       </div> 
     </Bottom>

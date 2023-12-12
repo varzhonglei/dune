@@ -50,6 +50,8 @@ export const initDashBoard: Dashboard = {
     troopsSupply: Array.from({length: 7}).map(_ => 1),
     troopsKeji: [],
     troopsTLL: [],
+    dreadnoughtCamp: [],
+    dreadnoughtBattle: []
   },
 
   cardBuy: 0,

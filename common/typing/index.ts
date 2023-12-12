@@ -33,6 +33,12 @@ export type TMibao = {
   color: MiBaoColor,
   mentat?: boolean
 }
+
+export type TDreadnought = {
+  color: MiBaoColor,
+}
+ 
+
 export type TTurn = 'inturn' | 'pass'
 
 export type Dashboard = {
@@ -66,6 +72,8 @@ export type Dashboard = {
     troopsSupply: number[]
     troopsKeji: number[]
     troopsTLL: number[]
+    dreadnoughtCamp: TDreadnought[]
+    dreadnoughtBattle: TDreadnought[]
   }
 
   cardBuy: number

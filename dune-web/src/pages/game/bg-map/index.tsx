@@ -8,6 +8,7 @@ type Props = {
    style?: React.CSSProperties
    holes?: THole[]
    showMask?: boolean
+   slot?: any
 }
 
 
@@ -34,5 +35,8 @@ export const BGMap = (props: Props) => {
 			id={props.modName} 
 			width={width} height={height} holes={props.holes || []} />
 		}
+    {
+      props.slot && props.slot
+    }
     </Container>
 }

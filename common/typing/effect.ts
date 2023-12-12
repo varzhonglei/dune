@@ -1,4 +1,4 @@
-import { ECardCamp } from "../cards/cards"
+import { ECardCamp } from "./card"
 
 
 export enum EConstraint {

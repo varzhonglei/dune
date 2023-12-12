@@ -1,9 +1,9 @@
-import { ModImage } from "../../components/mod-image"
 import { useAvailableLocations, useMiBaoAction } from "../../libs/hooks/useAction"
 import { useGameSubscribe } from "../../libs/store/game"
 import styled from "@emotion/styled"
 import { BGMap } from "./bg-map"
 import { holes } from "./bg-map/holes"
+import { Troops } from "./troops"
 
 const Container = styled('div')`
   width: 100%;
@@ -25,6 +25,11 @@ export const Game = () => {
       <BGMap style={{flex:3, width: '1px'}} showMask={false} modName={'bg2.jpg'}/>
       <BGMap style={{flex:2, width: '1px'}} showMask={!!miBaoAction.card}  holes={holes4}   modName={'bg4.jpg'}/>
     </div>
-    <BGMap showMask={!!miBaoAction.card} holes={holes1} modName={'bg1.jpg'}/>
+    <BGMap 
+      showMask={!!miBaoAction.card} 
+      holes={holes1}
+      modName={'bg1.jpg'}
+      slot={<Troops />}
+    />
   </Container>
 }

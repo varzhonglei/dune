@@ -1,6 +1,5 @@
-import { map } from "lodash"
-import { TCardPart, TCard } from "../../common/cards/cards"
-import { TYinCard, TYinCardPart } from "../../common/yin-card/yin-card"
+import { TYinCardPart } from "../../common/yin-card/yin-card"
+import { TCardPart } from "../../common/typing/card"
 
 const ids = {
     card: 1,

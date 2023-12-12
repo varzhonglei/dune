@@ -1,6 +1,9 @@
-import { ECardCamp, TCardPart } from "./cards"
 import { EConstraint, EEffect } from "../typing/effect"
 import { LocationIcon } from "../locations/locations"
+import { ECardCamp, TCardPart } from '../typing/card'
+
+
+
 
 export const c1: TCardPart = {
   name: '王权政治',

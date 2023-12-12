@@ -1,10 +1,9 @@
 import { Table } from "../../round-table/tables"
 import { Dashboard } from "../../../common/typing"
 import { TAction } from "../../../common/typing/user-action"
-import { LocationIcon, TBaiFoDi, baiFoBasicInf, baiFoDi } from "../../../common/locations/locations"
-import { allCards } from "../../../common/cards"
+import { TBaiFoDi, baiFoBasicInf, baiFoDi } from "../../../common/locations/locations"
 import { BasicHandler } from "./basicHandler"
-import { EEffect, TEffect } from "../../../common/typing/effect"
+import { allCards } from "../../../common/cards/cards"
 
 
 type TCreateHandler<T> = (dashboard:Dashboard, payload: T ) => void
