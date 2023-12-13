@@ -64,6 +64,50 @@ const Item = styled('div')`
   font-weight: bold;
 `
 
+const Battle1 = styled('div')`
+  position: absolute;
+  left: 27.5%;
+  top: 3.5%;
+  display: flex;
+  width: 22%;
+  height: 22%;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const Battle2 = styled('div')`
+  position: absolute;
+  right: 27.5%;
+  top: 3.5%;
+  display: flex;
+  width: 22%;
+  height: 22%;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const Battle3 = styled('div')`
+  position: absolute;
+  left: 27.5%;
+  top: 35%;
+  display: flex;
+  width: 22%;
+  height: 22%;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const Battle4 = styled('div')`
+  position: absolute;
+  right:27.5%;
+  top: 35%;
+  display: flex;
+  width: 22%;
+  height: 22%;
+  flex-direction: column;
+  justify-content: center;
+`
+
 
 
 export const Troops = () => {
@@ -76,14 +120,30 @@ export const Troops = () => {
         { ` ${ds.troops.troopsCamp.length}` }
       </Item>
       }
-      {ds.troops.dreadnoughtBattle?.length > 0 && <Item >
+      {ds.troops.dreadnoughtCamp?.length > 0 && <Item >
         <Box mr={1}>
           <DreadnoughtIcon size={22} color={ds.miBaoColor}></DreadnoughtIcon> 
         </Box>
-       { ds.troops.dreadnoughtBattle?.length > 1 &&  <Box mr={1}>
+       { ds.troops.dreadnoughtCamp?.length > 1 &&  <Box mr={1}>
           <DreadnoughtIcon size={22} color={ds.miBaoColor}></DreadnoughtIcon> 
         </Box>}   
       </Item>} 
+  </>
+
+const battle = (ds: Dashboard) => <>
+  { ds && ds.troops.troopsBattle.length > 0 && <Item >
+  <TroopsIcon size={18} color={ds.miBaoColor}></TroopsIcon> 
+  { ` ${ds.troops.troopsBattle.length}` }
+  </Item>
+  }
+  {ds.troops.dreadnoughtBattle?.length > 0 && <Item >
+  <Box mr={1}>
+    <DreadnoughtIcon size={22} color={ds.miBaoColor}></DreadnoughtIcon> 
+  </Box>
+  { ds.troops.dreadnoughtBattle?.length > 1 &&  <Box mr={1}>
+    <DreadnoughtIcon size={22} color={ds.miBaoColor}></DreadnoughtIcon> 
+  </Box>}   
+  </Item>} 
   </>
 
   return <Container>
@@ -99,5 +159,17 @@ export const Troops = () => {
     <P4>
      {content(d4)}
     </P4>
+    <Battle1>
+      { battle(d1) }
+    </Battle1>
+    <Battle2>
+     { battle(d2) }
+    </Battle2>
+    <Battle3>
+     { battle(d3) }
+    </Battle3>
+    <Battle4>
+     { battle(d4) }
+    </Battle4>
   </Container>
 }   

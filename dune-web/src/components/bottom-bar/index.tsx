@@ -30,8 +30,10 @@ export const BottomBar = () => {
 
   const isInturn =  myDashBoard?.turn === 'inturn'
 
+  const mibaoActioned = myDashBoard?.mibaoActioned
+
   const handleChooseCard = (card: TCard) => ()  => {
-    if (isInturn) {
+    if (isInturn && !mibaoActioned) {
       miBaoActionState.setStateImmer(draft => {
         if (draft.card?.id === card.id) {
           draft.card = null

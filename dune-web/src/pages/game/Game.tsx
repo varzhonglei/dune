@@ -1,5 +1,5 @@
 import { useAvailableLocations, useMiBaoAction } from "../../libs/hooks/useAction"
-import { useGameSubscribe } from "../../libs/store/game"
+import { useGame, useGameSubscribe } from "../../libs/store/game"
 import styled from "@emotion/styled"
 import { BGMap } from "./bg-map"
 import { holes } from "./bg-map/holes"
@@ -19,6 +19,8 @@ export const Game = () => {
   const bg1Stations = availableLocations.filter(s => !['kejiSale', 'jian'].includes(s.id))
   const holes4 = bg4Stations.map(s => holes[s.id])
   const holes1 = bg1Stations.map(s => holes[s.id])
+  const gameData = useGame()
+  console.log('gameData', gameData.locations)
 
   return <Container>
     <div className="is-flex">

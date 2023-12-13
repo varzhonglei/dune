@@ -33,7 +33,7 @@ export const locations: TLocations = [ {
     id: 'pao1',
     name: '跑单船',
     icon: LocationIcon.triangle,
-    get: [{ key: EEffect.getMoney }, { key: EEffect.paoC }]
+    get: [{ key: EEffect.getMoney }, { key: EEffect.paoC }],
   },
   {
     id: 'pao2',
@@ -200,7 +200,7 @@ export const locations: TLocations = [ {
     pay: [{ key: EConstraint.payMoney, number: 3 }],
     get: [{ key: EEffect.buyTech }, { key: EEffect.getJian }]
   }
-]
+].map(i => ({...i, miBao: []})) as TLocations
 
 export const baiFoDi = [LocationIcon.fremen, LocationIcon.empire, LocationIcon.sister, LocationIcon.union]
 export const baiFoBonus: {

@@ -47,6 +47,7 @@ export const TopBar = () => {
 
   const hasEffects = myEffects?.length !== 0
   const isInturn = myDashboard?.turn === 'inturn'
+  const mibaoActioned = myDashboard?.mibaoActioned
 
   return <Container>
     <Top>      
@@ -56,7 +57,7 @@ export const TopBar = () => {
       }
      
       {
-        isInturn && <div className='title is-5'>
+        isInturn && !mibaoActioned &&  <div className='title is-5'>
           特使行动阶段
         </div>
       }
