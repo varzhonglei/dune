@@ -2,11 +2,14 @@ import { CanvasMask, THole } from "../../../components/canvas-mask/canvas-mask"
 import { useSrcByName } from "../../../components/mod-image"
 import { useResizeObserver } from "../../../libs/hooks/useResizeObserver"
 import styled from "@emotion/styled"
+import { Locations } from "../Location"
+import { Location } from '../../../../../common/locations/locations'
 
 type Props = {
    modName: string
    style?: React.CSSProperties
    holes?: THole[]
+   locations?: Location[]
    showMask?: boolean
    slot?: any
 }
@@ -35,6 +38,9 @@ export const BGMap = (props: Props) => {
 			id={props.modName} 
 			width={width} height={height} holes={props.holes || []} />
 		}
+    <Locations
+      width={width} height={height} locations={props.locations || []}
+    ></Locations>
     {
       props.slot && props.slot
     }
