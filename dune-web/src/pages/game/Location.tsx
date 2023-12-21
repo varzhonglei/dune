@@ -51,11 +51,11 @@ export const Locations = (props: Props) => {
         }}
       >
         {
-          h.mibao?.length && h.mibao.map(m =>
+          h.mibao?.length ? h.mibao.map(m =>
             <Mibao ml={3}>
               <MiBaoIcon color={m.color} size={28} />
-            </Mibao>
-          )
+            </Mibao> 
+          ) : ''
         }
       </Item>
     })}

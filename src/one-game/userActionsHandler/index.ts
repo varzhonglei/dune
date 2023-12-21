@@ -45,6 +45,18 @@ export const userActionsHandler = ({
         }
       })
     }
+    if (actionType === EActionType.endTurn) {
+      table.setState(s => {
+        const ind = s.dashboards.findIndex(d => d.user?.name === name)
+        const dashboard = s.dashboards[ind]
+        if (dashboard) {
+          dashboard.exTurn = 'pass'
+          dashboard.turn = 'pass'
+          const next = s.dashboards[ind + 1] || s.dashboards[0]
+          next.turn = 'inturn'
+        }
+      })
+    }
     //saveGame
     jdb.saveGame(table.id, table.getState())
 }

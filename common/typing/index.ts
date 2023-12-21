@@ -44,6 +44,7 @@ export type TTurn = 'inturn' | 'pass'
 export type Dashboard = {
   turn: TTurn
   mibaoActioned: boolean
+  revealed: boolean
   exTurn: TTurn
   
   effects: TEffect[]

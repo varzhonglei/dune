@@ -48,6 +48,7 @@ export const TopBar = () => {
   const hasEffects = myEffects?.length !== 0
   const isInturn = myDashboard?.turn === 'inturn'
   const mibaoActioned = myDashboard?.mibaoActioned
+  const revealed = myDashboard?.revealed
 
   return <Container>
     <Top>      
@@ -92,20 +93,28 @@ export const TopBar = () => {
         <div className="column column-n-pd">
         {
           isInturn && <>
-           <button 
-            onClick={() => {
-              //
-            }}
-            className="button is-info is-light mr-1 ml-1">
-              结束轮次
-          </button>
-          <button 
-            onClick={() => {
-              //
-            }}
-            className="button is-info is-light mr-1 ml-1">
-              展示
-          </button>
+           {
+            revealed || mibaoActioned && !hasEffects &&  <button 
+              onClick={() => {
+                userActionMessage( {
+                  tableId: Number(tableId),
+                  actionType: EActionType.endTurn,
+                  payload: {}
+                })
+              }}
+              className="button is-info is-light mr-1 ml-1">
+                结束轮次
+            </button>
+          }
+          {
+            !revealed && !mibaoActioned && <button 
+              onClick={() => {
+                //
+              }}
+              className="button is-info is-light mr-1 ml-1">
+                展示
+            </button>
+            }
           </>
         }
         </div>

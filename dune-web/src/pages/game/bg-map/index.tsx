@@ -22,27 +22,27 @@ const Container = styled('div')`
 
 
 export const BGMap = (props: Props) => {
-    const src = useSrcByName(props.modName)
-    const { ref, width, height } = useResizeObserver()
-    return <Container
-      style={props.style}
-    >
-		<img 
-			ref={ref}
-			title={props.modName}
-			style={{width: '100%', height: '100%'}}
-			src={src || ''} 
-		/>
-		{
-			props.showMask && <CanvasMask 
-			id={props.modName} 
-			width={width} height={height} holes={props.holes || []} />
-		}
-    <Locations
-      width={width} height={height} locations={props.locations || []}
-    ></Locations>
-    {
-      props.slot && props.slot
-    }
-    </Container>
+  const src = useSrcByName(props.modName)
+  const { ref, width, height } = useResizeObserver()
+  return <Container
+    style={props.style}
+  >
+  <img 
+    ref={ref}
+    title={props.modName}
+    style={{width: '100%', height: '100%'}}
+    src={src || ''} 
+  />
+  {
+    props.showMask && <CanvasMask 
+    id={props.modName} 
+    width={width} height={height} holes={props.holes || []} />
+  }
+  <Locations
+    width={width} height={height} locations={props.locations || []}
+  ></Locations>
+  {
+    props.slot && props.slot
+  }
+  </Container>
 }

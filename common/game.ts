@@ -25,6 +25,7 @@ export const initDashBoard: Dashboard = {
   exTurn: 'pass',
   // 特使是否行动
   mibaoActioned: false,
+  revealed: false,
   effects: [],
   // 当前正要结算的行动
   currentEffect: null,
