@@ -69,6 +69,8 @@ export const initDashBoard: Dashboard = {
 
   yinCards: [],
 
+  boat: 0,
+
 }
 
 export const initialGame: Game = {

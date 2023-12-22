@@ -77,6 +77,8 @@ export type Dashboard = {
     dreadnoughtBattle: TDreadnought[]
   }
 
+  boat: 0 | 1 | 2 | 3
+  
   cardBuy: number
   revealDao: number
   mibao: TMibao[]

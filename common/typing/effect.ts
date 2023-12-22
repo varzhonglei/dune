@@ -10,6 +10,7 @@ export enum EConstraint {
   'retreatTroops' = 'retreatTroops',
   'ifGrafted' = 'ifGrafted',
 
+  'trashYin' = 'trashYin',
   'trashCard' = 'trashCard',
   'trashSelf' = 'trashSelf',
   'loseInf' = 'loseInf',
