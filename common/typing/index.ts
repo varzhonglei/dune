@@ -2,6 +2,7 @@ import { TCard } from "../cards/cards"
 import { TYinCard } from "../yin-card/yin-card"
 import { TEffect } from "./effect"
 import { User } from "./user"
+import { TGene } from './gene'
 
 export enum Role {
   'polo' = 'polo',
@@ -78,6 +79,8 @@ export type Dashboard = {
   }
 
   boat: 0 | 1 | 2 | 3
+  goldBug: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
+  gene: TGene
   
   cardBuy: number
   revealDao: number

@@ -1,11 +1,19 @@
 import {EConstraint, EEffect, TEffect } from './effect'
 
-type TGene = {
+export type TGene = {
   id: number
   bonus: TEffect[],
   top: TGene | null
   bottom: TGene | null
 }
+
+const geneStart:TGene = {
+  id: -1,
+  bonus: [],
+  top: null,
+  bottom: null
+}
+
 
 const gene1:TGene = {
   id: 1,
@@ -166,6 +174,8 @@ const gene21:TGene = {
 }
 
 function init () {
+  geneStart.top = gene1
+
   gene1.top = gene2
   gene1.bottom = gene3
 
@@ -216,3 +226,6 @@ function init () {
   gene18.bottom = gene21
 }
 init()
+
+
+export const gene = geneStart

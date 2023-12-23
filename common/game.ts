@@ -3,6 +3,7 @@ import { numberId } from "../src/utils"
 import { TYinCard, yinCards } from "./yin-card/yin-card"
 import { Dashboard, MiBaoColor, Role, TMibao } from "./typing"
 import { TLocations, locations } from "./locations/locations"
+import { gene } from "./typing/gene"
 
 export interface Game {
   firstPlayer: number
@@ -70,6 +71,8 @@ export const initDashBoard: Dashboard = {
   yinCards: [],
 
   boat: 0,
+  goldBug: 0,
+  gene: gene
 
 }
 

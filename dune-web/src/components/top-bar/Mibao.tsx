@@ -37,6 +37,7 @@ export const MiBao = ()=> {
   return <div className="flex-center">
     {
       availableLocations.map(l =>  <button 
+        key={l.id}
         onClick={() => {
           miBaoActionState.setStateImmer(old => {
             old.locationId = l.id
