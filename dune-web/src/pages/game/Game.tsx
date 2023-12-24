@@ -5,6 +5,7 @@ import { BGMap } from "./bg-map"
 import { holes } from "./bg-map/holes"
 import { Troops } from "./troops"
 import { locations } from "../../../../common/locations/locations"
+import { GoldBug } from "./GoldBug"
 
 const Container = styled('div')`
   width: 100%;
@@ -27,7 +28,13 @@ export const Game = () => {
 
   return <Container>
     <div className="is-flex">
-      <BGMap style={{flex:3, width: '1px'}} showMask={false} modName={'bg2.jpg'}/>
+      <BGMap 
+        style={{flex:3, width: '1px'}} 
+        slot={<>
+          <GoldBug />
+        </>}
+        showMask={false} 
+        modName={'bg2.jpg'}/>
       <BGMap style={{flex:2, width: '1px'}} showMask={!!miBaoAction.card} locations={bg4Locations} holes={holes4}  modName={'bg4.jpg'}/>
     </div>
     <BGMap 

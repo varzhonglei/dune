@@ -1,19 +1,30 @@
+import { CSSProperties } from "react"
 
 type Props = {
     color?: string
     size?: number
     width?: number
     height?: number
+    style?: CSSProperties
+}
+
+const sizeFix = (props: Props) => {
+  const s = props.style || {}
+  if (props.size || props.width) {
+    return {
+        width: (props.width || props.size) + 'px',
+        height: (props.height || props.size) + 'px',
+        ...s,
+      }
+  }
+  return {...s}
 }
 
 export const TroopsIcon = (props: Props) => 
     <svg 
-    style={{
-        width: (props.width || props.size) + 'px',
-        height: (props.height || props.size) + 'px',
-    }}
+    style={{...sizeFix(props)}}
     viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" 
-    p-id="2429" width="200" height="200">
+    p-id="2429">
         <path d="M814.7968 342.4768L493.3632 173.312 184.9344 335.5136l-12.4416 6.656 320.8704 160.1536 3.7376-1.7408L815.6672 343.04v-0.3072l-0.8704-0.256zM499.0976 500.5824l-5.7344 5.7344 5.7344-5.7344z" 
         fill={ props.color} opacity=".498" p-id="2430">
         </path>
@@ -24,29 +35,20 @@ export const TroopsIcon = (props: Props) =>
 
 export const DreadnoughtIcon = (props: Props) => {
     return <svg 
-    style={{
-        width: (props.width || props.size) + 'px',
-        height: (props.height || props.size) + 'px',
-    }}
+    style={{...sizeFix(props)}}
     viewBox="0 0 512 512"><path  fill={ props.color} d="M270.7 9.7C268.2 3.8 262.4 0 256 0s-12.2 3.8-14.7 9.7L197.2 112.6c-3.4 8-5.2 16.5-5.2 25.2v77l-144 84V280c0-13.3-10.7-24-24-24s-24 10.7-24 24v56 32 24c0 13.3 10.7 24 24 24s24-10.7 24-24v-8H192v32.7L133.5 468c-3.5 3-5.5 7.4-5.5 12v16c0 8.8 7.2 16 16 16h96V448c0-8.8 7.2-16 16-16s16 7.2 16 16v64h96c8.8 0 16-7.2 16-16V480c0-4.6-2-9-5.5-12L320 416.7V384H464v8c0 13.3 10.7 24 24 24s24-10.7 24-24V368 336 280c0-13.3-10.7-24-24-24s-24 10.7-24 24v18.8l-144-84v-77c0-8.7-1.8-17.2-5.2-25.2L270.7 9.7z"/></svg>
 }
 
 export const CircleIcon =  (props: Props) =>  <svg 
-style={{
-    width: (props.width || props.size) + 'px',
-    height: (props.height || props.size) + 'px',
-}}
+style={{...sizeFix(props)}}
 viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" 
-p-id="24843" width="200" height="200">
+p-id="24843">
     <path d="M512 512m-469.333333 0a469.333333 469.333333 0 1 0 938.666666 0 469.333333 469.333333 0 1 0-938.666666 0Z" fill={props.color} p-id="24844">
     </path>
     </svg>
 
 export const HeiIcon =  (props: Props) =>  <svg 
-style={{
-    width: (props.width || props.size) + 'px',
-    height: (props.height || props.size) + 'px',
-}}
+style={{...sizeFix(props)}}
 version="1.0" xmlns="http://www.w3.org/2000/svg"
 width="112.000000pt" height="190.000000pt" viewBox="0 0 112.000000 190.000000"
 preserveAspectRatio="xMidYMid meet">
@@ -64,10 +66,7 @@ fill="#000000" stroke="none">
 </svg>
 
 export const HeiEmptyIcon =  (props: Props) =>  <svg 
-style={{
-    width: (props.width || props.size) + 'px',
-    height: (props.height || props.size) + 'px',
-}}
+style={{...sizeFix(props)}}
  version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="112.000000pt" height="190.000000pt" viewBox="0 0 112.000000 190.000000"
  preserveAspectRatio="xMidYMid meet">
@@ -95,10 +94,7 @@ fill="#000000" stroke="none">
 </svg>
 
 export const MiBaoIcon =  (props: Props) =>  <svg 
-style={{
-    width: (props.width || props.size) + 'px',
-    height: (props.height || props.size) + 'px',
-}}
+style={{...sizeFix(props)}}
  version="1.0" xmlns="http://www.w3.org/2000/svg"
 width="300.000000pt" height="508.000000pt" viewBox="0 0 300.000000 508.000000"
 preserveAspectRatio="xMidYMid meet">
@@ -129,12 +125,8 @@ fill={props.color} stroke="none">
 </g>
 </svg>
 
-
 export const MiBaoEmptyIcon = (props: Props) =>  <svg 
-style={{
-    width: (props.width || props.size) + 'px',
-    height: (props.height || props.size) + 'px',
-}} 
+style={{...sizeFix(props)}}
 version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="300.000000pt" height="508.000000pt" viewBox="0 0 300.000000 508.000000"
  preserveAspectRatio="xMidYMid meet">
