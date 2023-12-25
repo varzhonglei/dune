@@ -6,6 +6,7 @@ import { holes } from "./bg-map/holes"
 import { Troops } from "./troops"
 import { locations } from "../../../../common/locations/locations"
 import { GoldBug } from "./GoldBug"
+import { Research } from "./Research"
 
 const Container = styled('div')`
   width: 100%;
@@ -32,6 +33,7 @@ export const Game = () => {
         style={{flex:3, width: '1px'}} 
         slot={<>
           <GoldBug />
+          <Research />
         </>}
         showMask={false} 
         modName={'bg2.jpg'}/>

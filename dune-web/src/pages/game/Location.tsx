@@ -40,9 +40,10 @@ export const Locations = (props: Props) => {
     })) 
 
   return <Container>
-    {hs.map(h => {
+    {hs.map((h, ind) => {
       
       return <Item
+        key={ind}
         style={{
           height: h.heightMultiple * height,
           width: h.widthMultiple * width,

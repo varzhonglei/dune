@@ -1,8 +1,8 @@
 import styled from "@emotion/styled"
 import { useGame } from "../../libs/store/game"
-import { Dashboard } from "../../../../common/typing"
 import { CircleIcon } from "../../assets/svg"
 import { groupBy } from "lodash"
+import Spice2 from '../../assets/spice2.png'
 
 const Container = styled('div')`
   position: absolute;
@@ -12,97 +12,94 @@ const Container = styled('div')`
   height: 24%;
 `
 
-const TheCircleWrap = styled('div')`
-  position: absolute;
-`
-
 const Column = styled('div')`
     position: absolute;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 7%;
+    align-items: center;
+    justify-content: center;
 `
 
-const columnPositions = {
-    '1': '40%',
-    '2': '55',
-    '3': '40%',
-    '4': '55',
-    '5': '60%',
-    '6': '75',
-    '7': '85',
-}
+const columnPositions = [ 
+    '0%',
+    '18%',
+    '30%',
+    '40%',
+    '55%',
+    '72%',
+    '80.5%',
+    '89%',
+]
+
+const startPositions = [{
+    top: '16%',
+    left: '2.7%',
+},{
+    top: '16%',
+    left: '9%',
+},{
+    top: '53%',
+    left: '2.7%',
+},{
+    top: '53%',
+    left: '9%',
+}]
+
+
+
 
 export const GoldBug = () => {
   const gameData = useGame()
-//   const bugs = gameData.dashboards.map(d => {
-//     return {
-//         miBaoColor: d.miBaoColor,
-//         goldBug: d.goldBug
-//     }
-//   })
-  const bugs = [
-    {
-        miBaoColor: 'red',
-        goldBug: 1
-    },
-    {
-        miBaoColor: 'blue',
-        goldBug: 2
-    },
-    {
-        miBaoColor: 'green',
-        goldBug: 2
-    },
-    {
-        miBaoColor: 'yellow',
-        goldBug: 1
+  const bugs = gameData.dashboards.map(d => {
+    return {
+        miBaoColor: d.miBaoColor,
+        goldBug: d.goldBug
     }
-  ]
+  })
   const grouped = groupBy(bugs, 'goldBug')
 
-  console.log('grouped', grouped)
-//   const item = (d: Dashboard, ind: 0|1|2|3) => {
-//     return <TheCircleWrap
-//         style={{
-//             top: `${ind * 25 + 3}%`
-//         }}
-//     >
-//         <CircleIcon style={{
-//              width: '6.5%',
-//              marginBottom: '0.2%'
-//             }}
-//           color={d.miBaoColor}
-//         />
-//     </TheCircleWrap>
-//   }
+  const reach4 = Object.keys(grouped).some(v => Number(v) >= 4)
 
   return <Container>
-     {/* {item(d1, 0)}
-     {item(d2, 1)}
-     {item(d3, 2)}
-     {item(d4, 3)} */}
-
      {
         Object.keys(grouped).map(gName => {
-            if (gName === '0') return null
+            if (gName === '0') {
+                return grouped[gName].map((theBug, index) => {
+                    return  <CircleIcon key={theBug.miBaoColor}  style={{
+                            width: '6.8%',
+                            position: 'absolute',
+                            ...(startPositions[index] || {})
+                        }}
+                    color={theBug.miBaoColor}
+                    />
+                })
+            }
             return <Column
                 style={{
-                    left: columnPositions[gName as '1']
+                    left: columnPositions[Number(gName)]
                 }}
             >
                 {
                     grouped[gName].map(theBug => {
-                        return  <CircleIcon style={{
-                            width: '6.5%',
+                        return  <CircleIcon key={theBug.miBaoColor} style={{
+                            width: '70%',
                             }}
                         color={theBug.miBaoColor}
                         />
                     })
                 }
             </Column>
-            
-            
         })
+     }
+     {
+        !reach4 && <img src={Spice2} style={{
+            position: 'absolute',
+            top: '55%',
+            left: '62%',
+            width: '6.7%',
+         }}/>
      }
   </Container>
 }   

@@ -8,7 +8,7 @@ export type TGene = {
 }
 
 const geneStart:TGene = {
-  id: -1,
+  id: 0,
   bonus: [],
   top: null,
   bottom: null
