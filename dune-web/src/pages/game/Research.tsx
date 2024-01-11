@@ -33,37 +33,76 @@ const positions = [{},
     left: '23.5%',
   },
   {
-    //4
     top: '3.8%',
     left: '34.3%',
   },
   {
-    top: '40%',
-    left: '20%',
+    top: '26.5%',
+    left: '34.3%',
   },
   {
-    top: '40%',
-    left: '20%',
+    top: '50%',
+    left: '34.3%',
   },
   {
-    top: '40%',
-    left: '20%',
+    top: '15%',
+    left: '45%',
   },
   {
-    top: '40%',
-    left: '20%',
+    top: '38%',
+    left: '45%',
   },
   {
-    top: '40%',
-    left: '20%',
+    top: '61.2%',
+    left: '45%',
   },
   {
-    top: '40%',
-    left: '20%',
+    top: '3.7%',
+    left: '56%',
   },
   {
-    top: '40%',
-    left: '20%',
+    top: '26.7%',
+    left: '56%',
+  },
+  {
+    top: '49.7%',
+    left: '56%',
+  },
+  {
+    top: '15%',
+    left: '67%',
+  },
+  {
+    top: '38%',
+    left: '67%',
+  },
+  {
+    top: '61.2%',
+    left: '67%',
+  },
+  {
+    top: '3.9%',
+    left: '77.6%',
+  },
+  {
+    top: '26.5%',
+    left: '77.6%',
+  },
+  {
+    top: '49.7%',
+    left: '77.6%',
+  },
+  {
+    top: '15%',
+    left: '89.5%',
+  },
+  {
+    top: '38.4%',
+    left: '89.5%',
+  },
+  {
+    top: '61.4%',
+    left: '89.5%',
   },
 ]
 
@@ -81,19 +120,19 @@ export const Research = () => {
   const genes = [
     {
       miBaoColor: 'red',
-      gene: {id: 4}
+      gene: {id: 0}
     },
     {
       miBaoColor: 'yellow',
-      gene: {id: 4}
+      gene: {id: 0}
     },
     {
       miBaoColor: 'blue',
-      gene: {id: 4}
+      gene: {id: 0}
     },
     {
       miBaoColor: 'green',
-      gene: {id: 4}
+      gene: {id: 0}
     }
   ]
 
