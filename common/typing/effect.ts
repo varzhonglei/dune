@@ -32,6 +32,8 @@ export enum EConstraint {
   'agentOnEmpire' = 'agentOnEmpire',
   //贴贴
   'tieTie' = 'tieTie',
+  'higherCouncil' = 'higherCouncil',
+  'cardBuy' = 'cardBuy'
 }
 
 export enum EEffect {

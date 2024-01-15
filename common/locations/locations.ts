@@ -133,7 +133,7 @@ export const locations: TLocations = [ {
     }]
   },
 
-   {
+  {
     id: 'unionGuild',
     name: '传送门',
     icon: LocationIcon.union,

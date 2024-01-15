@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { useGame } from "../../libs/store/game"
-import { CircleIcon } from "../../assets/svg"
+import { CircleIcon, TroopsIcon } from "../../assets/svg"
 import { groupBy } from "lodash"
 
 const Container = styled('div')`
@@ -18,6 +18,20 @@ const Row = styled('div')`
   display: flex;
   justify-content: center;
 `
+
+const startPositions = [{
+  top: '13%',
+  left: '7%',
+},{
+  top: '25%',
+  left: '7%',
+},{
+  top: '37%',
+  left: '7%',
+},{
+  top: '49%',
+  left: '7%',
+}]
 
 const positions = [{}, 
   {
@@ -110,31 +124,18 @@ const positions = [{},
 
 export const Research = () => {
   const gameData = useGame()
-  // const genes = gameData.dashboards.map(d => {
-  //   return {
-  //       miBaoColor: d.miBaoColor,
-  //       gene: d.gene
-  //   }
-  // })
-
-  const genes = [
-    {
-      miBaoColor: 'red',
-      gene: {id: 0}
-    },
-    {
-      miBaoColor: 'yellow',
-      gene: {id: 0}
-    },
-    {
-      miBaoColor: 'blue',
-      gene: {id: 0}
-    },
-    {
-      miBaoColor: 'green',
-      gene: {id: 0}
+  const genes = gameData.dashboards.map(d => {
+    return {
+        miBaoColor: d.miBaoColor,
+        gene: d.gene
     }
-  ]
+  })
+
+  const indexInformation = gameData.dashboards.reduce((pre, cur, index) => {
+    return {...pre, 
+      [cur.miBaoColor || index]: index
+    }
+  }, {}) as any
 
   const grouped = groupBy(genes, 'gene.id')
 
@@ -145,7 +146,22 @@ export const Research = () => {
     {
       keys.map(k => {
         if (Number(k) === 0) {
-          return null
+          return <Row
+            key={k}
+            style={{ height: '100%', width: '12%' }}
+          >
+            {
+              grouped[k]?.map((gene) => {
+                return <CircleIcon key={gene.miBaoColor} style={{
+                    width: '55%',
+                    position: 'absolute',
+                    ...(startPositions[indexInformation[gene?.miBaoColor || '']] || {})
+                  }}
+                  color={gene.miBaoColor}
+                />
+              })
+            }
+          </Row>
         } else {
           return <Row
             key={k}
@@ -170,6 +186,34 @@ export const Research = () => {
         }
       })
     }
-
+    <TTLTroops></TTLTroops>
   </Container>
 }   
+
+
+const C2 = styled('div')`
+  position: absolute;
+  left: 2%;
+  bottom: 6%;
+  width: 25%;
+  height: 27%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
+const TTLTroops = () => {
+  const gameData = useGame()
+  
+  return <C2>
+    { gameData.dashboards?.map(d => {
+      const count = d.troops.troopsTLL.length
+      if (count === 0) return null
+      return <div className="ml-4 mr-4 is-flex is-align-items-center" style={{ width: '25%', height: '25%' }}>
+        <TroopsIcon size={18} color={d.miBaoColor}></TroopsIcon> 
+        <div style={{color: d.miBaoColor}}>{ count }</div>
+      </div>
+    })}
+  </C2>
+}
