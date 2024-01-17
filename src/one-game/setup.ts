@@ -53,6 +53,15 @@ const firstDrawYin = (table: Table) => {
   })
 }
 
+const setTechnology = (table: Table) => {
+  table.store.setState((draft) => {
+    const technology = shuffle(draft.technology);
+    const [t0,t1,t2] = technology
+    draft.technologyDeck[0].cur = t0
+    draft.technologyDeck[1].cur = t1
+    draft.technologyDeck[2].cur = t2
+  })
+}
 
 
 export const setupDune = (table: Table) => {  
@@ -63,4 +72,5 @@ export const setupDune = (table: Table) => {
   setFirstPlayer(table)
   firstDrawCard(table)
   firstDrawYin(table)
+  setTechnology(table)
 }

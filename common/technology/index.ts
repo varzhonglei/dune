@@ -190,7 +190,4 @@ export const Technology: TTech[] = [
     price: 3,
     action: []
   },
-
-  
-
  ]

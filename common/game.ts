@@ -4,6 +4,7 @@ import { TYinCard, yinCards } from "./yin-card/yin-card"
 import { Dashboard, MiBaoColor, Role, TMibao } from "./typing"
 import { TLocations, locations } from "./locations/locations"
 import { gene } from "./typing/gene"
+import { Technology, TTech } from './technology'
 
 export interface Game {
   firstPlayer: number
@@ -17,6 +18,11 @@ export interface Game {
   yinCardsPlayed: TYinCard[]
   mentat: TMibao
   locations: TLocations
+  technology: TTech[]
+  technologyDeck:{
+    cur: TTech | null,
+    rest: number
+  }[]
 }
 
 export const initDashBoard: Dashboard = {
@@ -113,6 +119,17 @@ export const initialGame: Game = {
   fremenCards: fremenCards,
   spacingGuidCards: spacingGuidCards,
   locations: locations,
+  technology: Technology,
+  technologyDeck: [{
+    cur:  null,
+    rest: 5
+  }, {
+    cur:  null,
+    rest: 5
+  },{
+    cur:  null,
+    rest: 5
+  }],
 
   yinCards: yinCards,
   yinCardsPlayed: [],
