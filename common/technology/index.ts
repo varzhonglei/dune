@@ -100,5 +100,97 @@ export const Technology: TTech[] = [
       key:EEffect.getVP, number: 0.5
     }]
   },
+  {
+    id: 'k9',
+    name: '太空港',
+    price: 5,
+    buyEffect: [{
+      key: EEffect.drawCard, number: 2
+    }],
+    revealEffect: [
+      // todo
+    ]
+  },
+  {
+    id: 'k10',
+    name: '穿梭机队',
+    price: 6,
+    buyEffect: [{
+      key: EEffect.infChoseTwo
+    }],
+    roundBegin: [{
+      key: EEffect.getMoney, number: 2
+    }]
+  },
+  {
+    id: 'k11',
+    name: '间谍卫星',
+    price: 6,
+    action: [],
+    endGameEffect: [
+      //todo
+    ]
+  },
+  {
+    id: 'k12',
+    name: '窃听器',
+    price: 2,
+    buyEffect: [{
+      key: EEffect.drawYin
+    }],
+    action: [
+      //todo
+    ]
+  },
+  {
+    id: 'k13',
+    name: '思录机',
+    price: 2,
+    buyEffect: [{
+      key: EEffect.inf
+    }],
+    endGameEffect: [
+      //todo
+    ]
+  },
+  {
+    id: 'k14',
+    name: '全息投影仪',
+    price: 3,
+    action: [],
+  },
+  {
+    id: 'k15',
+    name: '缩微胶片',
+    price: 3,
+    revealEffect: [{
+      key: EEffect.cardBuy
+    }],
+  },
+  {
+    id: 'k16',
+    name: '入侵舰队',
+    price: 5,
+    buyEffect: [{
+      key: EEffect.getTroops, number: 4
+    }],
+    action: []
+  },
+  {
+    id: 'k17',
+    name: '防风罩',
+    price: 2,
+    winConflict: [{
+      key: EEffect.getWater
+    }],
+  },
+  {
+    id: 'k18',
+    name: '训练用无人机',
+    price: 3,
+    action: []
+  },
+
+  
 
  ]

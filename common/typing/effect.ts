@@ -72,6 +72,7 @@ export enum EEffect {
   'getJian' = 'getJian',
   'inf' = 'inf',
   'inf2' = 'inf2',
+  'infChoseTwo' = 'infChoseTwo',
   'infFremen' = 'infFremen',
   'infSister' = 'infSister',
   'infUnion' = 'infUnion',
